@@ -15,27 +15,27 @@ function Nav() {
                 <div className="ml-10 flex items-baseline space-x-4">
                   <a
                     href="#"
-                    className=" text-dark-blue px-3 py-2 rounded-md text-sm font-medium"
+                    className=" text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Discover
                   </a>
 
                   <a
                     href="#"
-                    className="text-dark-blue px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Innovations
                   </a>
 
                   <a
                     href="#"
-                    className="text-dark-blue px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Sponsors
                   </a>
 
                   <a
-                    href="#"
+                    href="#aboutus"
                     className="text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     About Us
