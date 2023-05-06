@@ -4,7 +4,7 @@ import Brands from '../../../Assets/Brands.png'
 function Hero() {
   return (
     <div>
-        <div className='flex md:flex-row mt-[110px] ml-[110px] flex-col h-full w-full'>
+        <div className='flex md:flex-row mt-[110px] ml-[8%] flex-col h-full w-full'>
             <div className='mt-[-25px]'>
                 <h1 className='font-bold text-dark-blue text-6xl '>Transform<br/>Your ideas<br/>into reality</h1>
                 <p className='font-semibold mt-5 text-gray-600'>Connecting Sponsors and Creative Thinkers to Drive<br/> Impactful Projects</p>
@@ -22,7 +22,7 @@ function Hero() {
                 </div>
             </div>
             <div className='!m-[-75px] !ml-[-355px] z-[-1] '>
-                <img src={Heroimg} alt='heroimg'  className="object-contain w-[750px] h-[750px] ml-[150px] mt-[-70px]"/>
+                <img src={Heroimg} alt='heroimg'  className="object-contain w-[750px] h-[750px] ml-[200px] mt-[-70px]"/>
             </div>
         </div>
         <img src={Brands}/>

@@ -4,6 +4,8 @@ import Hero from '../Landing/components/Hero'
 import About from './components/about'
 import Category from './components/category'
 import Connect from '../Landing/components/Connect'
+import Platform from './components/Platform'
+
 function Landing() {
   return (
     <div>
@@ -11,6 +13,7 @@ function Landing() {
       <Hero/>
       <About/>
       <Category/>
+      <Platform/>
       <Connect/>
     </div>
   )
