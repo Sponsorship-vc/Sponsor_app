@@ -36,7 +36,6 @@ function Platform() {
                     <h2 class="text-lg font-bold text-gray-800">{post.title}</h2>
                     <p className='font-semibold text-sm pt-2'>{post.content}</p>
                   </div>
-                 
                   </div>
               ))}
                 </div>
