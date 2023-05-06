@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
+import logo from '../../../Assets/logo.png'
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -10,7 +11,7 @@ function Nav() {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center ml-9">
               <div className="flex-shrink-0">
-                <h3 className="text-dark-blue font-bold">SponSir</h3>
+                <img src={logo} className="w-25% h-auto" />
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">

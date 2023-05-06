@@ -9,12 +9,12 @@ function Hero() {
                 <h1 className='font-bold text-dark-blue text-6xl '>Transform<br/>Your ideas<br/>into reality</h1>
                 <p className='font-semibold mt-5 text-gray-600'>Connecting Sponsors and Creative Thinkers to Drive<br/> Impactful Projects</p>
                 <div>
-            <div class="bg-white shadow-2xl rounded-lg p-4 w-[680px] h-[75px]  flex-row hidden md:flex">
-                    <div class="flex flex-col ">
-                        <h2 class="text-lg font-semibold text-gray-800">Innovation categories</h2>
+            <div className="bg-white shadow-2xl rounded-lg p-4 w-[680px] h-[75px]  flex-row hidden md:flex">
+                    <div className="flex flex-col ">
+                        <h2 className="text-lg font-semibold text-gray-800">Innovation categories</h2>
                         <p className='text-gray-600 text-sm'>What kind of innovative ideas do you want to sponsor ?</p>
                     </div>
-                    <button class="bg-blue-950 text-white font-bold py-2 px-8 rounded ml-[9.5rem] text-sm">
+                    <button className="bg-blue-950 text-white font-bold py-2 px-8 rounded ml-[9.5rem] text-sm">
                         Explore now
                     </button>
                 </div>
