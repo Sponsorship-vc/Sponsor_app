@@ -2,8 +2,8 @@ import React from 'react'
 
 function Category() {
   return (
-    <div className='flex h-screen w-screen'>
-        <div className='mx-40 mt-36 h-[514px] w-full'>
+    <div className='flex h-full w-full'>
+        <div className='mx-[11%] mt-36 h-full w-full'>
             <div className='flex justify-between gap-30 md:gap-[27%]'>
                 <p className='flex-1 font-bold text-dark-blue text-4xl'>Explore Ideas by Category </p>
                 <p className='flex-1 text-right'>Get the most exciting ideas from all around the world and show your contribution</p>
