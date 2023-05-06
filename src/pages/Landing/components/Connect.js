@@ -2,7 +2,7 @@ import React from 'react'
 import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa'
 function Connect() {
   return (
-    <div className='flex flex-col justify-center items-center bg-[#C2E5FF] h-screen w-screen'>
+    <div className='flex flex-col justify-center items-center bg-[#C2E5FF] h-screen'>
        <div class="flex items-center justify-center flex-col">
             <h1 class="font-bold text-dark-blue text-4xl">Have Doubts? Connect with us</h1>
             <p class="mt-5 text-dark-blue">Don't wanna miss something? Subscribe right now and get special promotion and monthly newsletter</p>

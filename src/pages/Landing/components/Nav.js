@@ -6,8 +6,9 @@ function Nav() {
     <div>
       <nav>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center ml-9">
+          <div className="  h-16">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center ml-9">
               <div className="flex-shrink-0">
                 <h3 className="text-dark-blue font-bold">SponSir</h3>
               </div>
@@ -40,23 +41,27 @@ function Nav() {
                   >
                     About Us
                   </a>
-                <div className="!pl-[500px]">
+                </div>
+              </div>
+              </div>
+
+              <div className="hidden md:block">
+              <div className="gap-x-2 flex">
                     <a
                       href="#sign-in"
-                      className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-800 border-gray-800 mt-4 lg:mt-0 mr-2 font-bold"
+                      className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-800 border-gray-800 lg:mt-0 font-bold"
                     >
                       Sign In
                     </a>
                     <a
                       href="#register"
-                      className="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-gray-800 hover:bg-gray-900 mt-4 lg:mt-0 font-bold"
+                      className="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold"
                     >
                       Register
                     </a>
                 </div>
-                </div>
               </div>
-            </div>
+            
             <div className="-mr-2 flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -100,6 +105,7 @@ function Nav() {
                   </svg>
                 )}
               </button>
+            </div>
             </div>
           </div>
         </div>
