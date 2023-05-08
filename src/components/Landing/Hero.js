@@ -1,6 +1,6 @@
 import React from 'react'
-import Heroimg from '../../../Assets/heroimg.png'
-import Brands from '../../../Assets/Brands.png'
+import Heroimg from '../../Assets/Landing/heroimg.png'
+import Brands from '../../Assets/Landing/Brands.png'
 function Hero() {
   return (
     <div>

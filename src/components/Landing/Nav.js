@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
-import logo from '../../../Assets/logo.png'
+import logo from '../../Assets/Landing/logo.png'
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   return (

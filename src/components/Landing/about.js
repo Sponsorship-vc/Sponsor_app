@@ -1,5 +1,5 @@
 import React from 'react'
-import about from '../../../Assets/about.png'
+import about from '../../Assets/Landing/about.png'
 function About() {
   return (
         <div className='flex flex-col bg-[#C2E5FF] pb-20 lg:h-full mt-10 lg:flex-row ' id='aboutus'>    

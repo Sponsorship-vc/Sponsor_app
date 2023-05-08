@@ -1,9 +1,9 @@
 import React from 'react'
-import icon1 from '../../../Assets/Icon1.png'
-import icon2 from '../../../Assets/Icon2.png'
-import icon3 from '../../../Assets/Icon3.png'
-import icon4 from '../../../Assets/Icon4.png'
-import icon5 from '../../../Assets/Icon5.png'
+import icon1 from '../../Assets/Landing/Icon1.png'
+import icon2 from '../../Assets/Landing/Icon2.png'
+import icon3 from '../../Assets/Landing/Icon3.png'
+import icon4 from '../../Assets/Landing/Icon4.png'
+import icon5 from '../../Assets/Landing/Icon5.png'
 
 function Platform() {
   const posts = [

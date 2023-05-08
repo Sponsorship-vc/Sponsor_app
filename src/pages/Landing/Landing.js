@@ -1,10 +1,10 @@
 import React from 'react'
-import Nav from '../Landing/components/Nav'
-import Hero from '../Landing/components/Hero'
-import About from './components/about'
-import Category from './components/category'
-import Connect from '../Landing/components/Connect'
-import Platform from './components/Platform'
+import Nav from '../../components/Landing/Nav'
+import Hero from '../../components/Landing/Hero'
+import About from '../../components/Landing/about'
+import Category from '../../components/Landing/category'
+import Connect from '../../components/Landing/Connect'
+import Platform from '../../components/Landing/Platform'
 
 function Landing() {
   return (
