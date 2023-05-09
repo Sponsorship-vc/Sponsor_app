@@ -5,7 +5,7 @@ import grp2 from '../../../Assets/Landing/Roleselector/Group2.png'
 import logo from '../../../Assets/Landing/logo.png'
 const roleselector = () => {
   return (
-    <div className=' grid grid-rows-8 bg-sky-200 w-full  h-screen'>
+    <div className=' grid grid-rows-8 bg-sky-200 w-full  h-full'>
 
         <div className=' row-span-2 text-center lg:p-2 p-8' >
 
