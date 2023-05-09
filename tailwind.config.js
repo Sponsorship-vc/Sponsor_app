@@ -7,6 +7,9 @@ module.exports = {
         'dark-blue': '#1D263A',
       },
     },
+    fontFamily: {
+        abc: ["Poppin", "sans-serif"]
+    }
   },
   plugins: [],
 }
