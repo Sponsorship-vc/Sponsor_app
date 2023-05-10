@@ -7,7 +7,7 @@ function Sidebar() {
     <div >
         <div className="bg-[#1D263A] w-screen/3 h-screen flex flex-col z-[-1] overflow-hidden">
             <img src={bgImg} className="w-full h-screen" alt="Background Image" />
-            <div className="absolute top-[3.75rem] left-[2.5rem]">
+            <div className="absolute top-[3.75rem] left-[1rem]">
                 <img src={logo} alt="Logo" />
                 <div className='mt-[100px]'>
                     <Typed

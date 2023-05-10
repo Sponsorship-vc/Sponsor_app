@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import logo from '../../Assets/Landing/logo.png'
+import {Link} from 'react-router-dom'
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -48,18 +49,19 @@ function Nav() {
 
               <div className="hidden md:block">
               <div className="gap-x-2 flex">
-                    <a
-                      href="#sign-in"
+                    <Link to='/role'>
+                    <p
                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-800 border-gray-800 lg:mt-0 font-bold"
                     >
                       Sign In
-                    </a>
-                    <a
-                      href="#register"
+                    </p></Link>
+                    <Link to='/role'>
+                    <p
                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold"
                     >
                       Register
-                    </a>
+                    </p>
+                    </Link>
                 </div>
               </div>
             
