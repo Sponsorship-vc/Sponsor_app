@@ -3,7 +3,7 @@ import Landing from '../src/pages/Landing/Landing'
 import Roleselector from './pages/Roleselector/Roleselector';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
-import Signup from './pages/Signup/Signup';
+import Signup from './pages/Signup/Signup'
 
 function App() {
   return (
