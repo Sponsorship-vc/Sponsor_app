@@ -2,7 +2,7 @@ import React from 'react'
 import about from '../../Assets/Landing/about.png'
 function About() {
   return (
-        <div className='flex flex-col bg-[#C2E5FF] pb-20 lg:h-full mt-10 lg:flex-row ' id='aboutus'>    
+        <div className='flex flex-col bg-[#C2E5FF] pb-20 lg:h-full lg:flex-row ' id='aboutus'>    
 
          {/* set colour  */}
             <div className='h:1/2 lg:w-1/2 lg:h-full  px-[8%] pt-40'>

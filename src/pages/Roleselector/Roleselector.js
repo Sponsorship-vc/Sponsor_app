@@ -1,8 +1,8 @@
 import React from 'react'
-import Card from '../../../components/Roleselector/Card'
-import grp1 from '../../../Assets/Landing/Roleselector/Group1.png'
-import grp2 from '../../../Assets/Landing/Roleselector/Group2.png'
-import logo from '../../../Assets/Landing/logo.png'
+import Card from '../../components/Roleselector/Card'
+import grp1 from '../../Assets/Roleselector/Group1.png'
+import grp2 from '../../Assets/Roleselector/Group2.png'
+import logo from '../../Assets/Landing/logo.png'
 const roleselector = () => {
   return (
     <div className=' grid grid-rows-8 bg-sky-200 w-full  h-full'>

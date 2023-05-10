@@ -1,7 +1,7 @@
 import React from 'react'
-const card = (props) => {
+const Card = (props) => {
   return (
-<div className=' rounded-xl w-max bg-sky-50 bg-opacity-50 hover:bg-cyan-100  shadow-violet-500 p-9 '>
+<div className=' rounded-xl w-max bg-[#F8F8F8] bg-opacity-50 border-2 hover:bg-cyan-100 p-9 '>
         <a href="#">
             <h5 class="mb-3 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-black font-abc">{props.title}</h5>
         </a>
@@ -21,4 +21,4 @@ const card = (props) => {
   )
 }
 
-export default card
+export default Card

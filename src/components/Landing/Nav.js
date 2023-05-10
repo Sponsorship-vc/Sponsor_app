@@ -145,7 +145,7 @@ function Nav() {
                 </a>
 
                 <a
-                  href="#"
+                  href="#aboutus"
                   className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium"
                 >
                   About us
