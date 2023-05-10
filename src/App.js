@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route exact path='/' Component={Landing}/>
           <Route path="/login/role/:id" Component={Login}/>
-          <Route path='/signup' Component={Signup}/>
+          <Route path="/signup/role/:id" Component={Signup}/>
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
         </Routes>
