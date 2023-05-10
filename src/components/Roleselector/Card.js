@@ -6,9 +6,7 @@ const Card = (props) => {
       <div class="max-w-sm h-3/4  bg-white  border-gray-200 rounded-full shadow-lg dark:bg-white-800 dark:border-white-700">
         <img className="rounded-none" src={props.img} alt="hi" />
       </div>
-      <a href={'/signup?signup=' + encodeURIComponent(props.title)}>
       <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-md'>{props.button}</button>
-      </a>
     </div>
 
    

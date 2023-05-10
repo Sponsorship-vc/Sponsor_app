@@ -11,9 +11,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path='/' Component={Landing}/>
-          <Route path="/login" Component={Login}/>
+          <Route path="/login/role/:id" Component={Login}/>
           <Route path='/signup' Component={Signup}/>
-          <Route path='/role' Component={Roleselector}/>
+          <Route path='/login/role' Component={Roleselector}/>
+          <Route path='/signup/role' Component={Roleselector}/>
         </Routes>
       </BrowserRouter>
     </div>

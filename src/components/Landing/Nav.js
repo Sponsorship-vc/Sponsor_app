@@ -49,13 +49,13 @@ function Nav() {
 
               <div className="hidden md:block">
               <div className="gap-x-2 flex">
-                    <Link to='/role'>
+                    <Link to='/login/role'>
                     <p
                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-800 border-gray-800 lg:mt-0 font-bold"
                     >
                       Sign In
                     </p></Link>
-                    <Link to='/role'>
+                    <Link to='/signup/role'>
                     <p
                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold"
                     >
