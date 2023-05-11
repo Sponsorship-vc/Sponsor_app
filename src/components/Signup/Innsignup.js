@@ -57,7 +57,9 @@ function Innsignup() {
             <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'>Register</button>
             <a href='/login/role/innovator'className='text-blue-500 font-bold text-md text-center flex mx-auto'>Already have an SponSir account? Log in</a>
             <p className='text-md text-gray-500 mx-auto'>Or</p>
-            <img src={googleImg} onClick={handleSigninWithGoogle}/>
+            <div className='mx-auto'>
+            <img src={googleImg} onClick={handleSigninWithGoogle} className='cursor-pointer'/>
+            </div>
           </div>
          </div>
         </div>
