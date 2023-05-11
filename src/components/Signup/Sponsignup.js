@@ -2,23 +2,37 @@ import React from 'react'
 import Sidebar from '../../components/Roleselector/Sidebar'
 import icon from '../../Assets/Signup/Vector.png'
 import { useState } from 'react';
+import { ref, uploadBytes } from "firebase/storage";
+import {  storage } from "../../firebase/config";
 
 function Sponsignup() {const [fileUploaded, setFileUploaded] = useState(false);
     const [fileName, setFileNames] = useState('');
+    const [fileUpload, setFileUpload] = useState(null);
+
   
     function handleFileSelect(event) {
       const files = event.target.files;
       if (files.length > 0) {
         const fileNames = [];
-        for (let i = 0; i < files.length; i++) {
-          fileNames.push(files[i].name);
-        }
+        fileNames.push(files[0].name);
         setFileUploaded(true);
         setFileNames(fileNames);
         const iconDiv = document.getElementById('iconDiv');
         iconDiv.classList.add('hidden');
+        setFileUpload(event.target.files[0])
+        // console.log(files)
       }
     }
+
+    const uploadFile = async () => {
+      if (!fileUpload) return;
+      const filesFolderRef = ref(storage, `projectFiles/${fileUpload.name}`);
+      try {
+        await uploadBytes(filesFolderRef, fileUpload);
+      } catch (err) {
+        console.error(err);
+      }
+    };
   
     return (
       <div className='flex w-screen z-[-1] flex-row mr-[-10px]'>
@@ -46,10 +60,10 @@ function Sponsignup() {const [fileUploaded, setFileUploaded] = useState(false);
                 ))}
                 </div>
               ) : null}
-              <input type="file" id="doc" name="doc" hidden multiple onChange={handleFileSelect}/>
+              <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
             </label>
             <p className='text-gray-400 text-center w-3/4 flex mx-auto'>By signing up, you confirm that you’ve read and accepted our User Notice and Privacy Policy.</p>
-            <button className='w-[600px] mx-auto my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'>Register</button>
+            <button className='w-[600px] mx-auto my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'onClick={uploadFile}>Register</button>
             <a href='/login/role/sponsor'className='text-blue-500 font-bold text-md text-center flex mx-auto'>Already have an SponSir account? Log in</a>
           </div>
          </div>

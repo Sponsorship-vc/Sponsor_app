@@ -20,7 +20,7 @@ function Innsignup() {
   const auth = getAuth(app);
   const usersCollectionRef = collection(db, "users");
   const [userList, setuserList] = useState([]);
-  // console.log(auth.currentUser.uid)
+  // console.log(auth.currentUser)
 
   const handleRegister=()=>{
     createUserWithEmailAndPassword(auth,email, password)
@@ -29,6 +29,7 @@ function Innsignup() {
         onSubmituser()
         setError(null);
         setName(user.displayName);
+        console.log(user.displayName)
       })
       .catch(function(error) {
         // Error signing up user
@@ -40,12 +41,14 @@ function Innsignup() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        onSubmituser()
+        setName(auth.currentUser.displayName)
+        console.log(name)
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-
-
+        
+        
+        onSubmituser()
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -58,7 +61,7 @@ function Innsignup() {
   const onSubmituser = async () => {
     try {
       await addDoc(usersCollectionRef, {
-        name: auth.currentUser.displayName,
+        name: name,
         email: auth.currentUser.email,
         role:"innovator",
         userId: auth.currentUser.uid,
