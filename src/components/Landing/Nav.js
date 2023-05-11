@@ -22,20 +22,22 @@ function Nav() {
                   >
                     Discover
                   </a>
-
+                  <Link to='/dashboard/innovator'> 
                   <a
                     href="#"
                     className="text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Innovations
                   </a>
-
+                  </Link> 
+                  <Link to='/dashboard/sponsor'>
                   <a
                     href="#"
                     className="text-dark-blue hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Sponsors
-                  </a>
+                  </a> 
+                  </Link>
 
                   <a
                     href="#aboutus"
