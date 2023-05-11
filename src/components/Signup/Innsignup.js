@@ -3,6 +3,13 @@ import Sidebar from '../../components/Roleselector/Sidebar'
 import googleImg from '../../Assets/Signup/Google Login.png'
 import { getAuth, createUserWithEmailAndPassword,signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { app } from '../../firebase/config';
+import {
+  getDocs,
+  collection,
+  addDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase/config";
+
 
 function Innsignup() {
 
@@ -11,11 +18,15 @@ function Innsignup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const auth = getAuth(app);
+  const usersCollectionRef = collection(db, "users");
+  const [userList, setuserList] = useState([]);
+  // console.log(auth.currentUser.uid)
 
   const handleRegister=()=>{
     createUserWithEmailAndPassword(auth,email, password)
       .then(function(user) {
         // User is signed up
+        onSubmituser()
         setError(null);
         setName(user.displayName);
       })
@@ -29,9 +40,12 @@ function Innsignup() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
+        onSubmituser()
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
+
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -40,6 +54,33 @@ function Innsignup() {
         console.log(errorMessage);
       });
   }
+
+  const onSubmituser = async () => {
+    try {
+      await addDoc(usersCollectionRef, {
+        name: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+        role:"innovator",
+        userId: auth.currentUser.uid,
+      });
+      getuserList();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getuserList = async () => {
+    try {
+      const data = await getDocs(usersCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setuserList(filteredData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className='flex w-screen z-[-1] flex-row mr-[-10px]'>
@@ -54,7 +95,7 @@ function Innsignup() {
             <input  placeholder='Your company mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' onChange={(e) => setEmail(e.target.value)}/>
             <input  placeholder='Create Password' type='password' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' onChange={(e) => setPassword(e.target.value)}/>
             <p className='text-gray-400 text-center w-3/4 flex mx-auto'>By signing up, you confirm that you’ve read and accepted our User Notice and Privacy Policy.</p>
-            <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'>Register</button>
+            <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleRegister}>Register</button>
             <a href='/login/role/innovator'className='text-blue-500 font-bold text-md text-center flex mx-auto'>Already have an SponSir account? Log in</a>
             <p className='text-md text-gray-500 mx-auto'>Or</p>
             <div className='mx-auto'>
