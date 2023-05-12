@@ -24,7 +24,7 @@ const Sidebar = (props) => {
       </a>
       <ul class=" flex-grow p-2 font-medium">
           <li class='ml-5'>
-            <Link to="dashb" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="/dashboard/innovator" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                <img src={Icon1} class="h-4 mr-3 sm:h-7"/>
                <span class="ml-3">Dashboard</span>
             </Link>

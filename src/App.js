@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Dashb from '../src/components/Dashboard/Dbpages/Dashb';
 import Prof from '../src/components/Dashboard/Dbpages/Prof';
 import Idea from '../src/components/Dashboard/Dbpages/Idea';
+import Inndash from '../src/components/Dashboard/Inndash'
+import Spondash from '../src/components/Dashboard/Spondash'
 import Nav from './components/Landing/Nav'
 
 function App() {
@@ -20,13 +22,14 @@ function App() {
           <Route path="/signup/role/:id" Component={Signup}/>
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
-          <Route path='/dashboard/:id' Component={Dashboard}>
-            <Route path='dashb' Component={Dashb}/>
+          <Route path='/dashboard/innovator' Component={Inndash}>
+            <Route path='' Component={Dashb}/>
             <Route path='idea' Component={Idea}/>
-            <Route path='prof' Component={Prof}/>
+            
           </Route>
-          
-          
+          <Route path='/dashboard/sponsor' Component={Spondash}>
+          <Route path='' Component={Prof}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
