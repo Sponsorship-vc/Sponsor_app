@@ -67,7 +67,15 @@ function Nav() {
                 </div>
               </div>
             
-            <div className="-mr-2 flex md:hidden">
+            <div className="-mr-2 gap-x-4 flex md:hidden">
+            <div className="flex gap-x-2 my-auto">
+                    <Link to='/login/role'>
+                    <p
+                      className="inline-block text-sm px-4 py-2 leading-none border rounded text-gray-800 border-gray-800 lg:mt-0 font-bold"
+                    >
+                      Sign In
+                    </p></Link>
+                </div>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -126,6 +134,7 @@ function Nav() {
         >
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
+              
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a
                   href="#"
@@ -136,25 +145,39 @@ function Nav() {
 
                 <a
                   href="#"
-                  className="text-dark-blue block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-dark-blue block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
                 >
                   Innovations
                 </a>
 
                 <a
                   href="#"
-                  className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
                 >
                   Sponsors
                 </a>
 
                 <a
                   href="#aboutus"
-                  className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
                 >
                   About us
                 </a>
+                    {/* <Link to='/login/role'>
+                    <p
+                      className="text-dark-blue  block px-3 py-2 rounded-md text-base font-medium text-gray-800 border-gray-800 font-bold hover:bg-gray-700"
+                    >
+                      Sign In
+                    </p></Link> */}
+                    <Link to='/signup/role'>
+                    <p
+                      className="text-dark-blue  block px-3 py-2 my-2 rounded-md text-base font-medium text-white bg-gray-800 hover:bg-gray-900 font-bold"
+                    >
+                      Register
+                    </p>
+                    </Link>
               </div>
+              
             </div>
           )}
         </Transition>
