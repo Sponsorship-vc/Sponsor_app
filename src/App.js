@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Dashb from '../src/components/Dashboard/Dbpages/Dashb';
+import Prof from '../src/components/Dashboard/Dbpages/Prof';
 import Idea from '../src/components/Dashboard/Dbpages/Idea';
 import Nav from './components/Landing/Nav'
 
@@ -22,7 +23,9 @@ function App() {
           <Route path='/dashboard/:id' Component={Dashboard}>
             <Route path='dashb' Component={Dashb}/>
             <Route path='idea' Component={Idea}/>
+            <Route path='prof' Component={Prof}/>
           </Route>
+          
           
         </Routes>
       </BrowserRouter>

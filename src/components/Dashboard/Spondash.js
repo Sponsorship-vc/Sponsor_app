@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import Sidebarsp from './Sidebarsp'
 
-import Dashb from '../Dashboard/Dbpages/Dashb'
+
 
 const Spondash = () => {
   return (
@@ -9,7 +9,7 @@ const Spondash = () => {
      
     
     <div className=''>
-        <Sidebar
+        <Sidebarsp
         title2="View Ideas"
         title3="Innovators"
         title4="My Sponsorship"
