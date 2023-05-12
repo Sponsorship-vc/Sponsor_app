@@ -29,7 +29,7 @@ function Innsignup() {
         onSubmituser()
         setError(null);
         setName(user.displayName);
-        console.log(user.displayName)
+        // console.log(user.displayName)
       })
       .catch(function(error) {
         // Error signing up user
@@ -42,7 +42,7 @@ function Innsignup() {
     signInWithPopup(auth, provider)
       .then((result) => {
         setName(auth.currentUser.displayName)
-        console.log(name)
+        // console.log(name)
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
