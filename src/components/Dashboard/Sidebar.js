@@ -8,12 +8,15 @@ import Icon5 from '../../Assets/Dashboard/Icons/Icon5.png'
 import Icon6 from '../../Assets/Dashboard/Icons/Icon6.png'
 import Icon7 from '../../Assets/Dashboard/Icons/Icon7.png'
 import Icon8 from '../../Assets/Dashboard/Icons/Icon8.png'
+import {Link , Outlet} from 'react-router-dom'
 
 const Sidebar = (props) => {
   return (
    
+<div>
 
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 translate-x-0" aria-label="Sidebar">
+
+<div id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 translate-x-0" aria-label="Sidebar">
    <div class="h-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
      <a href="https://flowbite.com/" class="flex text-center items-center justify-center p-5  mb-5">
          <img src={logo} class="h-8 mr-3  sm:h-7" alt="Flowbite Logo" />
@@ -21,18 +24,18 @@ const Sidebar = (props) => {
       </a>
       <ul class=" flex-grow p-2 font-medium">
           <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="dashb" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                <img src={Icon1} class="h-4 mr-3 sm:h-7"/>
                <span class="ml-3">Dashboard</span>
-            </a>
+            </Link>
          </li> 
               
          <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="idea" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon2} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">{props.title2}</span>
-              
-            </a>
+            </Link>  
+            
          </li>
          <li class='ml-5'>
             <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -77,7 +80,9 @@ const Sidebar = (props) => {
 
       <div class='text-white justify-center mt-auto flex items-center text-xs text-center gap-2'><img class='h-3' src={logo}/>- Innovators Dashboard</div>
    </div>
-</aside>
+</div>
+<Outlet/>
+</div>
   )
 }
 

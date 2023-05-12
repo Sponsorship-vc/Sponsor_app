@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Dashb from '../src/components/Dashboard/Dbpages/Dashb';
+import Idea from '../src/components/Dashboard/Dbpages/Idea';
 import Nav from './components/Landing/Nav'
 
 function App() {
@@ -17,7 +19,10 @@ function App() {
           <Route path="/signup/role/:id" Component={Signup}/>
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
-          <Route path='/dashboard/:id' Component={Dashboard}/>
+          <Route path='/dashboard/:id' Component={Dashboard}>
+            <Route path='dashb' Component={Dashb}/>
+            <Route path='idea' Component={Idea}/>
+          </Route>
           
         </Routes>
       </BrowserRouter>
