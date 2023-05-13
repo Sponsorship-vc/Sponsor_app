@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../../components/Dashboard/Header';
 import Ideabar from '../../../components/Dashboard/Innovator/Ideabar';
 
-function Idea() {
+function Ideasubmission() {
   return (
     <div>
       <Header/>
@@ -11,4 +11,4 @@ function Idea() {
   )
 }
 
-export default Idea
+export default Ideasubmission

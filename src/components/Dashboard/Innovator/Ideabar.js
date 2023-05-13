@@ -2,7 +2,7 @@ import React from 'react'
 
 const Ideabar = () => {
   return (
-    <div><div class="flex-1 h-screen ml-[-1rem] bg-white  flex items-center justify-center  p-6 bg-white   shadow dark:bg-green-800 ">
+    <div><div class="flex-1 h-screen ml-[-1rem]  flex items-center justify-center  p-6 bg-white   shadow dark:bg-green-800 ">
     <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
     </a>

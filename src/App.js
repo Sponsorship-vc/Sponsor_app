@@ -7,10 +7,10 @@ import Signup from './pages/Signup/Signup';
 
 
 import SponProfile from './pages/Dashboard/Sponsor/SponProfile';
-import Idea from './pages/Dashboard/Innovator/Idea';
 import Sidebarsp from './components/Dashboard/Sponsor/Sidebarsp';
 import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
 import InnProfile from './pages/Dashboard/Innovator/InnProfile';
+import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route path='/signup/role' Component={Roleselector}/>
           <Route path='/dashboard/innovator' Component={Sidebarin}>
             <Route path='' Component={InnProfile}/>
-            <Route path='idea' Component={Idea}/>
+            <Route path='ideasubmission' Component={Ideasubmission}/>
             
           </Route>
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>

@@ -16,7 +16,7 @@ const Sidebarin = (props) => {
 <div>
 
 
-<div id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 translate-x-0" aria-label="Sidebar">
+<div id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform  sm:translate-x-0 translate-x-0" aria-label="Sidebar">
    <div class="h-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
      <a href="https://flowbite.com/" class="flex text-center items-center justify-center p-5  mb-5">
          <img src={logo} class="h-8 mr-3  sm:h-7" alt="Flowbite Logo" />
@@ -26,7 +26,7 @@ const Sidebarin = (props) => {
           <li class='ml-5'>
             <Link to="/dashboard/innovator" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                <img src={Icon1} class="h-4 mr-3 sm:h-7"/>
-               <span class="ml-3">Dashboard</span>
+               <span class="ml-3">Profile</span>
             </Link>
          </li> 
               
