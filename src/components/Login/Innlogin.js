@@ -5,7 +5,7 @@ import { auth, db } from '../../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDocs, collection} from 'firebase/firestore';
 import { useNavigate } from "react-router-dom"
-import Dashboard from '../../pages/Dashboard/Dashboard';
+// import Dashboard from '../../pages/Dashboard/Dashboard';
 
 function Innlogin() {
   const [email, setEmail] = useState('');

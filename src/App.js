@@ -4,7 +4,7 @@ import Roleselector from './pages/Roleselector/Roleselector';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import Dashboard from './pages/Dashboard/Dashboard';
+
 import Dashb from '../src/components/Dashboard/Dbpages/Dashb';
 import Prof from '../src/components/Dashboard/Dbpages/Prof';
 import Idea from '../src/components/Dashboard/Dbpages/Idea';
