@@ -5,12 +5,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 
-import Dashb from '../src/components/Dashboard/Dbpages/Dashb';
-import Prof from '../src/components/Dashboard/Dbpages/Prof';
-import Idea from '../src/components/Dashboard/Dbpages/Idea';
-import Inndash from '../src/components/Dashboard/Inndash'
-import Spondash from '../src/components/Dashboard/Spondash'
-import Nav from './components/Landing/Nav'
+
+import SponProfile from './pages/Dashboard/Sponsor/SponProfile';
+import Idea from './pages/Dashboard/Innovator/Idea';
+import Sidebarsp from './components/Dashboard/Sponsor/Sidebarsp';
+import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
+import InnProfile from './pages/Dashboard/Innovator/InnProfile';
 
 function App() {
   return (
@@ -22,13 +22,13 @@ function App() {
           <Route path="/signup/role/:id" Component={Signup}/>
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
-          <Route path='/dashboard/innovator' Component={Inndash}>
-            <Route path='' Component={Dashb}/>
+          <Route path='/dashboard/innovator' Component={Sidebarin}>
+            <Route path='' Component={InnProfile}/>
             <Route path='idea' Component={Idea}/>
             
           </Route>
-          <Route path='/dashboard/sponsor' Component={Spondash}>
-          <Route path='' Component={Prof}/>
+          <Route path='/dashboard/sponsor' Component={Sidebarsp}>
+          <Route path='' Component={SponProfile}/>
           </Route>
         </Routes>
       </BrowserRouter>

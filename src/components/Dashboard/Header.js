@@ -6,10 +6,10 @@ import {
     getDocs,
     collection,
   } from "firebase/firestore";
-  import { db } from "../../../firebase/config";
+  import { db } from "../../firebase/config";
   import { useEffect, useState } from "react";
   import { getAuth } from "firebase/auth"
-  import { app } from '../../../firebase/config';
+  import { app } from '../../firebase/config';
 
 
 

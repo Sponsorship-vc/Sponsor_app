@@ -1,16 +1,16 @@
 import React from 'react'
-import logo from '../../Assets/Roleselector/whitelogo.png'
-import Icon1 from '../../Assets/Dashboard/Icons/Icon1.png'
-import Icon2 from '../../Assets/Dashboard/Icons/Icon2.png'
-import Icon3 from '../../Assets/Dashboard/Icons/Icon3.png'
-import Icon4 from '../../Assets/Dashboard/Icons/Icon4.png'
-import Icon5 from '../../Assets/Dashboard/Icons/Icon5.png'
-import Icon6 from '../../Assets/Dashboard/Icons/Icon6.png'
-import Icon7 from '../../Assets/Dashboard/Icons/Icon7.png'
-import Icon8 from '../../Assets/Dashboard/Icons/Icon8.png'
+import logo from '../../../Assets/Roleselector/whitelogo.png'
+import Icon1 from '../../../Assets/Dashboard/Icons/Icon1.png'
+import Icon2 from '../../../Assets/Dashboard/Icons/Icon2.png'
+import Icon3 from '../../../Assets/Dashboard/Icons/Icon3.png'
+import Icon4 from '../../../Assets/Dashboard/Icons/Icon4.png'
+import Icon5 from '../../../Assets/Dashboard/Icons/Icon5.png'
+import Icon6 from '../../../Assets/Dashboard/Icons/Icon6.png'
+import Icon7 from '../../../Assets/Dashboard/Icons/Icon7.png'
+import Icon8 from '../../../Assets/Dashboard/Icons/Icon8.png'
 import {Link , Outlet} from 'react-router-dom'
 
-const Sidebar = (props) => {
+const Sidebarsp = (props) => {
   return (
    
 <div>
@@ -24,7 +24,7 @@ const Sidebar = (props) => {
       </a>
       <ul class=" flex-grow p-2 font-medium">
           <li class='ml-5'>
-            <Link to="/dashboard/innovator" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="/dashboard/sponsor" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                <img src={Icon1} class="h-4 mr-3 sm:h-7"/>
                <span class="ml-3">Dashboard</span>
             </Link>
@@ -33,21 +33,21 @@ const Sidebar = (props) => {
          <li class='ml-5'>
             <Link to="idea" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon2} class="h-6 mr-3 sm:h-7"/>
-               <span class="flex-1 ml-3 whitespace-nowrap">{props.title2}</span>
+               <span class="flex-1 ml-3 whitespace-nowrap">Sponsorship details</span>
             </Link>  
             
          </li>
          <li class='ml-5'>
             <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon3} class="h-6 mr-3 sm:h-7"/>
-               <span class="flex-1 ml-3 whitespace-nowrap">{props.title3}</span>
+               <span class="flex-1 ml-3 whitespace-nowrap">Innovators</span>
             </a>
          </li>
          
          <li class='ml-5'>
             <a href="#" class="flex text-xs  items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon4} class="h-6 mr-3 sm:h-7"/>
-               <span class="flex-1 ml-3 whitespace-nowrap">{props.title4}</span>
+               <span class="flex-1 ml-3 whitespace-nowrap">My Sponsorship</span>
             </a>
          </li>
          <li class='ml-5'>
@@ -86,4 +86,4 @@ const Sidebar = (props) => {
   )
 }
 
-export default Sidebar
+export default Sidebarsp

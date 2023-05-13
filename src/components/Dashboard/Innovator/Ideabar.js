@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Idea = () => {
+const Ideabar = () => {
   return (
     <div><div class="flex-1 h-screen ml-[-1rem] bg-white  flex items-center justify-center  p-6 bg-white   shadow dark:bg-green-800 ">
     <a href="#">
@@ -14,4 +14,4 @@ const Idea = () => {
   )
 }
 
-export default Idea
+export default Ideabar
