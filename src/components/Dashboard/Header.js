@@ -30,7 +30,7 @@ function Header() {
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-      })).filter((doc) => doc.userId === auth.currentUser.uid);;
+      })).filter((doc) => doc.userId === auth.currentUser.uid);
       setuserList(filteredData);
     } catch (err) {
       console.error(err);
