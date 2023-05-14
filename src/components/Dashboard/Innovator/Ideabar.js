@@ -23,8 +23,9 @@ const Ideabar = () => {
     const usersCollectionRef = collection(db, "users");
     const auth = getAuth(app);
     const [userList, setuserList] = useState([]);
-    const name = `users/${userList[0].id}/ideas`;
-    const ideaCollectionRef = collection(db, name);
+    const [Name ,setName] = useState(`users/errorpath/${auth.currentUser.id}`);
+    // const name = `users/${userList[0].id}/ideas`;
+    const ideaCollectionRef = collection(db, Name);
 
     
 
@@ -92,13 +93,15 @@ const Ideabar = () => {
         id: doc.id,
       })).filter((doc) => doc.userId === auth.currentUser.uid);
       setuserList(filteredData);
+      setName(`users/${filteredData[0].id}/ideas`)
     } catch (err) {
       console.error(err);
     }
   };
-
+  
   useEffect(() => {
     getuserList();
+    console.log(Name)
   }, []);
 
 

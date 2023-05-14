@@ -56,7 +56,7 @@ function Header() {
 
         {userList.map((user) => (
             <div>
-                {user.name}.
+                <p>{user.name}</p>
                 <p>{user.role}</p>
             </div>
             
