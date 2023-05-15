@@ -11,6 +11,7 @@ import Sidebarsp from './components/Dashboard/Sponsor/Sidebarsp';
 import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
 import InnProfile from './pages/Dashboard/Innovator/InnProfile';
 import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
+import Myideas from './pages/Dashboard/Innovator/Myideas';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/dashboard/innovator' Component={Sidebarin}>
             <Route path='' Component={InnProfile}/>
             <Route path='ideasubmission' Component={Ideasubmission}/>
+            <Route path='myIdeas' Component={Myideas}/>
             
           </Route>
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>

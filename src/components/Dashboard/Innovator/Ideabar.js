@@ -23,7 +23,7 @@ const Ideabar = () => {
     const usersCollectionRef = collection(db, "users");
     const auth = getAuth(app);
     const [userList, setuserList] = useState([]);
-    const [Name ,setName] = useState(`users/errorpath/${auth.currentUser.id}`);
+    const [Name ,setName] = useState(`users/errorpath/ideas`);
     // const name = `users/${userList[0].id}/ideas`;
     const ideaCollectionRef = collection(db, Name);
 
@@ -59,7 +59,7 @@ const Ideabar = () => {
 
   const uploadFile = async () => {
     if (!fileUpload) return;
-    const filesFolderRef = ref(storage, `test/${fileUpload.name}`);
+    const filesFolderRef = ref(storage, `${Name}/${fileUpload.name}`);
     try {
       await uploadBytes(filesFolderRef, fileUpload);
     } catch (err) {

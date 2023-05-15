@@ -31,7 +31,7 @@ const Sidebarin = (props) => {
          </li> 
               
          <li class='ml-5'>
-            <Link to="idea" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="ideasubmission" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon2} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Idea Submission</span>
             </Link>  
@@ -45,10 +45,10 @@ const Sidebarin = (props) => {
          </li>
          
          <li class='ml-5'>
-            <a href="#" class="flex text-xs  items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="myideas" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                 <img src={Icon4} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">My Ideas</span>
-            </a>
+            </Link>
          </li>
          <li class='ml-5'>
             <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
