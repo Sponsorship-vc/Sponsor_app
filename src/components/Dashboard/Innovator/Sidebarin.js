@@ -24,54 +24,54 @@ const Sidebarin = (props) => {
       </a>
       <ul class=" flex-grow p-2 font-medium">
           <li class='ml-5'>
-            <Link to="/dashboard/innovator" class="flex text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="/dashboard/innovator" class="flex text-xs items-center p-2 text-gray-400 hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                <img src={Icon1} class="h-4 mr-3 sm:h-7"/>
                <span class="ml-3">Profile</span>
             </Link>
          </li> 
               
          <li class='ml-5'>
-            <Link to="ideasubmission" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="ideasubmission" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon2} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Idea Submission</span>
             </Link>  
             
          </li>
          <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon3} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Sponsors</span>
             </a>
          </li>
          
          <li class='ml-5'>
-            <Link to="myideas" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="myideas" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon4} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">My Ideas</span>
             </Link>
          </li>
          <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon5} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Chat</span>
                <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Premium</span>
             </a>
          </li>
          <li class='ml-5'>
-            <a href="#" class="flex  text-xs items-center p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="#" class="flex  text-xs items-center p-2 text-gray-400 hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon6} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Notifications</span>
                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
             </a>
          </li>
          <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon7} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Account Settings</span>
             </a>
          </li>
          <li class='ml-5'>
-            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="#" class="flex text-xs items-center p-2 text-gray-400 rounded-lg  hover:rounded-l-full hover:bg-white hover:w-80 hover:text-black">
                 <img src={Icon8} class="h-6 mr-3 sm:h-7"/>
                <span class="flex-1 ml-3 whitespace-nowrap">Help Center</span>
             </a>
