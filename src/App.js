@@ -14,7 +14,7 @@ import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
 import Myideas from './pages/Dashboard/Innovator/Myideas';
 import Help from './pages/Dashboard/Innovator/Help';
 import Sponsor from './pages/Dashboard/Innovator/Sponsors';
-import Chat from './pages/Dashboard/Innovator/Chat'
+import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
             <Route path='myIdeas' Component={Myideas}/>
             <Route path='help' Component={Help}/>
             <Route path='sponsor' Component={Sponsor}/>
-            <Route path='chat' Component={Chat}/>
+            <Route path='chat' Component={ChatWindow}/>
             
           </Route>
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>

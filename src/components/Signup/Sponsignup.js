@@ -14,7 +14,8 @@ import {
 import { db } from "../../firebase/config";
 
 
-function Sponsignup() {const [fileUploaded, setFileUploaded] = useState(false);
+function Sponsignup() {
+    const [fileUploaded, setFileUploaded] = useState(false);
     const [fileName, setFileNames] = useState('');
     const [fileUpload, setFileUpload] = useState(null);
     const usersCollectionRef = collection(db, "users");
@@ -48,7 +49,7 @@ function Sponsignup() {const [fileUploaded, setFileUploaded] = useState(false);
       } catch (err) {
         console.error(err);
       }
-    };
+    }
 
     const onSubmituser = async () => {
       try {

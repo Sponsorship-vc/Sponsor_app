@@ -22,7 +22,7 @@ function Header() {
   const [userList, setuserList] = useState([]);
   const usersCollectionRef = collection(db, "users");
   const auth = getAuth(app);
-
+  const user = userList[0]
 
   const getuserList = async () => {
     try {
@@ -32,6 +32,7 @@ function Header() {
         id: doc.id,
       })).filter((doc) => doc.userId === auth.currentUser.uid);
       setuserList(filteredData);
+      console.log(userList)
     } catch (err) {
       console.error(err);
     }
