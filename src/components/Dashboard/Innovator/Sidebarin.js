@@ -5,10 +5,9 @@ import Icon2 from '../../../Assets/Dashboard/Icons/Icon2.png'
 import Icon3 from '../../../Assets/Dashboard/Icons/Icon3.png'
 import Icon4 from '../../../Assets/Dashboard/Icons/Icon4.png'
 import Icon5 from '../../../Assets/Dashboard/Icons/Icon5.png'
-import Icon6 from '../../../Assets/Dashboard/Icons/Icon6.png'
-import Icon7 from '../../../Assets/Dashboard/Icons/Icon7.png'
+
 import Icon8 from '../../../Assets/Dashboard/Icons/Icon8.png'
-import {Link , NavLink,  Outlet} from 'react-router-dom'
+import { NavLink,  Outlet} from 'react-router-dom'
 
 
 const Sidebarin = () => {
