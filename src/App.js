@@ -12,6 +12,9 @@ import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
 import InnProfile from './pages/Dashboard/Innovator/InnProfile';
 import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
 import Myideas from './pages/Dashboard/Innovator/Myideas';
+import Help from './pages/Dashboard/Innovator/Help';
+import Sponsor from './pages/Dashboard/Innovator/Sponsors';
+import Chat from './pages/Dashboard/Innovator/Chat'
 
 function App() {
   return (
@@ -24,9 +27,12 @@ function App() {
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
           <Route path='/dashboard/innovator' Component={Sidebarin}>
-            <Route path='' Component={InnProfile}/>
+            <Route path='profile' Component={InnProfile}/>
             <Route path='ideasubmission' Component={Ideasubmission}/>
             <Route path='myIdeas' Component={Myideas}/>
+            <Route path='help' Component={Help}/>
+            <Route path='sponsor' Component={Sponsor}/>
+            <Route path='chat' Component={Chat}/>
             
           </Route>
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>
