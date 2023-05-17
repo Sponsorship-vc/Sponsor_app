@@ -15,7 +15,7 @@ import Myideas from './pages/Dashboard/Innovator/Myideas';
 import Help from './pages/Dashboard/Innovator/Help';
 import Sponsor from './pages/Dashboard/Innovator/Sponsors';
 import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
-
+// import './style.scss'
 function App() {
   return (
     <div>
