@@ -1,9 +1,8 @@
-import React , {useContext} from 'react' 
-import { useEffect,useState } from "react";
+import React from 'react' 
+import { useState } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import {  storage , db , auth } from "../../../firebase/config";
 import {
-  getDocs,
   collection,
   addDoc,
 } from "firebase/firestore";
@@ -13,6 +12,9 @@ const Ideabar = () => {
     const [fileUploaded, setFileUploaded] = useState(false);
     const [fileUpload, setFileUpload] = useState(null);
     const ideaCollectionRef = collection(db, "Ideas");
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
 
     const [a, seta] = useState("");
     const [b, setb] = useState("");
@@ -53,16 +55,17 @@ const Ideabar = () => {
   const onSubmituser = async () => {
     try {
       await addDoc(ideaCollectionRef, {
-        a: a,
-        b: b,
-        c:c,
-        d:d,
-        e:e,
-        f: f,
-        g:g,
-        h:h,
+        title: a,
+        Problem: b,
+        fundingRequirement:c,
+        category:d,
+        Solution:e,
+        model: f,
+        property:g,
+        teamDetails:h,
         filepath:"need to set",
         userId:auth.currentUser.uid,
+        date:formattedDate,
       });
       uploadFile();
     } catch (err) {
@@ -76,7 +79,7 @@ const Ideabar = () => {
         <div className='bg-[#30397F] rounded-t-xl h-20'>
           <p className='text-lg px-6 font-bold text-white py-6'>Idea Details</p>
         </div>
-          <div className='p-4 flex h-full flex-row'>
+          <div className='p-4 flex h-full flex-col md:flex-row'>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
               <p className='text[#303972] font-bold'>Idea Title</p>
               <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" placeholder='Give suitable title for you idea' onChange={(e) => seta(e.target.value)}/>
@@ -89,7 +92,7 @@ const Ideabar = () => {
 
               <p className='text[#303972] font-bold'>Images | pdfs</p>
               <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded h-20">
-                <div id="iconDiv" className="flex flex-col gap-2 p-2">
+                <div id="iconDiv" className="flex flex-col  p-2">
                   <p className="text-gray-400 flex justify-center">Click here to upload</p>
                 </div>
                 {fileUploaded ? (
@@ -112,9 +115,9 @@ const Ideabar = () => {
               <input type="text" className="border h-36 border-gray-300 rounded w-full p-2"onChange={(e) => setf(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Intellectual Property</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2"onChange={(e) => setg(e.target.value)}/>
+              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2"onChange={(e) => setg(e.target.value)} placeholder='Information on any patents, trademarks, or copyrights related to the idea'/>
               <p className='text[#303972] font-bold'>Team Details</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" onChange={(e) => seth(e.target.value)}/>
+              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" onChange={(e) => seth(e.target.value)} placeholder='Enter email address of team members'/>
 
             </div>
           </div>

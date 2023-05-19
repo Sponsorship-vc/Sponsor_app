@@ -1,14 +1,11 @@
 import React , {  useState } from 'react';
 import { ideaData } from '../../../data/Userdata';
-import {
-  getDocs,
-  collection,
-  addDoc,
+import { 
   deleteDoc,
-  updateDoc,
   doc,
 } from "firebase/firestore";
-import { db, auth, storage } from "../../../firebase/config";
+import { db } from "../../../firebase/config";
+import { PopoverHandler , Popover ,Button ,PopoverContent ,Typography, Input } from '@material-tailwind/react';
 
 
 
@@ -16,6 +13,10 @@ import { db, auth, storage } from "../../../firebase/config";
 function MyIdeabar() {
     
     const [ideaList, setideaList] = useState([]);
+    const [value, setValue] = useState([]);
+
+
+
 
     ideaData.then(
       (value) => {
@@ -27,10 +28,14 @@ function MyIdeabar() {
       },
     );
 
-    const deleteuser = async (id) => {
-      const userDoc = doc(db, "Ideas", id);
-      await deleteDoc(userDoc);
+    const deleteuser = async (id ,name) => {
+      if(name == value){
+        const userDoc = doc(db, "Ideas", id);
+        await deleteDoc(userDoc);
+      }
     };
+
+    
 
 
 
@@ -51,17 +56,38 @@ function MyIdeabar() {
                 </thead>
                 {ideaList.map((post) => (
                 <tr className='h-16 hover:border-l-4 hover:border-l-blue-800 border-t-2'>
-                    <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.a}</p></td>
+                    <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.title}</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.id}</p></td>
-                    <td><p className='text-sm font-normal flex justify-center text-gray-400'>march 14 2003</p></td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.d}</p></td>
-                    <td><button className='text-md w-3/4 mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-2 '>View Problem Statement</button></td>
+                    <td><p className='text-sm font-normal flex justify-center text-gray-400'>{post.date}</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.category}</p></td>
+                    <td><button className='text-md w-[80px] mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-2 '>View</button></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>button</p></td>
                     <td>
-                    <button 
-                    className='text-md  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-1 px-4'
-                    onClick={() => deleteuser(post.id)}
-                    >Delete</button>
+                      <Popover placement="bottom">
+                        <PopoverHandler>
+                          <button
+                          className='text-md  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-1 px-4'
+                          >Delete</button>
+                        </PopoverHandler>
+                        <PopoverContent className="w-96">
+                          <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className="mb-6"
+                          >
+                            Type "{post.title}"
+                          </Typography>
+                          <div className="flex gap-2">
+                            <input
+                            onChange={(e) => setValue(e.target.value)}
+                            />
+                            <button
+                          className='text-md   font-normal flex justify-center align-center text-white bg-red-700 rounded-full py-1 px-4'
+                          onClick={() => deleteuser(post.id ,post.title)}
+                          >Delete</button>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                     </td>
                 </tr>
                 ))}
