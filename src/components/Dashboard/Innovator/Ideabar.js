@@ -1,35 +1,18 @@
-import React from 'react' 
+import React , {useContext} from 'react' 
 import { useEffect,useState } from "react";
 import { ref, uploadBytes } from "firebase/storage";
-import {  storage , db ,app } from "../../../firebase/config";
+import {  storage , db , auth } from "../../../firebase/config";
 import {
   getDocs,
   collection,
   addDoc,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth"
-
-
-
-
-
-
-
 
 const Ideabar = () => {
   const [fileName, setFileNames] = useState('');
     const [fileUploaded, setFileUploaded] = useState(false);
     const [fileUpload, setFileUpload] = useState(null);
-    const usersCollectionRef = collection(db, "users");
-    const auth = getAuth(app);
-    const [userList, setuserList] = useState([]);
-    const [Name ,setName] = useState(`users/errorpath/ideas`);
-    // const name = `users/${userList[0].id}/ideas`;
-    const ideaCollectionRef = collection(db, Name);
-
-    
-
-  
+    const ideaCollectionRef = collection(db, "Ideas");
 
     const [a, seta] = useState("");
     const [b, setb] = useState("");
@@ -59,7 +42,7 @@ const Ideabar = () => {
 
   const uploadFile = async () => {
     if (!fileUpload) return;
-    const filesFolderRef = ref(storage, `${Name}/${fileUpload.name}`);
+    const filesFolderRef = ref(storage, `Ideas/${auth.currentUser.uid}/${fileUpload.name}`);
     try {
       await uploadBytes(filesFolderRef, fileUpload);
     } catch (err) {
@@ -79,32 +62,13 @@ const Ideabar = () => {
         g:g,
         h:h,
         filepath:"need to set",
+        userId:auth.currentUser.uid,
       });
       uploadFile();
     } catch (err) {
       console.error(err);
     }
   };
-  const getuserList = async () => {
-    try {
-      const data = await getDocs(usersCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      })).filter((doc) => doc.userId === auth.currentUser.uid);
-      setuserList(filteredData);
-      setName(`users/${filteredData[0].id}/ideas`)
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  
-  useEffect(() => {
-    getuserList();
-    console.log(Name)
-  }, []);
-
-
 
   return (
     <div className='ml-64'>

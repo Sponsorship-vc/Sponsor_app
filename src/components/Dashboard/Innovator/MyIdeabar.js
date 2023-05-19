@@ -1,67 +1,42 @@
-import React from 'react'
+import React , {  useState } from 'react';
+import { ideaData } from '../../../data/Userdata';
 import {
-    getDocs,
-    collection,
-  } from "firebase/firestore";
-import { db } from "../../../firebase/config";
-import { getAuth } from "firebase/auth"
-import { useEffect, useState } from "react";
-import { app } from '../../../firebase/config';
+  getDocs,
+  collection,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import { db, auth, storage } from "../../../firebase/config";
+
 
 
 
 function MyIdeabar() {
     
-    const [Name ,setName] = useState(`users/errorpath/ideas`);
-    const usersCollectionRef = collection(db, "users");
-    const ideaCollectionRef = collection(db, Name);
-  const [userList, setuserList] = useState([]);
-  const [ideaList, setideaList] = useState([]);
-  const auth = getAuth(app);
+    const [ideaList, setideaList] = useState([]);
 
+    ideaData.then(
+      (value) => {
+        setideaList(value)
+        // console.log(value); // Success!
+      },
+      (reason) => {
+        console.error(reason); // Error!
+      },
+    );
 
-    const getuserList = async () => {
-        try {
-          const data = await getDocs(usersCollectionRef);
-          const filteredData = data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          })).filter((doc) => doc.userId === auth.currentUser.uid);
-          setuserList(filteredData);
-          setName(`users/${filteredData[0].id}/ideas`)
-        //   console.log(ideaList,userList,"21")
-
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-      const getideaList = async () => {
-        try {
-          const data = await getDocs(ideaCollectionRef);
-          const filteredData = data.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-          setideaList(filteredData);
-        //   console.log(ideaList,userList,"1")
-        } catch (err) {
-          console.error(err);
-        }
-      };
-    
-      useEffect(() => {
-        getuserList();
-        getideaList();
-        // console.log(ideaList,userList,"1")
-      });
-
+    const deleteuser = async (id) => {
+      const userDoc = doc(db, "Ideas", id);
+      await deleteDoc(userDoc);
+    };
 
 
 
   return (
-    <div className='ml-64'>
-        <div className='mx-8 rounded-xl '>
+    <div className='ml-64 '>
+        <div className='mx-8 rounded-xl bg-white'>
             <table className=' w-full  px-4 '>
                 <thead className='w-full h-14'>
                 <tr>
@@ -77,19 +52,23 @@ function MyIdeabar() {
                 {ideaList.map((post) => (
                 <tr className='h-16 hover:border-l-4 hover:border-l-blue-800 border-t-2'>
                     <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.a}</p></td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>#123456789</p></td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>marcg 14 2003</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.id}</p></td>
+                    <td><p className='text-sm font-normal flex justify-center text-gray-400'>march 14 2003</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.d}</p></td>
+                    <td><button className='text-md w-3/4 mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-2 '>View Problem Statement</button></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>button</p></td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>button</p></td>
-                    <td></td>
+                    <td>
+                    <button 
+                    className='text-md  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-1 px-4'
+                    onClick={() => deleteuser(post.id)}
+                    >Delete</button>
+                    </td>
                 </tr>
                 ))}
 
             </table>
             <div className='flex justify-between flex-row px-4 py-4'>
                 <div><p className='text-sm text-gray-500'>showing 1-5 data from 100</p></div>
-                <div>buttons</div>
             </div>
         </div>
     </div>
