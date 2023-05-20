@@ -75,20 +75,20 @@ const Ideabar = () => {
 
   return (
     <div className='ml-64'>
-      <div className='mx-8 rounded-xl border-2'>
+      <div className='mx-8  rounded-xl border-2'>
         <div className='bg-[#30397F] rounded-t-xl h-20'>
           <p className='text-lg px-6 font-bold text-white py-6'>Idea Details</p>
         </div>
-          <div className='p-4 flex h-full flex-col md:flex-row'>
+          <div className='p-4 flex h-full rounded-b-xl flex-col bg-white md:flex-row'>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
               <p className='text[#303972] font-bold'>Idea Title</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" placeholder='Give suitable title for you idea' onChange={(e) => seta(e.target.value)}/>
+              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" placeholder='Give suitable title for you idea' onChange={(e) => seta(e.target.value)} />
 
               <p className='text[#303972] font-bold'>Problem Statement</p>
-              <input type="text" className="border h-36 border-gray-300 rounded w-full p-2" onChange={(e) => setb(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none" onChange={(e) => setb(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Funding Requriements</p>
-              <input type="text" className="border h-36 border-gray-300 rounded w-full p-2" onChange={(e) => setc(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none " onChange={(e) => setc(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Images | pdfs</p>
               <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded h-20">
@@ -106,23 +106,23 @@ const Ideabar = () => {
             </div>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
               <p className='text[#303972] font-bold'>Categories</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" onChange={(e) => setd(e.target.value)}/>
+              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" onChange={(e) => setd(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Solution</p>
-              <input type="text" className="border h-36 border-gray-300 rounded w-full p-2"onChange={(e) => sete(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => sete(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Target Market & Business Model</p>
-              <input type="text" className="border h-36 border-gray-300 rounded w-full p-2"onChange={(e) => setf(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => setf(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Intellectual Property</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2"onChange={(e) => setg(e.target.value)} placeholder='Information on any patents, trademarks, or copyrights related to the idea'/>
+              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => setg(e.target.value)} placeholder='Information on any patents, trademarks, or copyrights related to the idea'/>
               <p className='text[#303972] font-bold'>Team Details</p>
-              <input type="text" className="border h-10 border-gray-300 rounded w-full p-2" onChange={(e) => seth(e.target.value)} placeholder='Enter email address of team members'/>
+              <textarea type="email"  multiple className="border h-12 border-gray-300 rounded w-full p-2 resize-none" onChange={(e) => seth(e.target.value)} placeholder='Enter email address of team members'/>
 
             </div>
           </div>
       </div>
-      <div className='text-right  mx-8 my-8'>
+      <div className='text-right  px-8 py-8'>
         <button className="mx-4 inline-block text-sm px-6 py-3 leading-none border rounded-full text-gray-800 border-gray-800 lg:mt-0 font-bold">Save as Draft</button>
         <button className="inline-block text-sm px-6 py-3 leading-none border rounded-full text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold" onClick={onSubmituser}>Submit</button>
       </div>

@@ -15,6 +15,8 @@ import Myideas from './pages/Dashboard/Innovator/Myideas';
 import Help from './pages/Dashboard/Innovator/Help';
 import Sponsor from './pages/Dashboard/Innovator/Sponsors';
 import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
+import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
+
 // import './style.scss'
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
             <Route path='help' Component={Help}/>
             <Route path='sponsor' Component={Sponsor}/>
             <Route path='chat' Component={ChatWindow}/>
+            <Route path='myIdeas/:id' Component={ViewIdea}/>
             
           </Route>
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>

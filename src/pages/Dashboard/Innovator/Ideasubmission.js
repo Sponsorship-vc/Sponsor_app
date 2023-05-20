@@ -4,7 +4,7 @@ import Ideabar from '../../../components/Dashboard/Innovator/Ideabar';
 
 function Ideasubmission() {
   return (
-    <div>
+    <div className='bg-[#F3F4FF] h-full'>
       <Header/>
       <Ideabar/>
     </div>

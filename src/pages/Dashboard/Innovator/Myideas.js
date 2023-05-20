@@ -4,7 +4,7 @@ import MyIdeabar from '../../../components/Dashboard/Innovator/MyIdeabar';
 
 function Myideas() {
   return (
-    <div>
+    <div className='bg-[#F3F4FF] min-h-screen'>
       <Header/>
       <MyIdeabar/>
     </div>

@@ -5,7 +5,8 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-import { PopoverHandler , Popover ,Button ,PopoverContent ,Typography, Input } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
+import { PopoverHandler , Popover  ,PopoverContent ,Typography, Input } from '@material-tailwind/react';
 
 
 
@@ -13,7 +14,9 @@ import { PopoverHandler , Popover ,Button ,PopoverContent ,Typography, Input } f
 function MyIdeabar() {
     
     const [ideaList, setideaList] = useState([]);
-    const [value, setValue] = useState([]);
+    const [value, setValue] = useState("");
+    const length = ideaList.length;
+
 
 
 
@@ -29,7 +32,7 @@ function MyIdeabar() {
     );
 
     const deleteuser = async (id ,name) => {
-      if(name == value){
+      if(name === value){
         const userDoc = doc(db, "Ideas", id);
         await deleteDoc(userDoc);
       }
@@ -43,7 +46,7 @@ function MyIdeabar() {
     <div className='ml-64 '>
         <div className='mx-8 rounded-xl bg-white'>
             <table className=' w-full  px-4 '>
-                <thead className='w-full h-14'>
+                <thead className='w-full h-20'>
                 <tr>
                     <th><p className='text-sm font-bold text-blue-800'>Title</p></th>
                     <th><p className='text-sm font-bold text-blue-800'>Id</p></th>
@@ -55,15 +58,24 @@ function MyIdeabar() {
                 </tr>
                 </thead>
                 {ideaList.map((post) => (
-                <tr className='h-16 hover:border-l-4 hover:border-l-blue-800 border-t-2'>
+                <tr className='h-20 hover:border-l-4 hover:border-l-blue-800 border-t-2'>
                     <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.title}</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.id}</p></td>
                     <td><p className='text-sm font-normal flex justify-center text-gray-400'>{post.date}</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.category}</p></td>
-                    <td><button className='text-md w-[80px] mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-2 '>View</button></td>
+                    <td>
+                    <Link to={`/dashboard/innovator/myideas/${post.id}`}>
+                      <button 
+                      className='text-md w-[80px] mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-1 '
+                      >
+                        View
+                      </button>      
+                      </Link>
+
+                    </td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>button</p></td>
                     <td>
-                      <Popover placement="bottom">
+                      <Popover placement="left">
                         <PopoverHandler>
                           <button
                           className='text-md  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-1 px-4'
@@ -82,7 +94,7 @@ function MyIdeabar() {
                             onChange={(e) => setValue(e.target.value)}
                             />
                             <button
-                          className='text-md   font-normal flex justify-center align-center text-white bg-red-700 rounded-full py-1 px-4'
+                          className='text-md font-normal flex text-white bg-red-700 rounded-full my-auto py-2 px-4'
                           onClick={() => deleteuser(post.id ,post.title)}
                           >Delete</button>
                           </div>
@@ -94,7 +106,7 @@ function MyIdeabar() {
 
             </table>
             <div className='flex justify-between flex-row px-4 py-4'>
-                <div><p className='text-sm text-gray-500'>showing 1-5 data from 100</p></div>
+                <div><p className='text-sm text-gray-500'>showing 1-{length} data from {length}</p></div>
             </div>
         </div>
     </div>
