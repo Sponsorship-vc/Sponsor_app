@@ -4,6 +4,7 @@ import { ideaData } from '../../../data/Userdata';
 import { useState ,useEffect } from 'react';
 import  Dots  from '../../../Assets/Dashboard/Icons/Dots.png'
 import  Edit  from '../../../Assets/Dashboard/Icons/Vector.png'
+import { Link } from 'react-router-dom';
 
 function ViewIdeabar() {
     const location = useLocation();
@@ -17,7 +18,7 @@ function ViewIdeabar() {
           (value) => {
             const filteredValues = value.filter((item) => item.id === message);
             setpost(filteredValues);
-            console.log(filteredValues);
+            // console.log(filteredValues);
           },
           (reason) => {
             console.error(reason); // Error!
@@ -35,7 +36,11 @@ function ViewIdeabar() {
                     <div className='flex flex-row justify-between'> 
                         <p className='font-bold text-[#303972] text-3xl py-2'>{post.title}</p>
                         <div className='flex flex-row gap-4'>
-                            <img src={Edit} className="h-5"/>
+                            <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
+                                <img src={Edit} className="h-5"
+                                title="Edit"
+                                />
+                            </Link>
                             <img src={Dots} className="h-5"/>
                         </div>
                     </div>

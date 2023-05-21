@@ -43,8 +43,8 @@ function MyIdeabar() {
 
 
   return (
-    <div className='ml-64 '>
-        <div className='mx-8 rounded-xl bg-white'>
+    <div className='ml-64 py-8'>
+        <div className='mx-8   rounded-xl bg-white'>
             <table className=' w-full  px-4 '>
                 <thead className='w-full h-20'>
                 <tr>
@@ -73,7 +73,7 @@ function MyIdeabar() {
                       </Link>
 
                     </td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>button</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800'> {post.draft ? "draft":"submit"}</p></td>
                     <td>
                       <Popover placement="left">
                         <PopoverHandler>

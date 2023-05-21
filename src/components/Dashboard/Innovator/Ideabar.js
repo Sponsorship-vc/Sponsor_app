@@ -23,7 +23,8 @@ const Ideabar = () => {
     const [e, sete] = useState("");
     const [f, setf] = useState("");
     const [g, setg] = useState("");
-    const [h, seth] = useState("");
+    const [h, seth] = useState("");    
+    const [draft, setdraft] = useState(true);
 
     
 
@@ -51,6 +52,10 @@ const Ideabar = () => {
       console.error(err);
     }
   };
+  const onDraftuser = () =>{
+    setdraft(false);
+    onSubmituser();
+  }
 
   const onSubmituser = async () => {
     try {
@@ -66,6 +71,7 @@ const Ideabar = () => {
         filepath:"need to set",
         userId:auth.currentUser.uid,
         date:formattedDate,
+        draft:draft,
       });
       uploadFile();
     } catch (err) {
@@ -123,8 +129,10 @@ const Ideabar = () => {
           </div>
       </div>
       <div className='text-right  px-8 py-8'>
-        <button className="mx-4 inline-block text-sm px-6 py-3 leading-none border rounded-full text-gray-800 border-gray-800 lg:mt-0 font-bold">Save as Draft</button>
-        <button className="inline-block text-sm px-6 py-3 leading-none border rounded-full text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold" onClick={onSubmituser}>Submit</button>
+        <button className="mx-4 inline-block text-sm px-6 py-3 leading-none border rounded-full text-gray-800 border-gray-800 lg:mt-0 font-bold"
+        onClick={onDraftuser}>Save as Draft</button>
+        <button className="inline-block text-sm px-6 py-3 leading-none border rounded-full text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold" 
+        onClick={onSubmituser}>Submit</button>
       </div>
     </div>
   )
