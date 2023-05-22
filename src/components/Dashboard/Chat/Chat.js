@@ -1,20 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../../../context/ChatContext";
-import pfp from '../../../Assets/Dashboard/pfp.jpg'
+import pfp from "../../../Assets/Dashboard/pfp.jpg";
 
 const Chat = () => {
-const {data} = useContext(ChatContext);
+  const { data } = useContext(ChatContext);
 
   return (
     <div className="flex flex-1 flex-col">
       <div className="h-[50px] flex items-center p-[10px] text-dark-blue w-full flex- gap-3 mt-3  border-b border-slate-200">
-        <img src={data.user?.photoURL} alt="your pic " className="rounded-full h-8 w-8"/>
-        <span className="font-bold ">{data.user?.name}</span> 
+        <img
+          src={data.user?.photoURL || pfp} // Use a fallback image if photoURL is not available
+          alt="your pic"
+          className="rounded-full h-8 w-8"
+        />
+        <span className="font-bold">{data.user?.name}</span>
       </div>
       <Messages />
-      <Input/>
+      <Input />
     </div>
   );
 };
