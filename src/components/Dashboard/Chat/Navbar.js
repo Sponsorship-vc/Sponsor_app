@@ -7,13 +7,8 @@ const Navbar = () => {
   const {currentUser} = useContext(AuthContext)
 
   return (
-    <div className='navbar'>
-      <span className="logo">Lama Chat</span>
-      <div className="user">
-        <img src={currentUser.photoURL} alt="" />
-        <span>{currentUser.displayName}</span>
-        <button onClick={()=>signOut(auth)}>logout</button>
-      </div>
+    <div className='flex items-center bg-white h-[50px] p-[10px] justify-between text-dark-blue  font-bold'>
+      <span>Messages</span>
     </div>
   )
 }
