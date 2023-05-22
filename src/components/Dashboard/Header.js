@@ -30,7 +30,7 @@ function Header() {
 
   return (
 
-    <div className='flex-1 flex flex-row px-8 justify-between ml-64 py-4 '>
+    <div className='flex-1 flex flex-row px-8 justify-between ml-64 py-4  '>
     <div>
       <p>{message}</p>
     </div>

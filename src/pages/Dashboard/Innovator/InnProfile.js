@@ -4,7 +4,7 @@ import Profilecard from '../../../components/Dashboard/Innovator/Profilecard'
 
 function InnProfile() {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
         <Header/>
         <Profilecard/>
     </div>
