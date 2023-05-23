@@ -17,6 +17,7 @@ import Sponsor from './pages/Dashboard/Innovator/Sponsors';
 import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
 import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
 import EditIdea from './pages/Dashboard/Innovator/EditIdea';
+import Verification from './pages/verify/Verification';
 
 // import './style.scss'
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/signup/role/:id" Component={Signup}/>
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
+          <Route path ='/sponsor/verify' Component={Verification}/>
           <Route path='/dashboard/innovator' Component={Sidebarin}>
             <Route path='profile' Component={InnProfile}/>
             <Route path='ideasubmission' Component={Ideasubmission}/>

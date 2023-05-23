@@ -39,7 +39,7 @@ function Header() {
             <FaBell className='  m-auto' />
         </div>
 
-        {userList.map((user) => (
+        {userList && userList.map((user) => (
             <div>
                 <p>{user.name}</p>
                 <p>{user.role}</p>

@@ -5,7 +5,6 @@ import Icon2 from '../../../Assets/Dashboard/Icons/Icon2.png'
 import Icon3 from '../../../Assets/Dashboard/Icons/Icon3.png'
 import Icon4 from '../../../Assets/Dashboard/Icons/Icon4.png'
 import Icon5 from '../../../Assets/Dashboard/Icons/Icon5.png'
-
 import Icon8 from '../../../Assets/Dashboard/Icons/Icon8.png'
 import { NavLink,  Outlet} from 'react-router-dom'
 
@@ -27,7 +26,7 @@ const Sidebarin = () => {
       <ul className=" flex-grow  font-medium w-full">
 
            <li className=' ml-5  mb-2 '>
-            <NavLink to="/dashboard/innovator/profile"  className={({ isActive }) =>             
+            <NavLink to="profile"  className={({ isActive }) =>             
               isActive ? 'rounded-l-full bg-white text-sm flex h-11 p-3 w-full hover:text-black' : ' text-gray-400 flex p-3 text-sm font-thin'
               
                }>

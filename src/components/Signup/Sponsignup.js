@@ -12,6 +12,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useNavigate } from 'react-router-dom';
 
 
 function Sponsignup() {
@@ -25,6 +26,7 @@ function Sponsignup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const navigate = useNavigate
 
   
     function handleFileSelect(event) {
@@ -62,6 +64,7 @@ function Sponsignup() {
           verify:false,
         });
         getuserList();
+        navigate('/sponsor/verify')
       } catch (err) {
         console.error(err);
       }
@@ -97,12 +100,11 @@ function Sponsignup() {
     }
   
     return (
-      <div className='flex w-screen z-[-1] flex-row mr-[-10px]'>
-        <div className='z-[-1]'>
-  
+      <div className='flex w-screen z-[-1] flex-row mr-[-10px] overflow-hidden'>
+        <div className='z-[-1] h-full'>
         <Sidebar/>
         </div>
-        <div className='flex-1 ml-[-1rem] bg-white rounded-l-2xl flex items-center justify-center'>
+        <div className='flex-1 ml-[-1rem] bg-white rounded-l-2xl flex items-center justify-center overflow-x-hidden'>
           <div className='flex flex-col mx-8'>
           <p className='font-abc text-4xl text-center font-semibold py-10'> Register your account as a Sponsor </p>
           <div className='flex flex-col gap-2'>
@@ -124,7 +126,7 @@ function Sponsignup() {
             </label>
             <p className='text-gray-400 text-center w-3/4 flex mx-auto'>By signing up, you confirm that you’ve read and accepted our User Notice and Privacy Policy.</p>
             <button className='w-[600px] mx-auto my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'onClick={handleRegister}>Register</button>
-            <a href='/login/role/sponsor'className='text-blue-500 font-bold text-md text-center flex mx-auto'>Already have an SponSir account? Log in</a>
+            <a href='/login/role/sponsor'className='text-blue-500  text-md text-center flex mx-auto mb-5'>Already have an SponSir account? Log in</a>
           </div>
          </div>
         </div>

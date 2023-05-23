@@ -4,7 +4,7 @@ import googleImg from '../../Assets/Signup/Google Login.png';
 import { auth, db } from '../../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDocs, collection} from 'firebase/firestore';
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 // import Dashboard from '../../pages/Dashboard/Dashboard';
 
 function Innlogin() {
@@ -13,7 +13,6 @@ function Innlogin() {
   const [error, setError] = useState(null);
   const [userList, setUserList] = useState([]);
   const usersCollectionRef = collection(db, 'users');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate()
 
   const handleLoginClick = async () => {
@@ -32,7 +31,7 @@ function Innlogin() {
       let isRoleFound = false;
       userList.forEach((user) => {
         if (!isRoleFound && user.role === "innovator") {
-          setIsLoggedIn(!isLoggedIn);
+          navigate("/dashboard/innovator/profile")
           console.log("User role:", user.role);
           isRoleFound = true;
           
@@ -43,10 +42,10 @@ function Innlogin() {
       setError('Failed to login. Please try again.');
     }
   };
-  if(isLoggedIn)
-  {
-    navigate("/dashboard/innovator")
-  }
+  // if(isLoggedIn)
+  // {
+  //   navigate("/dashboard/innovator")
+  // }
 
     
   return (
@@ -62,9 +61,9 @@ function Innlogin() {
                 <input  placeholder='Enter your Password' type='password' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'  onChange={(e) => setPassword(e.target.value)}/>
                 <p className='text-xs text-gray-500 r'>By signing up, you confirm that you’ve read <br/>and accepted our <a className='text-blue-500 cursor-pointer'  href="https://www.example.com/user-notice">User Notice</a> and <a className='text-blue-500 cursor-pointer' href="https://www.example.com/privacy-policy">Privacy Policy</a>.</p>
                 <button className=' w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleLoginClick}>Login</button>
-                {/* <a href='/dashboard/innovator' className='w-full text-center my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'>Login</a> */}
-
-                <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto'>Don’t  have an SponSir account? Register</p>
+                <Link to='/signup/role/innovator'>
+                <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto' >Don’t  have an SponSir account? Register</p>
+                </Link>
                 <p className='text-md text-gray-500'>Or</p>
                 <img src={googleImg} alt='sign in with google' className='cursor-pointer'/>
                 {error && <p>{error}</p>}
