@@ -4,10 +4,10 @@ import Profilecard from '../../../components/Dashboard/Innovator/profile/Profile
 import Socialcard from '../../../components/Dashboard/Innovator/profile/Socialcard'
 function InnProfile() {
   return (
-    <div className='overflow-x-hidden  flex flex-col relative bg-[#D6EBE4]'>
+    <div className='overflow-x-hidden  flex flex-col relative bg-[#F3F4FF]'>
       <Header />
         <Profilecard />
-        {/* <Socialcard /> */}
+        <Socialcard />
       </div>
   )
 }

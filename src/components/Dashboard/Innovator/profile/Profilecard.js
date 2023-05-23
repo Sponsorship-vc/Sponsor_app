@@ -43,8 +43,8 @@ function Profilecard() {
   }, []);
 
   return (
-    <div className='flex h-[30rem] max-w-full ml-[17rem] rounded-xl flex-col !bg-white mr-5 '>
-      <div className='bg-[rgb(48,57,114)] h-1/5 w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
+    <div className='flex  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
+      <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
         <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
           <label htmlFor='profile-picture-input'>
             {user.pfp ? (
@@ -72,20 +72,19 @@ function Profilecard() {
           />
         </div>
         <div className='mb-0 flex relative'>
-          <div className='w-[10rem] h-[5rem] rounded-b-full bg-[#FCC43E] transform rotate-180 !top-4 left-5 absolute z-10'></div>
+          <div className='w-[10rem] h-[5rem] rounded-b-full bg-[#FCC43E] transform rotate-180 !top-4 left-10 absolute z-10'></div>
           <div className='w-[8rem] h-[4rem] rounded-b-full bg-[#FB7D5B] transform rotate-180  !top-8   absolute z-0'></div>
         </div>
       </div>
-      <div className='mt-[4rem] relative'>
-        <div className='gap-x-[45rem] flex flex-row '>
-          <h2 className='font-bold text-dark-blue ml-5 text-2xl '>Lookman paul</h2>
-          {/* <button className='rounded-xl z-[10] border border-blue-950 p-2'>Edit profile</button> */}
-          <img src={edit} alt='edit' className='h-20 w-20 cursor-pointer'/>
+      <div className='mt-[4rem] relative h-auto'>
+        <div className='flex flex-row justify-between max-h-6 items-start'>
+          <h2 className='font-bold text-dark-blue ml-5 text-2xl flex-initial'>Lookman paul</h2>
+          <img src={edit} alt='edit' className='h-20 w-20 cursor-pointer mr-4'/>
         </div>
-        <h4 className='text-dark-blue ml-5'>Innovator</h4>
+        <h4 className='text-gray-500 ml-5 mt-2'>Innovator</h4>
         <div className='grid grid-cols-3 grid-rows-2 gap-4 ml-5 mt-2 gap-y-10'>
           <div className='flex flex-col'>
-            <label className='text-[#A098AE]'>Country</label>
+            <label className='text-[#A098AE]'>Location</label>
             <div className='flex flex-row gap-4 mt-3'>
               <GrLocation className='mt-1' fill='FB7D5B' />
               <p className='- text-dark-blue'>Kerala, india</p>
@@ -121,8 +120,7 @@ function Profilecard() {
           </div>
         </div>
         <hr className='bg-black w-full mt-5'></hr>
-        <div>
-          <div className='flex flex-col ml-5 gap-y-10 mt-5'>
+          <div className='flex flex-col ml-5 gap-y-10 mt-5 '>
             <div>
               <label className='text-[#A098AE]'>Bio</label>
               <div className='flex flex-row gap-4 mt-3'>
@@ -136,7 +134,7 @@ function Profilecard() {
               </div>
               <hr className='bg-black w-full mt-5'></hr>
             </div>
-            <div className='flex flex-row gap-[30rem]'>
+            <div className='flex flex-row gap-[30rem] mb-5'>
               <div className='flex flex-col'>
                 <label className='text-[#A098AE]'>Resume</label>
                 <div className='flex flex-row gap-4 mt-3 relative'>
@@ -157,7 +155,6 @@ function Profilecard() {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );

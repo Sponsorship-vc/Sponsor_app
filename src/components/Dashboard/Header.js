@@ -11,6 +11,8 @@ function Header() {
   const location = useLocation();
   const path = location.pathname
   const message = path.split('/').pop();
+  const capitalizedMessage = message.charAt(0).toUpperCase() + message.slice(1);
+
   const [userList, setuserList] = useState([]);
 
   userData.then(
@@ -23,30 +25,25 @@ function Header() {
     },
   );
 
-
-
-
-  
-
   return (
 
-    <div className='flex-1 flex flex-row px-8 justify-between ml-64 py-4  '>
+    <div className='flex-1 flex flex-row px-8 justify-between ml-64 py-4 items-center '>
     <div>
-      <p>{message}</p>
+      <p className='font-bold text-2xl text-dark-blue'>{capitalizedMessage}</p>
     </div>
     <div className='flex flex-row gap-x-8'>
-        <div class="h-12 w-12 rounded-full flex bg-gray-400">
+        <div class="h-12 w-12 rounded-full flex bg-white">
             <FaBell className='  m-auto' />
         </div>
 
         {userList && userList.map((user) => (
             <div>
-                <p>{user.name}</p>
-                <p>{user.role}</p>
+                <p className='font-bold text-dark-blue'>{user.name}</p>
+                <p className='text-sm text-gray-500 ml-3'>{user.role}</p>
             </div>
             
         ))}
-        <div class="h-12 w-12 rounded-full flex bg-gray-400">
+        <div class="h-12 w-12 rounded-full flex bg-white">
             <FiUser className='m-auto'/>
         </div>
     </div>

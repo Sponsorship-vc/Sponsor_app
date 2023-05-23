@@ -10,7 +10,7 @@ function Socialcard() {
   {id:<BsFacebook/> ,content:"https:linkedin.com"},
 ]
   return (
-    <div className='bg-white mt-5 text-dark-blue ml-[17rem] relative max-w-full h-[12rem] rounded-xl mr-5 overflow-hidden'>
+    <div className='bg-white mt-5 text-dark-blue ml-[17rem] relative max-w-full h-[12rem] rounded-xl mr-5 overflow-hidden mb-8'>
       <div className='ml-7 '>
         <div className='flex flex-row items-center jusitfy-between mt-0'>
         <h1 className='text-dark-blue font-bold text-2xl flex-initial'>Social Media Handles</h1>
