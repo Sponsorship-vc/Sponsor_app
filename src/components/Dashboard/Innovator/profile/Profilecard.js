@@ -43,7 +43,7 @@ function Profilecard() {
   }, []);
 
   return (
-    <div className='flex h-[30rem] max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
+    <div className='flex h-[30rem] max-w-full ml-[17rem] rounded-xl flex-col !bg-white mr-5 '>
       <div className='bg-[rgb(48,57,114)] h-1/5 w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
         <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
           <label htmlFor='profile-picture-input'>

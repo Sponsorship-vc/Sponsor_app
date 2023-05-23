@@ -6,8 +6,8 @@ function InnProfile() {
   return (
     <div className='overflow-x-hidden  flex flex-col relative bg-[#D6EBE4]'>
       <Header />
-        {/* <Profilecard /> */}
-        <Socialcard />
+        <Profilecard />
+        {/* <Socialcard /> */}
       </div>
   )
 }
