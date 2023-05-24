@@ -18,6 +18,7 @@ import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
 import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
 import EditIdea from './pages/Dashboard/Innovator/EditIdea';
 import Verification from './pages/verify/Verification';
+import EditProfile from './pages/Dashboard/Innovator/EditProfile';
 
 // import './style.scss'
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path ='/sponsor/verify' Component={Verification}/>
           <Route path='/dashboard/innovator' Component={Sidebarin}>
             <Route path='profile' Component={InnProfile}/>
+            <Route path='profile/edit' Component={EditProfile}/>
             <Route path='ideasubmission' Component={Ideasubmission}/>
             <Route path='ideasubmission/:id' Component={EditIdea}/>
             <Route path='myIdeas' Component={Myideas}/>

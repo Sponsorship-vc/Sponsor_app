@@ -100,11 +100,11 @@ function Sponsignup() {
     }
   
     return (
-      <div className='flex w-screen z-[-1] flex-row mr-[-10px] overflow-hidden'>
+      <div className='flex w-screen z-[-1] flex-row mr-[-10px] overflow-hidden h-screen'>
         <div className='z-[-1] h-full'>
         <Sidebar/>
         </div>
-        <div className='flex-1 ml-[-1rem] bg-white rounded-l-2xl flex items-center justify-center overflow-x-hidden'>
+        <div className='flex-1 ml-[-1rem] bg-white rounded-l-2xl flex pt-6 pb-10  justify-center overflow-x-hidden'>
           <div className='flex flex-col mx-8'>
           <p className='font-abc text-4xl text-center font-semibold py-10'> Register your account as a Sponsor </p>
           <div className='flex flex-col gap-2'>

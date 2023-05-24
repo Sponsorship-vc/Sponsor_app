@@ -3,14 +3,57 @@ import { BsFillTelephoneFill } from 'react-icons/bs';
 import { GrLocation } from 'react-icons/gr';
 import { MdEmail } from 'react-icons/md';
 import pfp from '../../../../Assets/Dashboard/pfp.png';
-import { getDocs, collection } from 'firebase/firestore';
-import { auth, db } from '../../../../firebase/config';
-import Socialcard from '../../../../components/Dashboard/Innovator/profile/Socialcard'
+import {  collection } from 'firebase/firestore';
+import { db } from '../../../../firebase/config';
 import edit from '../../../../Assets/Dashboard/Icons/edit.svg'
+import { userData } from '../../../../data/Userdata';
+import { Link } from 'react-router-dom';
+
+
+
 function Profilecard() {
+  
+  const [userList, setuserList] = useState([]);
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [phno, setPhno] = useState("");
+  const [email, setEmail] = useState("");
+  const [dob, setDob] = useState("");
+  const [add1, setAdd1] = useState("");
+  const [add2, setAdd2] = useState("");
+  const [add3, setAdd3] = useState("");
+  const [add4, setAdd4] = useState("");
+  const [pin, setPin] = useState("");
+  const [bio, setBio] = useState("");
+  const [Id, setId] = useState("");
+
+
+    useEffect(() => {
+      userData.then(
+        (value) => {
+          setuserList(value)
+          // console.log(value);
+          setName(value[0].name ? value[0].name : "");
+          setCity(value[0].City ? value[0].City : "");
+          setPhno(value[0].Phoneno ? value[0].Phoneno : "");
+          setEmail(value[0].email ? value[0].email : "");
+          setDob(value[0].dob ? value[0].dob : "");
+          setAdd1(value[0].add1 ? value[0].add1 : "");
+          setAdd2(value[0].add2 ? value[0].add2 : "");
+          setAdd3(value[0].add3 ? value[0].add3 : "");
+          setAdd4(value[0].add4 ? value[0].add4 : "");
+          setPin(value[0].pin ? value[0].pin : "");
+          setBio(value[0].bio ? value[0].bio : "");
+          setId(value[0].id);
+        },
+        (reason) => {
+          console.error(reason); // Error!
+        }
+      );
+    }, []);
+
   const user = 0;
   const [selectedPicture, setSelectedPicture] = useState(null);
-  const [userList, setUserList] = useState([]);
   const usersCollectionRef = collection(db, 'users');
 
   const handlePictureUpload = (event) => {
@@ -23,24 +66,7 @@ function Profilecard() {
     document.getElementById('profile-picture-input').click();
   };
 
-  const getuserList = async () => {
-    try {
-      const data = await getDocs(usersCollectionRef);
-      const filteredData = data.docs
-        .map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-        .filter((doc) => doc.userId === auth.currentUser.uid);
-      setUserList(filteredData);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
-  useEffect(() => {
-    getuserList();
-  }, []);
 
   return (
     <div className='flex  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
@@ -78,8 +104,10 @@ function Profilecard() {
       </div>
       <div className='mt-[4rem] relative h-auto'>
         <div className='flex flex-row justify-between max-h-6 items-start'>
-          <h2 className='font-bold text-dark-blue ml-5 text-2xl flex-initial'>Lookman paul</h2>
-          <img src={edit} alt='edit' className='h-20 w-20 cursor-pointer mr-4'/>
+          <h2 className='font-bold text-dark-blue ml-5 text-2xl flex-initial'>{name}</h2>
+          <Link to={"/dashboard/innovator/profile/edit"}>
+            <img src={edit} alt='edit' className='h-20 w-20 cursor-pointer mr-4'/>
+          </Link>
         </div>
         <h4 className='text-gray-500 ml-5 mt-2'>Innovator</h4>
         <div className='grid grid-cols-3 grid-rows-2 gap-4 ml-5 mt-2 gap-y-10'>
@@ -87,35 +115,44 @@ function Profilecard() {
             <label className='text-[#A098AE]'>Location</label>
             <div className='flex flex-row gap-4 mt-3'>
               <GrLocation className='mt-1' fill='FB7D5B' />
-              <p className='- text-dark-blue'>Kerala, india</p>
+              {city ?(
+                <p className='- text-dark-blue'>{city}</p>
+              ): <p className='- text-dark-blue'>Add City</p>
+            }
             </div>
           </div>
           <div className='flex flex-col'>
             <label className='text-[#A098AE]'>Phone number</label>
             <div className='flex flex-row gap-4 mt-3'>
               <BsFillTelephoneFill className='mt-1' fill='#FB7D5B' />
-              <p className='font-semibold text-dark-blue'>9562784981</p>
+              {phno ?
+              (<p className='font-semibold text-dark-blue'>{phno}</p>):
+              <p className='font-semibold text-dark-blue'>Add phno</p>
+              }
             </div>
           </div>
           <div className='flex flex-col'>
             <label className='text-[#A098AE]'>Email id</label>
             <div className='flex flex-row gap-4 mt-3'>
               <MdEmail className='mt-1' fill='#FB7D5B ' size={20} />
-              <p className='font-semibold text-dark-blue'>i.dheerajdileep@gmail.com</p>
+              {email?( <p className='font-semibold text-dark-blue'>{email}</p>):  <p className='font-semibold text-dark-blue'>Add email</p>            }
             </div>
           </div>
           <div className='flex flex-col'>
             <label className='text-[#A098AE]'>Date of birth</label>
             <div className='flex flex-row gap-4 mt-3'>
-              <p className='font-semibold text-dark-blue'>25/12/2002</p>
+              {dob?( <p className='font-semibold text-dark-blue'>{dob}</p>): <p className='font-semibold text-dark-blue'>Add Dob</p>}
+             
             </div>
           </div>
           <div className='flex flex-col'>
             <label className='text-[#A098AE]'>Address</label>
             <div className='flex flex-row gap-4 mt-3'>
-              <p className='font-semibold text-dark-blue'>
-                Peringayil, p.o chittissery, pulakkartukara, Kerala
-              </p>
+              {add1 ? 
+              (<p className='font-semibold text-dark-blue'>
+              {add1}{add2}{add3}{add4}
+            </p>) :<p className='font-semibold text-dark-blue'>Add address</p>}
+              
             </div>
           </div>
         </div>
@@ -124,13 +161,13 @@ function Profilecard() {
             <div>
               <label className='text-[#A098AE]'>Bio</label>
               <div className='flex flex-row gap-4 mt-3'>
+                {bio?(<p className='font-semibold text-dark-blue'>
+                  {bio}
+                </p>):
                 <p className='font-semibold text-dark-blue'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                  esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                  in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                Add bio
+              </p>}
+                
               </div>
               <hr className='bg-black w-full mt-5'></hr>
             </div>

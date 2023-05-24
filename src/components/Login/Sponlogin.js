@@ -28,12 +28,12 @@ function Sponlogin() {
       // Update login state based on user role
       let isRoleFound = false;
       userList.forEach((user) => {
-        if (!isRoleFound && user.role === "sponsor" && user.verify==='true') {
+        if (!isRoleFound && user.role === "sponsor" && user.verify=== true) {
           navigate("/dashboard/sponsor")
           isRoleFound = true;
           
         }
-        if (!isRoleFound && user.role === "sponsor" && user.verify==='false') {
+        if (!isRoleFound && user.role === "sponsor" && user.verify=== false ) {
             navigate("/sponsor/verify")
             isRoleFound = true;
             
