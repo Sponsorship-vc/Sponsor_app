@@ -14,13 +14,13 @@ import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
 import Myideas from './pages/Dashboard/Innovator/Myideas';
 import Help from './pages/Dashboard/Innovator/Help';
 import Sponsor from './pages/Dashboard/Innovator/Sponsors';
-import ChatWindow from './pages/Dashboard/Innovator/ChatWindow'
+import ChatWindow from './pages/Dashboard/common/ChatWindow'
 import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
 import EditIdea from './pages/Dashboard/Innovator/EditIdea';
 import Verification from './pages/verify/Verification';
 import EditProfile from './pages/Dashboard/Innovator/EditProfile';
+import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed'
 
-// import './style.scss'
 function App() {
   return (
     <div>
@@ -32,6 +32,7 @@ function App() {
           <Route path='/login/role' Component={Roleselector}/>
           <Route path='/signup/role' Component={Roleselector}/>
           <Route path ='/sponsor/verify' Component={Verification}/>
+
           <Route path='/dashboard/innovator' Component={Sidebarin}>
             <Route path='profile' Component={InnProfile}/>
             <Route path='profile/edit' Component={EditProfile}/>
@@ -42,10 +43,13 @@ function App() {
             <Route path='sponsor' Component={Sponsor}/>
             <Route path='chat' Component={ChatWindow}/>
             <Route path='myIdeas/:id' Component={ViewIdea}/>
-            
           </Route>
+
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>
-          <Route path='' Component={SponProfile}/>
+          <Route path='profile' Component={SponProfile}/>
+          <Route path='ideafeed' Component={Ideafeed}/>
+          <Route path='chat' Component={SponProfile}/>
+          <Route path='help' Component={SponProfile}/>
           </Route>
         </Routes>
       </BrowserRouter>

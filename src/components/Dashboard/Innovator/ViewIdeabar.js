@@ -54,7 +54,7 @@ function ViewIdeabar() {
                     <p className='font-bold text-[#303972] text-md pt-2'>Problem Statement</p>
                     {post.Problem ? (
                         <p className='font-normal text-sm text-gray-600 w-3/4'>{post.Problem}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>Some text here</p>}
                     <p className='font-bold text-[#303972] text-md pt-2'>Related documents</p>
                     <p className='font-normal text-sm text-gray-600'>{post.filepath}</p>
                 </div>

@@ -12,7 +12,7 @@ function Roleselector() {
       </div>
       {/* need to make responsive */}
 
-      <div className='flex-1 h-screen ml-[-1rem] bg-white rounded-l-2xl flex items-center justify-center'>
+      <div className='flex-1 h-screen/2  w-screen/2 ml-[-1rem] bg-white rounded-l-2xl flex items-center justify-center overflow-hidden'>
         <div className='flex flex-col my-auto'>
           <div className='w-full text-center py-8'>
             <p className='font-abc text-4xl  font-semibold'> Choose Your Account Type </p>
