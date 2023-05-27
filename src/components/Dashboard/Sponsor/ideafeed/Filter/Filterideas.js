@@ -8,7 +8,7 @@ function Filterideas() {
   };
 
   return (
-    <div className='bg-white h-full w-1/5 ml-[17rem] overflow-hidden rounded-xl flex flex-col'>
+    <div className='bg-white h-full min-w-[20%] w-1/5 ml-[17rem] overflow-hidden rounded-xl flex flex-col'>
       <div className='mt-8 ml-4'>
         <h1 className='font-bold text-[#363B64]'>Filter</h1>
         <hr className='mt-8' />
