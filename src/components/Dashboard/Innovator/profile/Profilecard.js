@@ -52,7 +52,7 @@ function Profilecard() {
       );
     }, []);
 
-  const user = 0;
+  const user = 0
   const [selectedPicture, setSelectedPicture] = useState(null);
   const usersCollectionRef = collection(db, 'users');
 

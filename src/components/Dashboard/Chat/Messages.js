@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { ChatContext } from "../../../context/ChatContext";
-import { db} from "../../../firebase/config";
+import { db } from "../../../firebase/config";
 import Message from "./Message";
 
 const Messages = () => {
@@ -9,25 +9,26 @@ const Messages = () => {
   const { data } = useContext(ChatContext);
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
+    const chatRef = collection(db, "chats", data.chatId, "messages");
+    const messagesQuery = query(chatRef, orderBy("date"));
+
+    const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
+      const updatedMessages = snapshot.docs.map((doc) => doc.data());
+      setMessages(updatedMessages);
     });
 
     return () => {
-      unSub();
+      unsubscribe();
     };
   }, [data.chatId]);
 
-  // Sort messages by date in ascending order
-  const sortedMessages = messages && messages.length > 0 ? messages.sort((a, b) => a.date - b.date) : [];
-
   return (
-    <div className="p-[10px] h-full w-full overflow-scroll">
-      {sortedMessages.map((m) => (
-        <Message message={m} key={m.id} />
+    <div className="p-[10px] h-full overflow-y-scroll overflow-x-hidden ">
+      {messages && messages.map((message) => (
+        <Message message={message} key={message.id} />
       ))}
     </div>
-  );
+  );  
 };
 
 export default Messages;

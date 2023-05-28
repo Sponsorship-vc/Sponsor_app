@@ -16,37 +16,17 @@ const Message = ({ message }) => {
     <div
       ref={ref}
       className={`${
-        message.senderId === currentUser.uid ? "flex-row-reverse" : "flex"
-      } gap-3 mb-3 overflow-auto max-h-100 max-w-80`}
+        message.senderId === currentUser.uid ? "flex justify-end" : "flex justify-start"
+      } gap-3 mb-3 overflow-auto max-h-100`}
     >
-      <div className="flex flex-col text-gray-700">
-        <img
-          src={
-            message.senderId === currentUser.uid
-              ? currentUser.photoURL
-              : data.user.photoURL
-          }
-          alt=""
-          className="h-10 w-10 rounded-full object-cover"
-        />
-        <span>just now</span>
-      </div>
       <div
-        className={`flex flex-col gap-3 items-end ${
+        className={`flex flex-col gap-3 ${
           message.senderId === currentUser.uid
-            ? "bg-[#4D44B5] rounded-l-lg rounded-br-lg text-white"
-            : "bg-gray-300 rounded-bl-lg rounded-r-lg"
-        } max-w-full`}
+            ? "items-end bg-[#4D44B5] rounded-l-lg rounded-br-lg text-white min-w-min h-auto"
+            : "items-start bg-gray-300 rounded-bl-lg rounded-r-lg min-w-min max-w-10 "
+        } text-xs`}
       >
-            <p
-              className={`${
-                message.senderId === currentUser.uid
-                  ? "bg-[#4D44B5] rounded-l-lg rounded-br-lg max-w-max text-white"
-                  : "bg-gray-300 rounded-bl-lg rounded-r-lg max-w-max"
-              } whitespace-normal`}
-            >
-              {message.text}
-            </p>
+        <p className="whitespace-normal p-3 break-words max-w-[15rem]  ">{message.text}</p>
 
         {message.img && <img src={message.img} alt="" className="w-1/2" />}
       </div>

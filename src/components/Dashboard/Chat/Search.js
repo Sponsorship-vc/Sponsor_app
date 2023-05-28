@@ -18,7 +18,7 @@ const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
-
+  const chatContext = useContext(ChatContext);
   const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
@@ -28,6 +28,7 @@ const Search = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
+        console.log(user.userId)
       });
     } catch (err) {
       setErr(true);
@@ -41,9 +42,11 @@ const Search = () => {
   const handleSelect = async () => {
     // Check whether the group (chats in Firestore) exists; if not, create
     const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
+      currentUser.uid > user.userId
+        ? currentUser.uid + user.userId
+        : user.userId + currentUser.uid;
+        console.log(currentUser.uid)
+        console.log(user.userId)
     try {
       const chatRef = doc(db, "chats", combinedId);
       const chatSnapshot = await getDoc(chatRef);
@@ -56,14 +59,14 @@ const Search = () => {
         const messageRef = doc(chatRef.collection("messages"), combinedId);
         await setDoc(messageRef, {
           sender: currentUser.uid,
-          recipient: user.uid,
+          recipient: user.userId,
           timestamp: serverTimestamp(),
         });
 
         // Create user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
-            uid: user.uid,
+            uid: user.userId,
             name: user.name,
             photoURL: user.photoURL
           },
@@ -79,6 +82,8 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
+      // Update the context with the new user and chat information
+      chatContext.dispatch({ type: "CHANGE_USER", payload: user });
     } catch (err) {}
 
     setUser(null);

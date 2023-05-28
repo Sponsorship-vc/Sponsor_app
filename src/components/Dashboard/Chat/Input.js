@@ -32,6 +32,7 @@ const Input = () => {
               id: uuid(),
               text,
               senderId: currentUser.uid,
+              recieverId: data.user.userId,
               date: serverTimestamp(),
               img: downloadURL,
             });
@@ -43,6 +44,7 @@ const Input = () => {
         id: uuid(),
         text,
         senderId: currentUser.uid,
+        recieverId: data.user.userId,
         date: serverTimestamp(),
       });
     }
@@ -61,14 +63,14 @@ const Input = () => {
       date: serverTimestamp(),
     });
   
-    setText("");
-    setImg(null);
   };
   
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       handleSend();
+      setText("");
+      setImg(null);
     }
   };
 
