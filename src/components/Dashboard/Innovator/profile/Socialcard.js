@@ -4,6 +4,7 @@ import {BsFacebook} from 'react-icons/bs'
 import Edit from '../../../../Assets/Dashboard/Icons/edit.svg'
 import { userData } from '../../../../data/Userdata';
 import { db  } from "../../../../firebase/config";
+import tick from '../../../../Assets/Dashboard/Icons/tick.png'
 import { doc ,updateDoc } from "firebase/firestore";
 
 function Socialcard() {
@@ -69,7 +70,11 @@ const updateDetails = async () => {
       <div className='ml-7 '>
         <div className='flex flex-row items-center jusitfy-between mt-0'>
         <h1 className='text-dark-blue font-bold text-2xl flex-initial'>Social Media Handles</h1>
+        {edit ?
+        <img src={tick} className='h-8 w-8 ml-auto mr-6 my-4 cursor-pointer' onClick={handleEdit}/>
+        :
         <img src={Edit} className='h-20 w-20 ml-auto cursor-pointer' onClick={handleEdit}/>
+        }
         </div>
         <p className='text-gray-400 text-xs !mt-[-1%]'>Your personal socialmedia profiles</p>
       </div>
