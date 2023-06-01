@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ChatContext } from "../../../context/ChatContext";
-import { doc, serverTimestamp, updateDoc, collection, addDoc } from "firebase/firestore";
+import { doc, serverTimestamp, updateDoc, collection, addDoc, setDoc } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -18,7 +18,7 @@ const Input = () => {
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
-  
+
       uploadTask.on(
         "state_changed",
         null,
@@ -48,23 +48,32 @@ const Input = () => {
         date: serverTimestamp(),
       });
     }
-  
-    await updateDoc(doc(db, "userChats", currentUser.uid, data.chatId), {
+
+    // Update user chat for current user
+    await setDoc(doc(db, "userChats", currentUser.uid), {
       lastMessage: {
         text,
       },
       date: serverTimestamp(),
-    });
-  
-    await updateDoc(doc(db, "userChats", data.user.uid, data.chatId), {
+      chatId: data.chatId,
+      uid: data.user.userId,
+      name: data.user.name,
+      photoURL: data.user.photoURL || '',
+    }, { merge: true });
+
+    // Update user chat for the other user
+    await setDoc(doc(db, "userChats", data.user.userId), {
       lastMessage: {
         text,
       },
       date: serverTimestamp(),
-    });
-  
+      chatId: data.chatId,
+      uid: currentUser.uid,
+      name: currentUser.name,
+      photoURL: currentUser.photoURL || '',
+    }, { merge: true });
   };
-  
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();

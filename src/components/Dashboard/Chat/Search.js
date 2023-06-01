@@ -28,7 +28,7 @@ const Search = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
-        console.log(user.userId)
+        console.log(user.userId);
       });
     } catch (err) {
       setErr(true);
@@ -45,8 +45,9 @@ const Search = () => {
       currentUser.uid > user.userId
         ? currentUser.uid + user.userId
         : user.userId + currentUser.uid;
-        console.log(currentUser.uid)
-        console.log(user.userId)
+    console.log(currentUser.uid);
+    console.log(user.userId);
+
     try {
       const chatRef = doc(db, "chats", combinedId);
       const chatSnapshot = await getDoc(chatRef);
@@ -64,23 +65,21 @@ const Search = () => {
         });
 
         // Create user chats
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.userId,
-            name: user.name,
-            photoURL: user.photoURL
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-
-        await updateDoc(doc(db, "userChats", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: currentUser.uid,
-            name: currentUser.name,
-            photoURL: currentUser.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
+      //   await setDoc(doc(db, "userChats",currentUser.uid), {
+      //     uid: user.userId,
+      //     name: user.name,
+      //     photoURL: user.photoURL,
+      //     date : serverTimestamp(),
+      //     chatId : combinedId
+      // });
+      //   console.log("usercaht saved")
+      //   await setDoc(doc(db, "userChats",user.userId), {
+      //       uid: currentUser.uid,
+      //       name: currentUser.name,
+      //       photoURL: currentUser.photoURL,
+      //       date : serverTimestamp(),
+      //       chatId : combinedId
+      //   });
       }
       // Update the context with the new user and chat information
       chatContext.dispatch({ type: "CHANGE_USER", payload: user });
@@ -96,8 +95,11 @@ const Search = () => {
         <input
           type="text"
           placeholder="Find a user"
+          onChange={(e) => {
+            setUsername(e.target.value);
+            handleSearch(); // Call handleSearch on each change
+          }}
           onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
           value={username}
           className="bg-transparent rounded-full outline-none w-90% border border-gray-400 h-2rem text-sm pl-4"
         />

@@ -8,7 +8,7 @@ const ChatSidebar = () => {
     <div className="flex flex-2 border-r border-gray-300  flex-col">
       <Navbar />
       <Search/>
-      <Chats/>
+      {/* <Chats/> */}
     </div>
   );
 };
