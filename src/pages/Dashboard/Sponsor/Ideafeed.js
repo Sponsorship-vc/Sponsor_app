@@ -1,7 +1,7 @@
 import React from 'react'
 import Filterideas from '../../../components/Dashboard/Sponsor/ideafeed/Filter/Filterideas'
 import Header from '../../../components/Dashboard/Header'
-import Ideas from '../../../components/Dashboard/Sponsor/ideafeed/Ideas'
+import Ideas from '../../../components/Dashboard/Sponsor/ideafeed/ideas'
 function Ideafeed() {
   return (
     <div className='bg-[#F3F4FF] h-screen overflow-scroll '>

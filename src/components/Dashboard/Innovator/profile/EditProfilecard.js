@@ -4,6 +4,7 @@ import { MdEmail } from 'react-icons/md';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { userData } from '../../../../data/Userdata';
 import { db  } from "../../../../firebase/config";
+import tick from '../../../../Assets/Dashboard/Icons/tick.png'
 import { doc ,updateDoc } from "firebase/firestore";
 
 
@@ -106,8 +107,8 @@ function EditProfilecard() {
       <div className='mt-[4rem] relative h-auto'>
         <div className='flex flex-row justify-between max-h-6 items-start'>
           <h2 className='font-bold text-dark-blue ml-5 text-2xl flex-initial'>{name}</h2>
-          {/* <img src={edit} alt='edit' className='h-20 w-20 cursor-pointer mr-4' onClick={updateUser}/> */}
-          <button className="inline-block text-sm px-6 py-3 mr-4 leading-none border rounded-full text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold" onClick={updateUser}>Submit</button>
+          <img src={tick} alt='edit' className='h-7 w-7 cursor-pointer mr-10' onClick={updateUser}/>
+          {/* <button className="inline-block text-sm px-6 py-3 mr-4 leading-none border rounded-full text-white bg-gray-800 hover:bg-gray-900 lg:mt-0 font-bold" onClick={updateUser}>Submit</button> */}
         </div>
         <h4 className='text-gray-500 ml-5 mt-2'>Innovator</h4>
         <div className='flex flex-wrap gap-44 ml-5 mt-2 gap-y-10'>

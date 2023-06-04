@@ -50,27 +50,27 @@ const Input = () => {
     }
 
     // Update user chat for current user
-    await setDoc(doc(db, "userChats", currentUser.uid), {
+    await setDoc(doc(db, "userChats", currentUser.uid,"chat",data.user.userId), {
       lastMessage: {
         text,
       },
       date: serverTimestamp(),
       chatId: data.chatId,
       uid: data.user.userId,
-      name: data.user.name,
+      // name: data.user.name,
       photoURL: data.user.photoURL || '',
     }, { merge: true });
     console.log(data.user.name)
 
     // Update user chat for the other user
-    await setDoc(doc(db, "userChats", data.user.userId), {
+    await setDoc(doc(db, "userChats", data.user.userId,"chat",currentUser.uid), {
       lastMessage: {
         text,
       },
       date: serverTimestamp(),
       chatId: data.chatId,
       uid: currentUser.uid,
-      name: currentUser.name,
+      // name: currentUser.displayName,
       photoURL: currentUser.photoURL || '',
     }, { merge: true });
   };
