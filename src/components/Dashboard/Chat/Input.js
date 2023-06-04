@@ -60,6 +60,7 @@ const Input = () => {
       name: data.user.name,
       photoURL: data.user.photoURL || '',
     }, { merge: true });
+    console.log(data.user.name)
 
     // Update user chat for the other user
     await setDoc(doc(db, "userChats", data.user.userId), {

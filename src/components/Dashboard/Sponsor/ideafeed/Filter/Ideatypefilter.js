@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
-import { MdArrowDropDown } from 'react-icons/md';
-function Industryfilter({options,toggleDropdown,name,isOpen}) {
+import React from 'react'
+import { MdArrowDropDown } from 'react-icons/md'
+function Ideatypefilter({options,toggleDropdown,name,isOpen}) {
   return (
     <div className='flex flex-col mt-5 ml-5'>
         <div className='flex flex-row items-center' onClick={toggleDropdown}>
@@ -26,4 +26,4 @@ function Industryfilter({options,toggleDropdown,name,isOpen}) {
   )
 }
 
-export default Industryfilter
+export default Ideatypefilter
