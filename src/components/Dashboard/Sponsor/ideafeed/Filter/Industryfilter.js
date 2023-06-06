@@ -1,6 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState ,useContext} from 'react'
 import { MdArrowDropDown } from 'react-icons/md';
+import { OptionsContext } from '../../../../../context/optionContext';
+
 function Industryfilter({options,toggleDropdown,name,isOpen}) {
+  const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
+  console.log(selectedOptions)
+
   return (
     <div className='flex flex-col mt-5 ml-5'>
         <div className='flex flex-row items-center' onClick={toggleDropdown}>

@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {useState} from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { ideasData } from '../../../../data/Userdata';
+import { OptionsContext } from '../../../../context/optionContext';
 function Ideas() {
+  // const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
+
 
   const [likedIndexes, setLikedIndexes] = useState([]);
-  const ideas = [{id:"image",title:"idea title", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"},
-                {id:"image",title:"idea title", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"},
-                {id:"image",title:"idea title", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"},
-                {id:"image",title:"idea title", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"},
-                {id:"image",title:"idea title", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"},]
+  const [ideaList, setideaList] = useState([]);
+
+  ideasData.then(
+    (value) => {
+      setideaList(value)
+      // console.log(value); // Success!
+    },
+    (reason) => {
+      console.error(reason); // Error!
+    },
+  );
 
 
     const handleLike = (index) => {
@@ -37,27 +47,30 @@ function Ideas() {
           <h2>Action</h2>
         </div>
       </div>
-      {ideas.map((idea,index) => (
+      {ideaList.map((idea,index) => (
       <React.Fragment key={index}>
       <hr />
       <div className='flex flex-row mb-3'>
         <div className='bg-[#C1BBEB] rounded-lg h-full w-1/5'></div>
         <div className='flex flex-col w-1/2 mt-3'>
           <h1 className='font-bold text-[#303972]'>{idea.title}</h1>
-          <p className='text-[#A098AE] text-sm mt-3'>{idea.content}</p>
+          <p className='text-[#A098AE] text-sm mt-3'>{idea.Solution}</p>
         </div>
         <div className='flex flex-col gap-y-3 mt-3 ml-10'>
-          <p className='bg-[#C1BBEB] rounded-2xl min-w-content min-h-content px-3 py-1 text-xs text-[#303972]'>Technology</p>
-          <p className='bg-[#C1BBEB] rounded-xl min-w-content min-h-content px-3 py-1 text-xs text-[#303972]'>Technology</p>
-          <p className='bg-[#C1BBEB] rounded-xl min-w-content min-h-content px-3 py-1 text-xs text-[#303972]'>Technology</p>
+        {Array.isArray(idea.category) && idea.category.map((category, index) => (
+          <p
+          className='bg-[#C1BBEB] rounded-2xl min-w-content min-h-content px-3 py-1 text-xs flex mx-auto text-[#303972]'>{category}
+          </p>
+        ))}
+
         </div>
-        <div className='ml-10 h-full justify-center items-center flex mt-10 '>
+        {/* <div className='ml-auto mr-10 h-full justify-center items-center flex mt-10 '>
         {likedIndexes.includes(index) ? (
                 <AiFillHeart size={30} onClick={() => handleLike(index)} fill='red' />
               ) : (
                 <AiOutlineHeart size={30} onClick={() => handleLike(index)} />
               )}
-        </div>
+        </div> */}
       </div> 
       </React.Fragment>))}
     </div>
