@@ -12,7 +12,7 @@ import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
 import InnProfile from './pages/Dashboard/Innovator/InnProfile';
 import Ideasubmission from './pages/Dashboard/Innovator/Ideasubmission';
 import Myideas from './pages/Dashboard/Innovator/Myideas';
-import Help from './pages/Dashboard/Innovator/Help';
+import Help from './pages/Dashboard/common/Help';
 import Sponsor from './pages/Dashboard/Innovator/Sponsors';
 import ChatWindow from './pages/Dashboard/common/ChatWindow'
 import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
@@ -48,8 +48,8 @@ function App() {
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>
           <Route path='profile' Component={SponProfile}/>
           <Route path='ideafeed' Component={Ideafeed}/>
-          <Route path='chat' Component={SponProfile}/>
-          <Route path='help' Component={SponProfile}/>
+          <Route path='chat' Component={ChatWindow}/>
+          <Route path='help' Component={Help}/>
           </Route>
         </Routes>
       </BrowserRouter>

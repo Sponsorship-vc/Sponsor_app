@@ -21,7 +21,8 @@ const Chats = () => {
         const unsubscribe = onSnapshot(orderedDataRef, (snapshot) =>  {
           const filteredData = snapshot.docs.map((doc) => doc.data());
           console.log(filteredData);
-          setChats(filteredData);}
+          setChats(filteredData);
+        }
         )} catch (error) {
         console.log(error)
       }
