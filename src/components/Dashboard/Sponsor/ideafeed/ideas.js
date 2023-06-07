@@ -1,24 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import {useState} from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { ideasData } from '../../../../data/Userdata';
 import { OptionsContext } from '../../../../context/optionContext';
 function Ideas() {
-  // const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
-
+  const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
+  console.log(selectedOptions)
 
   const [likedIndexes, setLikedIndexes] = useState([]);
-  const [ideaList, setideaList] = useState([]);
+  const [ideaList, setIdeaList] = useState([]);
 
-  ideasData.then(
-    (value) => {
-      setideaList(value)
-      // console.log(value); // Success!
-    },
-    (reason) => {
-      console.error(reason); // Error!
-    },
-  );
+  useEffect(() => {
+    ideasData
+      .then((value) => {
+        setIdeaList(value);
+        // console.log(value); // Success!
+      })
+      .catch((reason) => {
+        console.error(reason); // Error!
+      });
+  }, []);
 
 
     const handleLike = (index) => {
@@ -47,7 +48,7 @@ function Ideas() {
           <h2>Action</h2>
         </div>
       </div>
-      {ideaList.map((idea,index) => (
+      {ideaList && ideaList.map((idea,index) => (
       <React.Fragment key={index}>
       <hr />
       <div className='flex flex-row mb-3'>
@@ -64,13 +65,13 @@ function Ideas() {
         ))}
 
         </div>
-        {/* <div className='ml-auto mr-10 h-full justify-center items-center flex mt-10 '>
+        <div className='ml-auto mr-10 h-full justify-center items-center flex mt-10 '>
         {likedIndexes.includes(index) ? (
                 <AiFillHeart size={30} onClick={() => handleLike(index)} fill='red' />
               ) : (
                 <AiOutlineHeart size={30} onClick={() => handleLike(index)} />
               )}
-        </div> */}
+        </div>
       </div> 
       </React.Fragment>))}
     </div>

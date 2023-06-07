@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Industryfilter from './Industryfilter';
 import Devstagefilter from './Devstagefilter';
-import Ideatypefilter from './Ideatypefilter';
 
 function Filterideas() {
   const [isOpen, setIsOpen] = useState([]);
@@ -23,9 +21,9 @@ function Filterideas() {
         <h1 className='font-bold text-[#363B64]'>Filter</h1>
         <hr className='mt-8' />
       </div>
-      <Industryfilter options={industryOptions} toggleDropdown={() => toggleDropdown(0)} name='Industry' isOpen={isOpen[0]} />
+      <Devstagefilter options={industryOptions} toggleDropdown={() => toggleDropdown(0)} name='Industry' isOpen={isOpen[0]} />
       <Devstagefilter options={stageOptions} toggleDropdown={() => toggleDropdown(1)} name='Stage of development' isOpen={isOpen[1]} />
-      <Ideatypefilter options={typeOptions} toggleDropdown={() => toggleDropdown(2)} name='Idea type' isOpen={isOpen[2]}/>
+      <Devstagefilter options={typeOptions} toggleDropdown={() => toggleDropdown(2)} name='Idea type' isOpen={isOpen[2]}/>
     </div>
   );
 }
