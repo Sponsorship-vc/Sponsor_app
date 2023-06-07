@@ -23,7 +23,7 @@ const Messages = () => {
   }, [data.chatId]);
 
   return (
-    <div className="p-[10px] h-full overflow-y-scroll overflow-x-hidden ">
+    <div className="p-[10px] h-full overflow-auto overflow-x-hidden ">
       {messages && messages.map((message) => (
         <Message message={message} key={message.id} />
       ))}

@@ -56,11 +56,13 @@ const Input = () => {
       },
       date: serverTimestamp(),
       chatId: data.chatId,
-      uid: data.user.userId,
-      // name: data.user.name,
+      userId: data.user.userId,
+      name: data.user.name,
       photoURL: data.user.photoURL || '',
     }, { merge: true });
-    console.log(data.user.name)
+    // console.log(data.user.userId)
+    // console.log(data.chatId)
+
 
     // Update user chat for the other user
     await setDoc(doc(db, "userChats", data.user.userId,"chat",currentUser.uid), {
@@ -70,9 +72,10 @@ const Input = () => {
       date: serverTimestamp(),
       chatId: data.chatId,
       uid: currentUser.uid,
-      // name: currentUser.displayName,
+      // name: currentUser.name,
       photoURL: currentUser.photoURL || '',
     }, { merge: true });
+    // console.log(currentUser.uid)
   };
 
   const handleKeyDown = (event) => {
@@ -85,8 +88,8 @@ const Input = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-center h-[20%]">
-      <div className="h-[65%] w-[95%] p-[10px] flex items-center justify-between border border-gray-400 rounded-full">
+    <div className="w-full flex items-center justify-center h-[20%]  border-gray-300 border-t">
+      <div className="h-[65%] w-[95%] p-[10px] flex items-center justify-between border border-gray-400 rounded-full ">
         <input
           type="text"
           placeholder="Type something..."

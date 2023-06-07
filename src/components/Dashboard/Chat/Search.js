@@ -90,8 +90,8 @@ const Search = () => {
   };
 
   return (
-    <div className="mt-4">
-      <div className="p-10 items-center flex justify-center">
+    <div className="mt-4 ">
+      <div className="px-2 pt-1 items-center flex justify-center !w-full">
         <input
           type="text"
           placeholder="Find a user"
@@ -101,7 +101,7 @@ const Search = () => {
           }}
           onKeyDown={handleKey}
           value={username}
-          className="bg-transparent rounded-full outline-none w-90% border border-gray-400 h-2rem text-sm pl-4"
+          className="bg-transparent rounded-full outline-none !w-[95%] border border-gray-400 h-[2rem] text-sm pl-4"
         />
       </div>
       {err && <span className="text-black">User not found!</span>}
