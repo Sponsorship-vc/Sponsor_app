@@ -5,10 +5,14 @@ import { ideasData } from '../../../../data/Userdata';
 import { OptionsContext } from '../../../../context/optionContext';
 function Ideas() {
   const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
-  console.log(selectedOptions)
 
   const [likedIndexes, setLikedIndexes] = useState([]);
   const [ideaList, setIdeaList] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [industry, setIndustry] = useState([]);
+  console.log(selectedOptions.Industry)
+
+
 
   useEffect(() => {
     ideasData
@@ -20,6 +24,24 @@ function Ideas() {
         console.error(reason); // Error!
       });
   }, []);
+  // console.log(ideaList)
+  useEffect(() => {
+
+
+    const filteredIdeas = selectedOptions.Industry && selectedOptions.Industry.length > 0
+    ? Object.values(ideaList).filter((idea) => {
+        const ideaCategories = Array.isArray(idea.category)
+          ? idea.category.map((category) => category.toLowerCase())
+          : [];
+        const lowerCaseSelectedOptions = selectedOptions.Industry.map((option) => option.toLowerCase());
+        return lowerCaseSelectedOptions.every((selectedOption) =>
+          ideaCategories.includes(selectedOption)
+        );
+      })
+    : Object.values(ideaList);
+  
+    setFilteredData(filteredIdeas);
+  }, [selectedOptions, ideaList]);
 
 
     const handleLike = (index) => {
@@ -37,6 +59,8 @@ function Ideas() {
       setLikedIndexes(newLikedIndexes);
     };
 
+
+
               
 
   return (
@@ -48,7 +72,7 @@ function Ideas() {
           <h2>Action</h2>
         </div>
       </div>
-      {ideaList && ideaList.map((idea,index) => (
+      {filteredData && filteredData.map((idea,index) => (
       <React.Fragment key={index}>
       <hr />
       <div className='flex flex-row mb-3'>

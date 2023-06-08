@@ -7,14 +7,13 @@ function Devstagefilter({options,toggleDropdown,name,isOpen}) {
 
 
 
-  const handleOptionChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      removeOption(option);
+  const handleOptionChange = (option,name) => {
+    if (selectedOptions[name] && selectedOptions[name].includes(option)) {
+      removeOption(option,name);
     } else {
-      addOption(option);
+      addOption(option,name);
     }
   };
-  // console.log(selectedOptions)
 
   return (
     <div className='flex flex-col mt-5 ml-5'>
@@ -31,7 +30,7 @@ function Devstagefilter({options,toggleDropdown,name,isOpen}) {
           <div className='flex flex-col pb-2'>
             {options.map((option) => (
               <div className='flex flex-row items-center gap-x-5 mt-4' key={option}>
-                <input type='checkbox' checked={selectedOptions.includes(option)} onChange={() => handleOptionChange(option)} />
+                <input type='checkbox' checked={selectedOptions.name && selectedOptions.name.includes(option)} onChange={() => handleOptionChange(option,name)} />
                 <p className='text-[#363B64] font-bold text-sm'>{option}</p>
               </div>
             ))}
