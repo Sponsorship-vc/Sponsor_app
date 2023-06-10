@@ -3,13 +3,13 @@ import {useState} from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { ideasData } from '../../../../data/Userdata';
 import { OptionsContext } from '../../../../context/optionContext';
+import '../../../../index.css'
 function Ideas() {
-  const { selectedOptions, addOption, removeOption } = useContext(OptionsContext);
+  const { selectedOptions } = useContext(OptionsContext);
 
   const [likedIndexes, setLikedIndexes] = useState([]);
   const [ideaList, setIdeaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [industry, setIndustry] = useState([]);
   console.log(selectedOptions.Industry)
 
 
@@ -79,7 +79,7 @@ function Ideas() {
         <div className='bg-[#C1BBEB] rounded-lg h-full w-1/5'></div>
         <div className='flex flex-col w-1/2 mt-3'>
           <h1 className='font-bold text-[#303972]'>{idea.title}</h1>
-          <p className='text-[#A098AE] text-sm mt-3'>{idea.Solution}</p>
+          <p className='line-clamp text-[#A098AE] text-sm mt-3'>{idea.Solution}</p>
         </div>
         <div className='flex flex-col gap-y-3 mt-3 ml-10'>
         {Array.isArray(idea.category) && idea.category.map((category, index) => (

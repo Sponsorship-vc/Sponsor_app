@@ -1,4 +1,4 @@
-import React , {  useState } from 'react';
+import React , {  useState , useEffect} from 'react';
 import { ideaData } from '../../../data/Userdata';
 import { 
   deleteDoc,
@@ -19,17 +19,18 @@ function MyIdeabar() {
 
 
 
+  useEffect (() =>{
+      ideaData.then(
+        (value) => {
+          setideaList(value)
+          // console.log(value); // Success!
+        },
+        (reason) => {
+          console.error(reason); // Error!
+        },
+      );
+      },[ideaData])
 
-
-    ideaData.then(
-      (value) => {
-        setideaList(value)
-        // console.log(value); // Success!
-      },
-      (reason) => {
-        console.error(reason); // Error!
-      },
-    );
 
     const deleteuser = async (id ,name) => {
       if(name === value){

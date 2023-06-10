@@ -29,4 +29,9 @@ html{
   .customLook + button:hover{
     box-shadow: 0 0 0 5px inset currentColor;
   }
-  
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  }

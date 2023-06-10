@@ -73,9 +73,9 @@ function Profilecard() {
   <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
     <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
       <label htmlFor='profile-picture-input'>
-        {user.pfp ? (
+        { selectedPicture ? (
           <img
-            src={user.pfp}
+            src={selectedPicture}
             className='m-auto h-[6rem] w-[6rem] rounded-full bg-white cursor-pointer'
             alt='Profile Picture'
             onClick={handleClick}
