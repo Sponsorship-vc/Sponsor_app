@@ -4,8 +4,8 @@ import Devstagefilter from './Devstagefilter';
 function Filterideas() {
   const [isOpen, setIsOpen] = useState([]);
   const industryOptions = ['Healthcare', 'Technology', 'Education', 'Tourism', 'Automobile', 'Others'];
-  const stageOptions = ['Early','Prototype','Commercialisable']
-  const typeOptions = ['Product','Service']
+  const stageOptions = ['Ideation','Development','Prototype','Commercialisable']
+  const typeOptions = ['Product','Service','Design','Process']
 
   const toggleDropdown = (index) => {
     setIsOpen((prevOpen) => {

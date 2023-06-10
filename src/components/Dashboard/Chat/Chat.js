@@ -6,13 +6,13 @@ import {RiAccountCircleFill} from 'react-icons/ri'
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
-
+  data && console.log(`data mte ${JSON.stringify(data)}`)
   return (
     <div className="flex flex-1 flex-col overflow-x-hidden">
       <div className="h-[50px] flex items-center p-[10px] text-dark-blue w-full flex- gap-3 mt-3  border-b border-slate-200">
-        {data.photoURL ? (
+        {data.user.photoURL ? (
                   <img
-                    src={data.photoURL}
+                    src={data.user.photoURL}
                     alt="Profile"
                     className="w-10 h-10 rounded-full mb-2"
                   />

@@ -7,7 +7,7 @@ import Message from "./Message";
 const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
-
+  console.log(JSON.stringify(data))
   useEffect(() => {
     const chatRef = collection(db, "chats", data.chatId, "messages");
     const messagesQuery = query(chatRef, orderBy("date"));

@@ -4,6 +4,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { ideasData } from '../../../../data/Userdata';
 import { OptionsContext } from '../../../../context/optionContext';
 import '../../../../index.css'
+import { Link } from 'react-router-dom';
 function Ideas() {
   const { selectedOptions } = useContext(OptionsContext);
 
@@ -58,9 +59,6 @@ function Ideas() {
   
       setLikedIndexes(newLikedIndexes);
     };
-
-
-
               
 
   return (
@@ -75,7 +73,8 @@ function Ideas() {
       {filteredData && filteredData.map((idea,index) => (
       <React.Fragment key={index}>
       <hr />
-      <div className='flex flex-row mb-3'>
+      <Link to={`/dashboard/sponsor/ideafeed/viewidea/${idea.id}`}>
+      <div className='flex flex-row mb-3 cursor-pointer'>
         <div className='bg-[#C1BBEB] rounded-lg h-full w-1/5'></div>
         <div className='flex flex-col w-1/2 mt-3'>
           <h1 className='font-bold text-[#303972]'>{idea.title}</h1>
@@ -97,6 +96,7 @@ function Ideas() {
               )}
         </div>
       </div> 
+      </Link>
       </React.Fragment>))}
     </div>
   )

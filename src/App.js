@@ -55,6 +55,7 @@ function App() {
           <Route path='ideafeed' Component={Ideafeed}/>
           <Route path='chat' Component={ChatWindow}/>
           <Route path='help' Component={Help}/>
+          <Route path='ideafeed/viewidea/:id' Component={ViewIdea}/>
           </Route>
         </Routes>
       </BrowserRouter>

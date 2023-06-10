@@ -1,32 +1,40 @@
-import React  from 'react'
-import { useLocation } from 'react-router-dom';
-import { ideaData } from '../../../data/Userdata';
+import React,{useContext}  from 'react'
+import { useLocation,useNavigate } from 'react-router-dom';
+import { ideasData } from '../../../data/Userdata';
 import { useState ,useEffect } from 'react';
 import  Dots  from '../../../Assets/Dashboard/Icons/Dots.png'
 import  Edit  from '../../../Assets/Dashboard/Icons/Vector.png'
 import { Link } from 'react-router-dom';
+import {BsChatLeftDots} from 'react-icons/bs'
+import {ChatContext} from '../../../context/ChatContext'
 
-function ViewIdeabar() {
+function ViewIdeabar({isSponsor}) {
     const location = useLocation();
     const path = location.pathname
     const message = path.split('/').pop();
     const [post, setpost] = useState([]);
+    const navigate = useNavigate()
+    const { dispatch } = useContext(ChatContext);
 
 
     useEffect(() => {
-        ideaData.then(
-          (value) => {
-            const filteredValues = value.filter((item) => item.id === message);
+        ideasData.then(
+         (value) => {
+            console.log(value)
+            const filteredValues =  value.filter((value) => value.id === message)
             setpost(filteredValues);
-            // console.log(filteredValues);
+            console.log(post);
           },
           (reason) => {
             console.error(reason); // Error!
           }
         );
-      }, []);
+      }, [message])
       
-
+      const handleChat = (user) => {
+        // console.log(`user handlechat ${JSON.stringify(user)}`)
+        navigate(`/dashboard/sponsor/chat`);
+      }
 
   return (
     <div className='ml-64 py-8'>
@@ -35,22 +43,26 @@ function ViewIdeabar() {
                 <div className='flex flex-col gap-2 '>
                     <div className='flex flex-row justify-between'> 
                         <p className='font-bold text-[#303972] text-3xl py-2'>{post.title}</p>
-                        <div className='flex flex-row gap-4'>
-                            <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
+                        <div className='flex flex-row gap-8 justify-center items-center mr-5'>
+                            {isSponsor ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
                                 <img src={Edit} className="h-5"
                                 title="Edit"
                                 />
-                            </Link>
+                            </Link>) : (
+                            <div className='flex justify-center items-center cursor-pointer bg-[#C1BBEB] text-dark-blue py-2 px-4 h-3/4 text-sm rounded-xl gap-2 '>
+                                <button  onClick={() => handleChat(post)}>Chat</button>
+                                <BsChatLeftDots/>
+                            </div>)}
                             <img src={Dots} className="h-5"/>
                         </div>
                     </div>
-                    <div className='flex flex-row gap-5'>
-                    {post.category && (
-                        <p className='font-normal text-white text-md bg-[#4D44B5] px-3 py-1 rounded-full '>{post.category}</p>
-                    )}
-                    </div>
-                    
-
+                    <div className='flex flex-row gap-1 justify-start items-start '>
+                    {Array.isArray(post.category) && post.category.map((category, index) => (
+                        <p
+                        className='bg-[#C1BBEB] rounded-2xl min-w-content min-h-content px-3 py-1 text-xs flex  text-[#303972]'>{category}
+                        </p>
+                        ))}
+                        </div>
                     <p className='font-bold text-[#303972] text-md pt-2'>Problem Statement</p>
                     {post.Problem ? (
                         <p className='font-normal text-sm text-gray-600 w-3/4'>{post.Problem}</p>
@@ -82,11 +94,6 @@ function ViewIdeabar() {
                         {post.teamDetails ? (
                         <p className='font-normal text-sm text-gray-700'>{post.teamDetails}</p>
                         ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
-
-
-
-
-                        
                     </div>
                 </div>
             </div>
