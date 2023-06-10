@@ -36,6 +36,7 @@ function MyIdeabar() {
       if(name === value){
         const userDoc = doc(db, "Ideas", id);
         await deleteDoc(userDoc);
+        window.location.reload()
       }
     };
 

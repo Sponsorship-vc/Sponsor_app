@@ -7,7 +7,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import '../../../index.css';
-// import {userData} from '../../../data/Userdata'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -20,6 +20,7 @@ const Ideabar = () => {
     const today = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString('en-US', options);
+    const navigate = useNavigate()
 
     const [a, seta] = useState("");
     const [b, setb] = useState("");
@@ -145,7 +146,9 @@ const Ideabar = () => {
         date:formattedDate,
         draft:draft,
       });
-      uploadFile();
+    uploadFile();
+    navigate(`/dashboard/innovator/myideas`)
+    window.location.reload()
     } catch (err) {
       console.error(err);
     }
@@ -162,7 +165,7 @@ const Ideabar = () => {
         <div className='bg-[#30397F] rounded-t-xl h-20'>
           <p className='text-lg px-6 font-bold text-white py-6'>Idea Details</p>
         </div>
-          <div className='p-4 flex h-full rounded-b-xl flex-col bg-white md:flex-row'>
+          <div className='p-4 flex h-full  flex-col bg-white md:flex-row'>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
               <p className='text[#303972] font-bold'>Idea Title</p>
               <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" placeholder='Give suitable title for you idea' onChange={(e) => seta(e.target.value)} />

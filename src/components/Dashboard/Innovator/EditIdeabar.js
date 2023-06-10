@@ -1,6 +1,6 @@
 import { useState ,useEffect} from "react";
 import React  from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { ideaData } from "../../../data/Userdata";
 import { doc ,updateDoc } from "firebase/firestore";
 import { db, storage ,auth} from '../../../firebase/config';
@@ -27,9 +27,7 @@ function EditIdeabar() {
     const [fileUpload, setFileUpload] = useState(null);
     const [selectedPicture, setSelectedPicture] = useState(null);
     const [fileUploaded, setFileUploaded] = useState(false);
-
-
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         ideaData.then(
@@ -55,6 +53,8 @@ function EditIdeabar() {
       const onDraftuser = () =>{
         setdraft(false);
         updateIdeaTitle();
+        navigate(`/dashboard/innovator/myideas/${message}`)
+        window.location.reload()
       }
 
       const updateIdeaTitle = async (id) => {
@@ -73,6 +73,8 @@ function EditIdeabar() {
           draft:draft,
         });
         await uploadFile();
+        navigate(`/dashboard/innovator/myideas/${message}`)
+        window.location.reload()
       };
 
       

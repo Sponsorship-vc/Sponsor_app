@@ -6,6 +6,7 @@ import { userData } from '../../../../data/Userdata';
 import { db  } from "../../../../firebase/config";
 import tick from '../../../../Assets/Dashboard/Icons/tick.png'
 import { doc ,updateDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -28,6 +29,7 @@ function EditProfilecard() {
     const [suggestions, setSuggestions] = useState([]);
     const [category, setCategory] = useState("");
     const [d, setd] = useState("");    
+    const navigate = useNavigate()
     
 
 
@@ -75,6 +77,8 @@ function EditProfilecard() {
             bio:bio,
             interest:d
         });
+        navigate(`/dashboard/innovator/profile`)
+        window.location.reload()
       };
 
       const handleChange = (event) => {

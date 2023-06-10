@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { GrLocation } from 'react-icons/gr';
 import { MdEmail } from 'react-icons/md';
-import {CgProfile} from 'react-icons/cg'
+import {IoPersonCircleOutline} from 'react-icons/io5'
 import { db ,storage} from '../../../../firebase/config';
 import edit from '../../../../Assets/Dashboard/Icons/edit.svg'
 import { userData } from '../../../../data/Userdata';
 import { Link } from 'react-router-dom';
 import { ref, uploadBytes } from "firebase/storage";
 import { doc ,updateDoc } from "firebase/firestore";
-
-
-
-
 
 function Profilecard() {
   
@@ -109,12 +105,12 @@ function Profilecard() {
         { selectedPicture ? (
           <img
             src={selectedPicture}
-            className='m-auto h-[6rem] w-[6rem] rounded-full bg-white cursor-pointer'
+            className='m-auto h-[7.2rem] w-[7.2rem] rounded-full bg-white cursor-pointer'
             alt='Profile Picture'
             onClick={handleClick}
           />
         ) : (
-          <CgProfile className='m-auto h-[7.5rem] w-[7.5rem] rounded-full bg-white cursor-pointer' fill='303972' />
+          <IoPersonCircleOutline className='m-auto h-[8rem] w-[8rem] rounded-full bg-white cursor-pointer' fill='#303972'/>
         )}
       </label>
       <input
@@ -142,7 +138,7 @@ function Profilecard() {
       <div className='flex flex-col'>
         <label className='text-[#A098AE]'>Location</label>
         <div className='flex flex-row gap-4 mt-3'>
-          <GrLocation className='mt-1' fill='FB7D5B' />
+          <GrLocation className='mt-1' fill='#FB7D5B' />
           {city ? (
             <p className='- text-dark-blue'>{city}</p>
           ) : (
