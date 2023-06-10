@@ -27,7 +27,7 @@ const Ideabar = () => {
     const [e, sete] = useState("");
     const [f, setf] = useState("");
     const [g, setg] = useState("");
-    const [h, seth] = useState("");    
+    const [id, setId] = useState("");    
     const [draft, setdraft] = useState(true);
     const [inputValue, setInput] = useState("");    
     const [category, setCategory] = useState("");    
@@ -101,24 +101,23 @@ const Ideabar = () => {
     updatedTags.splice(index, 1);
     setd(updatedTags);
   };
-    
-  function handleFileSelect(event) {
+
+  const handleFileSelect = async (event) => {
     const files = event.target.files;
     if (files.length > 0) {
-      const fileNames = [];
-      fileNames.push(files[0].name);
+      const file = files[0];
+      const fileName = file.name;
       setFileUploaded(true);
-      setFileNames(fileNames);
+      setFileNames([fileName]);
       const iconDiv = document.getElementById('iconDiv');
       iconDiv.classList.add('hidden');
-      setFileUpload(event.target.files[0])
-      // console.log(files)
+      setFileUpload(file);
+      setId(auth.currentUser.uid)
     }
-  }
-
+  };
+  
   const uploadFile = async () => {
-    if (!fileUpload) return;
-    const filesFolderRef = ref(storage, `Ideas/${auth.currentUser.uid}/${fileUpload.name}`);
+    const filesFolderRef = ref(storage, `Idea/${id}/${a}/${fileName}`);
     try {
       await uploadBytes(filesFolderRef, fileUpload);
     } catch (err) {
@@ -141,7 +140,7 @@ const Ideabar = () => {
         model: f,
         property:g,
         teamDetails:tags,
-        filepath:"need to set",
+        filepath:`Idea/${id}/${a}/${fileName}`,
         userId:auth.currentUser.uid,
         date:formattedDate,
         draft:draft,
@@ -151,6 +150,8 @@ const Ideabar = () => {
       console.error(err);
     }
   };
+
+  
 
   return (
     // <div className='ml-64'>

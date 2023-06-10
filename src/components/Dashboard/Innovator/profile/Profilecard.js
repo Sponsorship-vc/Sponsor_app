@@ -3,11 +3,14 @@ import { BsFillTelephoneFill } from 'react-icons/bs';
 import { GrLocation } from 'react-icons/gr';
 import { MdEmail } from 'react-icons/md';
 import {CgProfile} from 'react-icons/cg'
-import {  collection } from 'firebase/firestore';
-import { db } from '../../../../firebase/config';
+import { db ,storage} from '../../../../firebase/config';
 import edit from '../../../../Assets/Dashboard/Icons/edit.svg'
 import { userData } from '../../../../data/Userdata';
 import { Link } from 'react-router-dom';
+import { ref, uploadBytes } from "firebase/storage";
+import { doc ,updateDoc } from "firebase/firestore";
+
+
 
 
 
@@ -26,6 +29,12 @@ function Profilecard() {
   const [pin, setPin] = useState("");
   const [bio, setBio] = useState("");
   const [Id, setId] = useState("");
+  const [interest, setInterest] = useState("");
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [fileName, setFileNames] = useState('');
+  const [fileUpload, setFileUpload] = useState(null);
+  const [selectedPicture, setSelectedPicture] = useState(null);
+
 
 
     useEffect(() => {
@@ -44,6 +53,7 @@ function Profilecard() {
           setAdd4(value[0].add4 ? value[0].add4 : "");
           setPin(value[0].pin ? value[0].pin : "");
           setBio(value[0].bio ? value[0].bio : "");
+          setInterest(value[0].interest ? value[0].interest : "");
           setId(value[0].id);
         },
         (reason) => {
@@ -52,10 +62,6 @@ function Profilecard() {
       );
     }, []);
 
-  const user = 0
-  const [selectedPicture, setSelectedPicture] = useState(null);
-  const usersCollectionRef = collection(db, 'users');
-
   const handlePictureUpload = (event) => {
     const file = event.target.files[0];
     setSelectedPicture(URL.createObjectURL(file));
@@ -63,7 +69,34 @@ function Profilecard() {
 
   const handleClick = () => {
     // Trigger the file input when the profile picture is clicked
-    document.getElementById('profile-picture-input').click();
+    document.getElementById('profile-picture-input');
+  };
+
+  const handleFileSelect = async (event) => {
+    const files = event.target.files;
+    if (files.length > 0) {
+      const file = files[0];
+      const fileName = file.name;
+      setFileUploaded(true);
+      setFileNames([fileName]);
+      const iconDiv = document.getElementById('iconDiv');
+      iconDiv.classList.add('hidden');
+      setFileUpload(file);
+      await uploadFile(file);
+    }
+  };
+  
+  const uploadFile = async (file) => {
+    const filesFolderRef = ref(storage, `Resume/${Id}/${file.name}`);
+    try {
+      await uploadBytes(filesFolderRef, file);
+      const userDoc = doc(db, "users", Id);
+        await updateDoc(userDoc, { 
+            filepath:`Resume/${Id}/${file.name}`
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
 
@@ -182,16 +215,28 @@ function Profilecard() {
         <div className='flex flex-col'>
           <label className='text-[#A098AE]'>Resume</label>
           <div className='flex flex-row gap-4 mt-3 relative'>
-            <input type='file' class='opacity-0 absolute inset-0 z-0 h-15 w-[15rem]' />
-            <div class='h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center'>
-              <span class='text-gray-400'>Click here to Upload</span>
-            </div>
+          <label className="h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center">
+              <div id="iconDiv" className="flex flex-col gap-2">
+                <p className="text-gray-400 flex justify-center">Click here to upload</p>
+              </div>
+              {fileUploaded ? (
+                <div className="flex flex-wrap justify-center gap-2 py-4">
+                  <p className="text-gray-400 flex justify-center">{fileName}</p>
+                </div>
+              ) : null}
+              <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
+            </label>
           </div>
         </div>
         <div className='flex flex-col'>
           <label className='text-[#A098AE]'>Interest</label>
-          <div className='flex flex-row gap-4 mt-3'>
-            <p className='font-semibold text-dark-blue'>Web3, Blockchain</p>
+          <div className='flex flex-row gap-2 mt-3'>
+          {interest.length>0 && interest.map((content, index) => (
+            <p key={index} className="font-semibold text-dark-blue">
+              {content}
+              {index !== interest.length - 1 && ' , '}
+            </p>
+          ))}
           </div>
         </div>
       </div>

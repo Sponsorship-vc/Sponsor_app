@@ -25,6 +25,12 @@ function EditProfilecard() {
     const [pin, setPin] = useState("");
     const [bio, setBio] = useState("");
     const [Id, setId] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [category, setCategory] = useState("");
+    const [d, setd] = useState("");    
+    
+
+
 
 
       useEffect(() => {
@@ -43,6 +49,7 @@ function EditProfilecard() {
             setAdd4(value[0].add4 ? value[0].add4 : "");
             setPin(value[0].pin ? value[0].pin : "");
             setBio(value[0].bio ? value[0].bio : "");
+            setd(value[0].interest ? value[0].interest : "");
             setId(value[0].id);
           },
           (reason) => {
@@ -66,8 +73,50 @@ function EditProfilecard() {
             add4:add4,
             pin:pin,
             bio:bio,
+            interest:d
         });
       };
+
+      const handleChange = (event) => {
+        const value = event.target.value;
+        setCategory(value);
+        // Update suggestions based on the input value
+        if (value.trim() !== '') {
+          updateSuggestions(value);
+        } else {
+          setSuggestions([]);
+        }
+      };
+
+      const updateSuggestions = (value) => {
+        // Implement your logic to fetch suggestions based on the input value
+        // For example, you can filter a list of valid words or make an API call to retrieve suggestions
+        const filteredSuggestions = ['sports', 'music', 'arts', 'technology', 'fashion', 'fitness', 'travel', 'sustainability', 'business', 'causes']
+        .filter((word) =>
+          word.toLowerCase().startsWith(value.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions);
+      };
+
+      const onAddCategory = () => {
+        const tagValue = category;
+        if (tagValue && !d.includes(tagValue)) {
+          setd([...d, tagValue]);
+          setCategory('');
+          setSuggestions([]);
+        }
+    }; 
+
+    const handleSuggestionClick = (suggestion) => {
+      setCategory(suggestion);
+      setSuggestions([]);
+    };
+
+    const onRemoveCat = (index) => {
+      const updatedTags = [...d];
+      updatedTags.splice(index, 1);
+      setd(updatedTags);
+    };
 
 
   return (
@@ -221,7 +270,54 @@ function EditProfilecard() {
               <div className='flex flex-col'>
                 <label className='text-[#A098AE]'>Interest</label>
                 <div className='flex flex-row gap-4 mt-3'>
-                  <p className='font-semibold text-dark-blue'>Use tagify</p>
+                <div className=' flex flex-col'>
+                <input 
+                 className=" border h-12 border-gray-300 rounded w-full p-2 resize-none"
+                 onChange={handleChange}
+                 value={category}
+                 onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    onAddCategory();
+                  }
+                 }}
+              />
+              {suggestions.length > 0 && (
+                <ul>
+                  {suggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className='flex flex-row gap-4'>
+              {d.length > 0 && (
+                <ul>
+               {d.map((tag, index) => (
+                  <div key={index} className="inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded-full mr-2 mt-2">
+                  <span className="mr-2">{tag}</span>
+                  <button
+                  className="text-red-500 hover:text-red-600 focus:outline-none"
+                  onClick={() => onRemoveCat(index)}
+                  >
+                    <svg
+                    className="w-4 h-4 fill-current"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                      d="M17.292 6.292l-1.415-1.415L12 10.586 7.122 5.707 5.707 7.122 10.586 12l-4.88 4.88 1.415 1.415L12 13.414l4.878 4.88 1.414-1.415L13.414 12l4.878-4.878z"
+                    />
+                    </svg>
+                  </button>
+                </div>
+                 ))}
+                 </ul>
+                 )}
+              </div>
+
+                </div>
                 </div>
               </div>
             </div>

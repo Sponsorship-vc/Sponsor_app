@@ -2,8 +2,10 @@ import { useState ,useEffect} from "react";
 import React  from 'react';
 import { useLocation } from "react-router-dom";
 import { ideaData } from "../../../data/Userdata";
-import { db  } from "../../../firebase/config";
 import { doc ,updateDoc } from "firebase/firestore";
+import { db, storage ,auth} from '../../../firebase/config';
+import { ref, uploadBytes } from "firebase/storage";
+
 
 function EditIdeabar() {
 
@@ -15,11 +17,17 @@ function EditIdeabar() {
     const [f, setf] = useState("");
     const [g, setg] = useState("");
     const [h, seth] = useState("");
+    const [id, setId] = useState("");
     const location = useLocation();
     const path = location.pathname
     const message = path.split('/').pop();
     const [post, setpost] = useState([]);
     const [draft, setdraft] = useState(true);
+    const [fileName, setFileNames] = useState('');
+    const [fileUpload, setFileUpload] = useState(null);
+    const [selectedPicture, setSelectedPicture] = useState(null);
+    const [fileUploaded, setFileUploaded] = useState(false);
+
 
 
 
@@ -53,17 +61,44 @@ function EditIdeabar() {
         const userDoc = doc(db, "Ideas", message);
         // console.log(id)
         await updateDoc(userDoc, { 
-            title: a,
-            Problem: b,
-            fundingRequirement:c,
-            category:d,
-            Solution:e,
-            model: f,
-            property:g,
-            teamDetails:h,
-            filepath:"need to set",
-            draft:draft,
+          title: a,
+          Problem: b,
+          fundingRequirement:c,
+          category:d,
+          Solution:e,
+          model: f,
+          property:g,
+          teamDetails:h,
+          filepath:`Idea/${id}/${a}/${fileName}`,
+          draft:draft,
         });
+        await uploadFile();
+      };
+
+      
+      const handleFileSelect = async (event) => {
+        const files = event.target.files;
+        if (files.length > 0) {
+          const file = files[0];
+          const fileName = file.name;
+          setFileUploaded(true);
+          setFileNames([fileName]);
+          const iconDiv = document.getElementById('iconDiv');
+          iconDiv.classList.add('hidden');
+          setFileUpload(file);
+          setId(auth.currentUser.uid)
+
+        }
+      };
+      
+      const uploadFile = async () => {
+        const filesFolderRef = ref(storage, `Idea/${id}/${a}/${fileName}`);
+
+        try {
+          await uploadBytes(filesFolderRef, fileUpload);
+        } catch (err) {
+          console.error(err);
+        }
       };
 
   return (
@@ -91,7 +126,7 @@ function EditIdeabar() {
               onChange={(e) => setc(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Images | pdfs</p>
-              {/* <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded h-20">
+              <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded h-20">
                 <div id="iconDiv" className="flex flex-col  p-2">
                   <p className="text-gray-400 flex justify-center">Click here to upload</p>
                 </div>
@@ -101,7 +136,7 @@ function EditIdeabar() {
                 </div>
                 ) : null}
                 <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
-            </label> */}
+            </label>
             <p>need to fix</p>
 
             </div>
