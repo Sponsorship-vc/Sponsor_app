@@ -153,8 +153,11 @@ const Ideabar = () => {
   };
 
   return (
-    <div className='ml-64'>
-      <div className='mx-8  rounded-xl border-2'>
+    // <div className='ml-64'>
+    //   <div className='mx-8  rounded-xl border-2'>
+    <div className='  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
+      <div className='bg-[rgb(48,57,114)]  w-full rounded-t-xl   gap-x-[35rem]'>
+
         <div className='bg-[#30397F] rounded-t-xl h-20'>
           <p className='text-lg px-6 font-bold text-white py-6'>Idea Details</p>
         </div>

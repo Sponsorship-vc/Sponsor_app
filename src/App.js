@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 
 
-import SponProfile from './pages/Dashboard/Sponsor/SponProfile';
+
 import Sidebarsp from './components/Dashboard/Sponsor/Sidebarsp';
 import Sidebarin from './components/Dashboard/Innovator/Sidebarin';
 import InnProfile from './pages/Dashboard/Innovator/InnProfile';
@@ -18,6 +18,10 @@ import ChatWindow from './pages/Dashboard/common/ChatWindow'
 import ViewIdea from './pages/Dashboard/Innovator/ViewIdea';
 import EditIdea from './pages/Dashboard/Innovator/EditIdea';
 import Verification from './pages/verify/Verification';
+
+import SponProfile from './pages/Dashboard/Sponsor/SpoProfile';
+import EditSProfile from './pages/Dashboard/Sponsor/SponProfile';
+
 import EditProfile from './pages/Dashboard/Innovator/EditProfile';
 import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed'
 
@@ -47,6 +51,7 @@ function App() {
 
           <Route path='/dashboard/sponsor' Component={Sidebarsp}>
           <Route path='profile' Component={SponProfile}/>
+          <Route path='profile/edit' Component={EditSProfile}/>
           <Route path='ideafeed' Component={Ideafeed}/>
           <Route path='chat' Component={ChatWindow}/>
           <Route path='help' Component={Help}/>
