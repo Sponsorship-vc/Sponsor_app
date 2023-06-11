@@ -11,7 +11,6 @@ function Ideas() {
   const [likedIndexes, setLikedIndexes] = useState([]);
   const [ideaList, setIdeaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  console.log(selectedOptions.Industry)
 
 
 
@@ -25,23 +24,25 @@ function Ideas() {
         console.error(reason); // Error!
       });
   }, []);
-  // console.log(ideaList)
+
+
   useEffect(() => {
+    
+    const filteredData = Object.values(ideaList).filter((idea) => {
+      const ideaCategories = Array.isArray(idea.category) ? idea.category.map((category) => category.toLowerCase()) : [];
+      const lowerCaseSelectedIndustry = selectedOptions.Industry ? selectedOptions.Industry.map((option) => option.toLowerCase()) : [];
+      const lowerCaseSelectedIdeaType = selectedOptions["Idea type"] ? selectedOptions["Idea type"].map((option) => option.toLowerCase()) : [];
+      const lowerCaseSelecteddevStage = selectedOptions["Stage of development"] ? selectedOptions["Stage of development"].map((option) => option.toLowerCase()) : [];
+    
+      return (
+        (lowerCaseSelectedIndustry.length === 0 || lowerCaseSelectedIndustry.every((option) => ideaCategories.includes(option))) &&
+        (lowerCaseSelectedIdeaType.length === 0 || idea.ideaType && lowerCaseSelectedIdeaType.some((option) => idea.ideaType.toLowerCase().includes(option)))&&
+        (lowerCaseSelecteddevStage.length === 0 || idea.devStage && lowerCaseSelecteddevStage.some((option) => idea.devStage.toLowerCase().includes(option)))
+      );
+    });
+    
 
-
-    const filteredIdeas = selectedOptions.Industry && selectedOptions.Industry.length > 0
-    ? Object.values(ideaList).filter((idea) => {
-        const ideaCategories = Array.isArray(idea.category)
-          ? idea.category.map((category) => category.toLowerCase())
-          : [];
-        const lowerCaseSelectedOptions = selectedOptions.Industry.map((option) => option.toLowerCase());
-        return lowerCaseSelectedOptions.every((selectedOption) =>
-          ideaCategories.includes(selectedOption)
-        );
-      })
-    : Object.values(ideaList);
-  
-    setFilteredData(filteredIdeas);
+    setFilteredData(filteredData);
   }, [selectedOptions, ideaList]);
 
 

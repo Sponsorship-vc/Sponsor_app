@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from '../../../components/Dashboard/Header'
-import EditIdeabar from '../../../components/Dashboard/Innovator/EditIdeabar'
+import Ideabar from '../../../components/Dashboard/Innovator/Ideabar'
 
 function EditIdea() {
   return (
-    <div>
-        <Header/>
-        <EditIdeabar/>
+    <div className='bg-[#F3F4FF] h-full'>
+      <Header/>
+      <Ideabar/>
     </div>
   )
 }
