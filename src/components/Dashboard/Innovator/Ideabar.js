@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { useEffect } from 'react' 
 import { useState ,useRef } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import {  storage , db , auth } from "../../../firebase/config";
@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import '../../../index.css';
 import { useNavigate } from 'react-router-dom';
+import {userData} from '../../../data/Userdata'
 
 
 
@@ -36,7 +37,19 @@ const Ideabar = () => {
     const [tags, setTags] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-    // const [userList,setuserList] = useState([])
+    const [userList,setuserList] = useState([])
+
+    useEffect(()=>{
+      userData.then(
+        (value) => {
+          setuserList(value);
+        },
+        (reason) => {
+          console.error(reason);
+        }
+      );
+    },[])
+    
   
     const onAddteam = () => {
         const tagValue = inputValue;
@@ -145,6 +158,8 @@ const Ideabar = () => {
         userId:auth.currentUser.uid,
         date:formattedDate,
         draft:draft,
+        name: userList[0].name,
+        photoURL: userList[0].photoURL || '',
       });
     uploadFile();
     navigate(`/dashboard/innovator/myideas`)
@@ -153,8 +168,6 @@ const Ideabar = () => {
       console.error(err);
     }
   };
-
-  
 
   return (
     // <div className='ml-64'>

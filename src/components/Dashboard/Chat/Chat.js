@@ -6,7 +6,7 @@ import {RiAccountCircleFill} from 'react-icons/ri'
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
-  data && console.log(`data mte ${JSON.stringify(data)}`)
+  data && console.log(`data mte ${data.user.userId}`)
   return (
     <div className="flex flex-1 flex-col overflow-x-hidden">
       <div className="h-[50px] flex items-center p-[10px] text-dark-blue w-full flex- gap-3 mt-3  border-b border-slate-200">

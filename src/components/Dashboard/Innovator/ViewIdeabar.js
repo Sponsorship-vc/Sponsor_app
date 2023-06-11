@@ -20,10 +20,8 @@ function ViewIdeabar({isSponsor}) {
     useEffect(() => {
         ideasData.then(
          (value) => {
-            console.log(value)
             const filteredValues =  value.filter((value) => value.id === message)
             setpost(filteredValues);
-            console.log(post);
           },
           (reason) => {
             console.error(reason); // Error!
@@ -33,7 +31,9 @@ function ViewIdeabar({isSponsor}) {
       
       const handleChat = (user) => {
         // console.log(`user handlechat ${JSON.stringify(user)}`)
+        dispatch({ type: "CHANGE_USER", payload: user });
         navigate(`/dashboard/sponsor/chat`);
+
       }
 
   return (
@@ -44,7 +44,7 @@ function ViewIdeabar({isSponsor}) {
                     <div className='flex flex-row justify-between'> 
                         <p className='font-bold text-[#303972] text-3xl py-2'>{post.title}</p>
                         <div className='flex flex-row gap-8 justify-center items-center mr-5'>
-                            {!isSponsor ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
+                            {isSponsor ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
                                 <img src={Edit} className="h-5"
                                 title="Edit"
                                 />
