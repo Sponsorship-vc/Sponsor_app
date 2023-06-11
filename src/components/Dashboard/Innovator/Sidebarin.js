@@ -45,15 +45,6 @@ const Sidebarin = () => {
             
          </li>
          <li className='ml-5 mb-2'>
-            <NavLink to="sponsor"  className={({ isActive }) =>
-               isActive ? 'rounded-l-full bg-white text-sm flex h-11 p-3 w-full hover:text-black' : 'text-gray-400 flex p-3 text-sm'
-                }>
-                <img src={Icon3} className="h-6 mr-3 contrast-0 sm:h-7"/>
-               <span className="flex-1 ml-3 whitespace-nowrap">Sponsors</span>
-               </NavLink>  
-         </li>
-         
-         <li className='ml-5 mb-2'>
             <NavLink to="myideas"  className={({ isActive }) =>
               isActive ? 'rounded-l-full bg-white text-sm flex h-11 p-3 w-full hover:text-black' : 'text-gray-400 flex p-3 text-sm font-thin'
                 }>

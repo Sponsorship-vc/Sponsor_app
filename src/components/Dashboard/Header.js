@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { FaBell } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
@@ -16,14 +16,17 @@ function Header() {
 
   const [userList, setuserList] = useState([]);
 
-  userData.then(
-    (value) => {
-      setuserList(value);
-    },
-    (reason) => {
-      console.error(reason);
-    }
-  );
+  useEffect(()=>{
+    userData.then(
+      (value) => {
+        setuserList(value);
+      },
+      (reason) => {
+        console.error(reason);
+      }
+    );
+  },[])
+  
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -32,6 +35,7 @@ function Header() {
   const handleSignOut = () => {
     signOut(auth).then(() => {
       console.log('signout succesfull')
+      window.location.reload()
     }).catch((error) => {
       // An error happened.
     });
@@ -73,7 +77,7 @@ function Header() {
         <div className="relative">
           <div
             className="h-12 w-12 rounded-full flex bg-white cursor-pointer"
-            onMouseEnter={toggleDropdown}
+            onClick={()=>toggleDropdown}
           >
             <FiUser className="m-auto" />
           </div>

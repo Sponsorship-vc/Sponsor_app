@@ -22,17 +22,17 @@ const Chats = () => {
           const filteredData = snapshot.docs.map((doc) => doc.data());
           console.log(filteredData);
           setChats(filteredData);
+          console.log(`chat nte ${JSON.stringify(chats)}`)
         }
         )} catch (error) {
         console.log(error)
       }
     }
    currentUser.uid &&  unsub2()
-  }, [currentUser.uid]);
-
+  }, [currentUser.uid])
   const handleSelect = (user) => {
     dispatch({ type: "CHANGE_USER", payload: user });
-    console.log(user)
+    // console.log(user)
   };
   return (
     <div className="flex flex-col h-[25rem] w-full bg-white mt-4 overflow-auto ">
@@ -60,8 +60,13 @@ const Chats = () => {
               <div className="ml-2">
                 <span className="font-bold text-sm text-dark-blue">
                   {chat.name || 'user'}
+                  {console.log(chat.name)}
                 </span>
-                <p className="text-gray-500 text-xs">{chat.lastMessage.text}</p>
+                <p className="text-gray-500 text-xs">
+                  {chat.lastMessage.text.length > 3
+                    ? chat.lastMessage.text.slice(0, 15) + '...'
+                    : chat.lastMessage.text}
+                </p>
               </div>
             </div>
           ))}

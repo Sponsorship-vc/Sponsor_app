@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ChatContext } from "../../../context/ChatContext";
 import { doc, serverTimestamp, updateDoc, collection, addDoc, setDoc } from "firebase/firestore";
@@ -6,6 +6,7 @@ import { db, storage } from "../../../firebase/config";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { ImAttachment } from "react-icons/im";
+import { userData } from "../../../data/Userdata";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -13,6 +14,18 @@ const Input = () => {
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+  const [userList,setuserList] = useState([])
+
+    useEffect(()=>{
+      userData.then(
+        (value) => {
+          setuserList(value);
+        },
+        (reason) => {
+          console.error(reason);
+        }
+      );
+    },[])
 
   const handleSend = async () => {
     if (img) {
@@ -71,8 +84,8 @@ const Input = () => {
       },
       date: serverTimestamp(),
       chatId: data.chatId,
-      uid: currentUser.uid,
-      // name: currentUser.name,
+      userId: currentUser.uid,
+      name: userList[0].name,
       photoURL: currentUser.photoURL || '',
     }, { merge: true });
     // console.log(currentUser.uid)

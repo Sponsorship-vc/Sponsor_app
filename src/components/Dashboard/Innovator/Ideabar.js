@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react' 
-import { useState ,useRef } from "react";
+import { useState  } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import {  storage , db , auth } from "../../../firebase/config";
 import {
@@ -7,8 +7,10 @@ import {
   addDoc,
 } from "firebase/firestore";
 import '../../../index.css';
-import { useNavigate } from 'react-router-dom';
 import {userData} from '../../../data/Userdata'
+import { useNavigate , useLocation } from 'react-router-dom';
+import { ideaData } from '../../../data/Userdata';
+import Devstagefilter from '../Sponsor/ideafeed/Filter/Devstagefilter';
 
 
 
@@ -22,7 +24,6 @@ const Ideabar = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString('en-US', options);
     const navigate = useNavigate()
-
     const [a, seta] = useState("");
     const [b, setb] = useState("");
     const [c, setc] = useState("");
@@ -32,6 +33,8 @@ const Ideabar = () => {
     const [g, setg] = useState("");
     const [id, setId] = useState("");    
     const [draft, setdraft] = useState(true);
+    const [devStage, setDevStage] = useState("");
+    const [ideaType, setIdeaType] = useState("");
     const [inputValue, setInput] = useState("");    
     const [category, setCategory] = useState("");    
     const [tags, setTags] = useState([]);
@@ -50,6 +53,33 @@ const Ideabar = () => {
       );
     },[])
     
+    const location = useLocation();
+    const path = location.pathname
+    const message = path.split('/').pop();
+    const [post, setpost] = useState([]);
+    
+    useEffect(() => {
+      ideaData.then(
+        (value) => {
+          const filteredValues = value.filter((item) => item.id === message);
+          setpost(filteredValues);
+          // console.log(filteredValues);
+          seta(filteredValues[0].title);
+          setb(filteredValues[0].Problem);
+          setc(filteredValues[0].fundingRequirement);
+          setd(filteredValues[0].category);
+          sete(filteredValues[0].Solution);
+          setf(filteredValues[0].model);
+          setg(filteredValues[0].property);
+          setTags(filteredValues[0].teamDetails);
+          setDevStage(filteredValues[0].devStage);
+          setIdeaType(filteredValues[0].ideaType)
+        },
+        (reason) => {
+          console.error(reason); // Error!
+        }
+      );
+    }, []);
   
     const onAddteam = () => {
         const tagValue = inputValue;
@@ -160,6 +190,8 @@ const Ideabar = () => {
         draft:draft,
         name: userList[0].name,
         photoURL: userList[0].photoURL || '',
+        ideaType:ideaType,
+        devStage:devStage
       });
     uploadFile();
     navigate(`/dashboard/innovator/myideas`)
@@ -170,8 +202,6 @@ const Ideabar = () => {
   };
 
   return (
-    // <div className='ml-64'>
-    //   <div className='mx-8  rounded-xl border-2'>
     <div className='  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
       <div className='bg-[rgb(48,57,114)]  w-full rounded-t-xl   gap-x-[35rem]'>
 
@@ -181,13 +211,13 @@ const Ideabar = () => {
           <div className='p-4 flex h-full  flex-col bg-white md:flex-row'>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
               <p className='text[#303972] font-bold'>Idea Title</p>
-              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" placeholder='Give suitable title for you idea' onChange={(e) => seta(e.target.value)} />
+              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" placeholder='Give suitable title for you idea' value={a} onChange={(e) => seta(e.target.value)} />
 
               <p className='text[#303972] font-bold'>Problem Statement</p>
-              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none" onChange={(e) => setb(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none" value={b} onChange={(e) => setb(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Funding Requriements</p>
-              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none " onChange={(e) => setc(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none " value={c} onChange={(e) => setc(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Images | pdfs</p>
               <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded h-20">
@@ -201,6 +231,38 @@ const Ideabar = () => {
                 ) : null}
                 <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
             </label>
+
+            <p className='text[#303972] font-bold'>Stage of development</p>
+            <div class="relative inline-block">
+              <select class="block w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={(e) => setDevStage(e.target.value)}>
+                <option value="Ideation">Ideation</option>
+                <option value="Development">Development</option>
+                <option value="Prototype">Prototype</option>
+                <option value="Commercialisable">Commercialisable</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+
+
+            <p className='text[#303972] font-bold'>Idea type</p>
+            <div class="relative inline-block">
+              <select class="block w-full appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={ideaType} onChange={(e) => setIdeaType(e.target.value)}>
+                <option value="Product">Product</option>
+                <option value="Service">Service</option>
+                <option value="Design">Design</option>
+                <option value="Process">Process</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+
 
             </div>
             <div className='flex-1 flex flex-col  p-2 gap-y-2 '>
@@ -248,13 +310,13 @@ const Ideabar = () => {
               </div>
                  
               <p className='text[#303972] font-bold'>Solution</p>
-              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => sete(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none" value={e} onChange={(e) => sete(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Target Market & Business Model</p>
-              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => setf(e.target.value)}/>
+              <textarea type="text" className="border h-36 border-gray-300 rounded w-full p-2 resize-none" value={f} onChange={(e) => setf(e.target.value)}/>
 
               <p className='text[#303972] font-bold'>Intellectual Property</p>
-              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none"onChange={(e) => setg(e.target.value)} placeholder='Information on any patents, trademarks, or copyrights related to the idea'/>
+              <textarea type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none"value={g} onChange={(e) => setg(e.target.value)} placeholder='Information on any patents, trademarks, or copyrights related to the idea'/>
               <p className='text[#303972] font-bold'>Team Details</p>
               <div className='flex flex-row'>
                  <input 
