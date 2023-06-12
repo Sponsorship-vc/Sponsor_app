@@ -4,8 +4,10 @@ import { MdEmail } from 'react-icons/md';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { userData } from '../../../../data/Userdata';
-import { db  } from "../../../../firebase/config";
-import { doc ,updateDoc } from "firebase/firestore";
+import { db , storage } from "../../../../firebase/config";
+import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
+import { doc ,updateDoc ,setDoc } from "firebase/firestore";
+import { IoPersonCircleOutline } from 'react-icons/io5';
 
 
 
@@ -14,6 +16,7 @@ function EditProfilecard() {
 
     const [userList, setuserList] = useState([]);
     const [name, setName] = useState("");
+    const [iname, setIname] = useState("");
     const [city, setCity] = useState("");
     const [phno, setPhno] = useState("");
     const [email, setEmail] = useState("");
@@ -25,6 +28,8 @@ function EditProfilecard() {
     const [pin, setPin] = useState("");
     const [bio, setBio] = useState("");
     const [Id, setId] = useState("");
+    const [web, setWeb] = useState("");
+    const [selectedPicture, setSelectedPicture] = useState("");
 
 
       useEffect(() => {
@@ -33,6 +38,7 @@ function EditProfilecard() {
             setuserList(value)
             // console.log(value);
             setName(value[0].name ? value[0].name : "");
+            setIname(value[0].iname ? value[0].iname : "");
             setCity(value[0].City ? value[0].City : "");
             setPhno(value[0].Phoneno ? value[0].Phoneno : "");
             setEmail(value[0].email ? value[0].email : "");
@@ -43,7 +49,9 @@ function EditProfilecard() {
             setAdd4(value[0].add4 ? value[0].add4 : "");
             setPin(value[0].pin ? value[0].pin : "");
             setBio(value[0].bio ? value[0].bio : "");
+            setWeb(value[0].website ? value[0].website : "");
             setId(value[0].id);
+            setSelectedPicture(value[0].photoURL? value[0].photoURL : "");
           },
           (reason) => {
             console.error(reason); // Error!
@@ -51,12 +59,44 @@ function EditProfilecard() {
         );
       }, []);
 
+      const handlePictureUpload = async (event) => {
+        const imageFile = event.target.files[0];
+      
+        try {
+          // Create a reference to the image in Firebase Storage
+          const imageRef = ref(storage, `${userList[0].userId}/${imageFile.name}`);
+          const imgLocRef = ref(storage, `UserImages/${userList[0].userId}/${imageFile.name}`);
+      
+          // Upload the image to Firebase Storage
+          await uploadBytes(imgLocRef, imageFile);
+      
+          // Get the URL of the uploaded image
+          const imageUrl = await getDownloadURL(imgLocRef);
+          console.log("pfp success");
+      
+          // Save the URL of the image in the Firestore document
+          await setDoc(doc(db, "users", userList[0].id), {
+            photoURL: imageUrl
+          }, { merge: true });
+      
+          setSelectedPicture(URL.createObjectURL(imageFile));
+        } catch (error) {
+          console.error("Error uploading picture:", error);
+        }
+      };
+  
+    const handleClick = () => {
+      // Trigger the file input when the profile picture is clicked
+      document.getElementById('profile-picture-input');
+    };
+
 
       const updateUser = async (id) => {
         const userDoc = doc(db, "users", Id);
         console.log(phno,"this")
         await updateDoc(userDoc, { 
             City: city,
+            iname: iname,
             Phoneno: phno,
             email:email,
             dob:dob,
@@ -64,6 +104,7 @@ function EditProfilecard() {
             add2:add2,
             add3:add3,
             add4:add4,
+            website:web,
             pin:pin,
             bio:bio,
         });
@@ -71,34 +112,29 @@ function EditProfilecard() {
 
 
   return (
-    <div className='flex  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
+    <div className='flex  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 mb-5'>
       <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
-        <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
-          {/* <label htmlFor='profile-picture-input'>
-            {user.pfp ? (
-              <img
-                src={user.pfp}
-                className='m-auto h-[6rem] w-[6rem] rounded-full bg-white cursor-pointer'
-                alt='Profile Picture'
-                onClick={handleClick}
-              />
-            ) : (
-              <img
-                src={pfp}
-                className='m-auto h-[7.5rem] w-[7.5rem] rounded-full bg-white cursor-pointer z-[15]'
-                alt='Profile Picture'
-                onClick={handleClick}
-              />
-            )}
-          </label> */}
-          {/* <input
-            type='file'
-            accept='image/*'
-            id='profile-picture-input'
-            onChange={handlePictureUpload}
-            className='hidden'
-          /> */}
-        </div>
+      <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
+      <label htmlFor='profile-picture-input'>
+        { selectedPicture ? (
+          <img
+            src={selectedPicture}
+            className='m-auto h-[7.2rem] w-[7.2rem] rounded-full bg-white cursor-pointer'
+            alt='Profile Picture'
+            onClick={handleClick}
+          />
+        ) : (
+          <IoPersonCircleOutline className='m-auto h-[8rem] w-[8rem] rounded-full bg-white cursor-pointer' fill='#303972'/>
+        )}
+      </label>
+      <input
+        type='file'
+        accept='image/*'
+        id='profile-picture-input'
+        onChange={handlePictureUpload}
+        className='hidden'
+      />
+    </div>
         <div className='mb-0 flex relative'>
           <div className='w-[10rem] h-[5rem] rounded-b-full bg-[#FCC43E] transform rotate-180 !top-4 left-10 absolute z-10'></div>
           <div className='w-[8rem] h-[4rem] rounded-b-full bg-[#FB7D5B] transform rotate-180  !top-8   absolute z-0'></div>
@@ -116,19 +152,6 @@ function EditProfilecard() {
         <div className='grid grid-cols-4 gap-20'>
 
           <div className='col-start-1 col-end-2'>
-            <label className='text-[#A098AE]'>Owner</label>
-            
-            <div className='flex flex-row gap-4 mt-3'>
-              <CgProfile className='flex my-auto' fill='FB7D5B' />
-              <input type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" 
-              placeholder='Enter owner Name'
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              />
-
-            </div>
-          </div>
-          <div className='col-start-2 col-end-3'>
             <label className='text-[#A098AE]'>Phone </label>
             <div className='flex flex-row gap-4 mt-3'>
               <BsFillTelephoneFill className='flex my-auto' fill='#FB7D5B' />              
@@ -139,7 +162,7 @@ function EditProfilecard() {
 
             </div>
           </div>
-          <div className='col-start-3 col-end-4'>
+          <div className='col-start-2 col-end-3'>
             <label className='text-[#A098AE]'>Email</label>
             <div className='flex flex-row gap-4 mt-3'>
               <MdEmail className='flex my-auto' fill='#FB7D5B ' size={20} />
@@ -150,14 +173,14 @@ function EditProfilecard() {
 
             </div>
           </div>
-          <div className='col-start-4 col-end-5'>
+          <div className='col-start-3 col-end-4'>
             <label className='text-[#A098AE]'>Website</label>
             <div className='flex flex-row gap-4 mt-3'>
               <MdEmail className='flex my-auto' fill='#FB7D5B ' size={20} />
               <input type="text" className="border h-12 border-gray-300 rounded w-full p-2" 
               placeholder='Enter Website url'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}/>
+              value={web}
+              onChange={(e) => setWeb(e.target.value)}/>
 
             </div>
           </div>
@@ -174,7 +197,7 @@ function EditProfilecard() {
               <GrLocation className='flex my-auto' fill='FB7D5B' />
               <input type="text" className="border h-12 border-gray-300 rounded w-full p-2 resize-none" 
               placeholder='Enter Industry Name'
-              value={city}
+              value={iname}
               onChange={(e) => setCity(e.target.value)}
               />
 
@@ -198,11 +221,11 @@ function EditProfilecard() {
           <div className='col-start-3 col-span-2'>
             <label className='text-[#A098AE]'>Office Address</label>
             <div className='flex flex-row gap-4 mt-3'>
-              <MdEmail className='flex my-auto' fill='#FB7D5B ' size={20} />
+            <GrLocation className='flex my-auto' fill='FB7D5B' />
               <input type="text" className="border h-12 border-gray-300 rounded w-full p-2" 
               placeholder='Enter Address'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}/>
+              value={add1}
+              onChange={(e) => setAdd1(e.target.value)}/>
 
             </div>
           </div>
@@ -214,53 +237,15 @@ function EditProfilecard() {
           <div className='grid grid-cols-4 gap-10'>
                
           <label className='text-[#A098AE]'>Company Description</label>
-
-                <div className='col-start-1 col-end-5'>
-                    
+                <div className='col-start-1 col-end-5'> 
                     <input type="text" className="border  h-24 w-full border-gray-300 rounded  p-2" 
-                    value={add1}
-                    onChange={(e) => setAdd1(e.target.value)}/>
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}/>
                 </div>
-              
-            
-
-
             </div>
           </div>
         </div>
         <hr className='bg-black w-full mt-5'></hr>
-          {/* <div className='flex flex-col ml-5 gap-y-10 mt-5 '>
-            <div>
-              <label className='text-[#A098AE]'>Bio</label>
-              <div className='flex flex-row gap-4 mt-3 pr-4'>
-              <textarea type="text" className="border h-28 border-gray-300 rounded w-full p-2 resize-none"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)} />
-
-              </div>
-              <hr className='bg-black w-full mt-5'></hr>
-            </div>
-            <div className='flex flex-row gap-[30rem] mb-5'>
-              <div className='flex flex-col'>
-                <label className='text-[#A098AE]'>Resume</label>
-                <div className='flex flex-row gap-4 mt-3 relative'>
-                  <input
-                    type='file'
-                    class='opacity-0 absolute inset-0 z-0 h-15 w-[15rem]'
-                  />
-                  <div class='h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center'>
-                    <span class='text-gray-400'>Click to Upload</span>
-                  </div>
-                </div>
-              </div>
-              <div className='flex flex-col'>
-                <label className='text-[#A098AE]'>Interest</label>
-                <div className='flex flex-row gap-4 mt-3'>
-                  <p className='font-semibold text-dark-blue'>Use tagify</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
       </div>
    
   )

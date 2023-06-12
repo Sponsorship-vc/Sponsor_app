@@ -7,8 +7,8 @@ import { db ,storage} from '../../../../firebase/config';
 import edit from '../../../../Assets/Dashboard/Icons/edit.svg'
 import { userData } from '../../../../data/Userdata';
 import { Link } from 'react-router-dom';
-import { ref, uploadBytes } from "firebase/storage";
-import { doc ,updateDoc } from "firebase/firestore";
+import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
+import { doc ,updateDoc,setDoc } from "firebase/firestore";
 
 function Profilecard() {
   
@@ -29,7 +29,7 @@ function Profilecard() {
   const [fileUploaded, setFileUploaded] = useState(false);
   const [fileName, setFileNames] = useState('');
   const [fileUpload, setFileUpload] = useState(null);
-  const [selectedPicture, setSelectedPicture] = useState(null);
+  const [selectedPicture, setSelectedPicture] = useState("");
 
 
 
@@ -51,17 +51,38 @@ function Profilecard() {
           setBio(value[0].bio ? value[0].bio : "");
           setInterest(value[0].interest ? value[0].interest : "");
           setId(value[0].id);
+          setSelectedPicture(value[0].photoURL? value[0].photoURL : "")
         },
         (reason) => {
           console.error(reason); // Error!
         }
       );
     }, []);
-
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedPicture(URL.createObjectURL(file));
-  };
+    const handlePictureUpload = async (event) => {
+      const imageFile = event.target.files[0];
+    
+      try {
+        // Create a reference to the image in Firebase Storage
+        const imageRef = ref(storage, `${userList[0].userId}/${imageFile.name}`);
+        const imgLocRef = ref(storage, `UserImages/${userList[0].userId}/${imageFile.name}`);
+    
+        // Upload the image to Firebase Storage
+        await uploadBytes(imgLocRef, imageFile);
+    
+        // Get the URL of the uploaded image
+        const imageUrl = await getDownloadURL(imgLocRef);
+        console.log("pfp success");
+    
+        // Save the URL of the image in the Firestore document
+        await setDoc(doc(db, "users", userList[0].id), {
+          photoURL: imageUrl
+        }, { merge: true });
+    
+        setSelectedPicture(URL.createObjectURL(imageFile));
+      } catch (error) {
+        console.error("Error uploading picture:", error);
+      }
+    };
 
   const handleClick = () => {
     // Trigger the file input when the profile picture is clicked

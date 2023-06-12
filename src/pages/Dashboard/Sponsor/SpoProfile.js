@@ -4,7 +4,7 @@ import Profilecard from '../../../components/Dashboard/Sponsor/profile/Profileca
 
 function SpoProfile() {
   return (
-    <div className='overflow-x-hidden  flex flex-col relative bg-[#F3F4FF]'>
+    <div className='overflow-x-hidden  min-h-screen relative bg-[#F3F4FF]'>
       <Header />
         <Profilecard />
         

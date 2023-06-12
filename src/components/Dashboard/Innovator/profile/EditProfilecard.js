@@ -3,10 +3,12 @@ import { GrLocation } from 'react-icons/gr';
 import { MdEmail } from 'react-icons/md';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { userData } from '../../../../data/Userdata';
-import { db  } from "../../../../firebase/config";
+import { db ,storage } from "../../../../firebase/config";
 import tick from '../../../../Assets/Dashboard/Icons/tick.png'
-import { doc ,updateDoc } from "firebase/firestore";
+import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
+import { doc ,updateDoc,setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
+import { IoPersonCircleOutline } from 'react-icons/io5';
 
 
 
@@ -28,7 +30,8 @@ function EditProfilecard() {
     const [Id, setId] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [category, setCategory] = useState("");
-    const [d, setd] = useState("");    
+    const [d, setd] = useState("");
+    const [selectedPicture,setSelectedPicture] = useState('')    
     const navigate = useNavigate()
     
 
@@ -53,6 +56,7 @@ function EditProfilecard() {
             setBio(value[0].bio ? value[0].bio : "");
             setd(value[0].interest ? value[0].interest : "");
             setId(value[0].id);
+            setSelectedPicture(value[0].photoURL? value[0].photoURL : "")
           },
           (reason) => {
             console.error(reason); // Error!
@@ -91,7 +95,7 @@ function EditProfilecard() {
           setSuggestions([]);
         }
       };
-
+      console.log(selectedPicture)
       const updateSuggestions = (value) => {
         // Implement your logic to fetch suggestions based on the input value
         // For example, you can filter a list of valid words or make an API call to retrieve suggestions
@@ -111,6 +115,32 @@ function EditProfilecard() {
         }
     }; 
 
+    const handlePictureUpload = async (event) => {
+      const imageFile = event.target.files[0];
+    
+      try {
+        // Create a reference to the image in Firebase Storage
+        const imageRef = ref(storage, `${userList[0].userId}/${imageFile.name}`);
+        const imgLocRef = ref(storage, `UserImages/${userList[0].userId}/${imageFile.name}`);
+    
+        // Upload the image to Firebase Storage
+        await uploadBytes(imgLocRef, imageFile);
+    
+        // Get the URL of the uploaded image
+        const imageUrl = await getDownloadURL(imgLocRef);
+        console.log("pfp success");
+    
+        // Save the URL of the image in the Firestore document
+        await setDoc(doc(db, "users", userList[0].id), {
+          photoURL: imageUrl
+        }, { merge: true });
+    
+        setSelectedPicture(URL.createObjectURL(imageFile));
+      } catch (error) {
+        console.error("Error uploading picture:", error);
+      }
+    };
+
     const handleSuggestionClick = (suggestion) => {
       setCategory(suggestion);
       setSuggestions([]);
@@ -124,34 +154,29 @@ function EditProfilecard() {
 
 
   return (
-    <div className='flex  max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5 '>
-      <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
-        <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
-          {/* <label htmlFor='profile-picture-input'>
-            {user.pfp ? (
-              <img
-                src={user.pfp}
-                className='m-auto h-[6rem] w-[6rem] rounded-full bg-white cursor-pointer'
-                alt='Profile Picture'
-                onClick={handleClick}
-              />
-            ) : (
-              <img
-                src={pfp}
-                className='m-auto h-[7.5rem] w-[7.5rem] rounded-full bg-white cursor-pointer z-[15]'
-                alt='Profile Picture'
-                onClick={handleClick}
-              />
-            )}
-          </label> */}
-          {/* <input
-            type='file'
-            accept='image/*'
-            id='profile-picture-input'
-            onChange={handlePictureUpload}
-            className='hidden'
-          /> */}
-        </div>
+    <div className='flex max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5'>
+    <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
+      <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
+        <label htmlFor='profile-picture-input'>
+          { selectedPicture ? (
+            <img
+              src={selectedPicture}
+              className='m-auto h-[7.2rem] w-[7.2rem] rounded-full bg-white cursor-pointer'
+              alt='Profile Picture'
+              onClick={handlePictureUpload}
+            />
+          ) : (
+            <IoPersonCircleOutline className='m-auto h-[8rem] w-[8rem] rounded-full bg-white cursor-pointer' fill='#303972'/>
+          )}
+        </label>
+        <input
+          type='file'
+          accept='image/*'
+          id='profile-picture-input'
+          onChange={handlePictureUpload}
+          className='hidden'
+        />
+      </div>
         <div className='mb-0 flex relative'>
           <div className='w-[10rem] h-[5rem] rounded-b-full bg-[#FCC43E] transform rotate-180 !top-4 left-10 absolute z-10'></div>
           <div className='w-[8rem] h-[4rem] rounded-b-full bg-[#FB7D5B] transform rotate-180  !top-8   absolute z-0'></div>

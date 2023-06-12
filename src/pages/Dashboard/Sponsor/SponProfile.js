@@ -4,7 +4,7 @@ import EditProfilecard from '../../../components/Dashboard/Sponsor/profile/EditP
 
 function SponProfile() {
   return (
-    <div>
+    <div className='overflow-x-hidden  flex flex-col relative bg-[#F3F4FF]'>
         <Header/>
         <EditProfilecard />
     </div>

@@ -60,8 +60,8 @@ const Help = ({ question, answer }) => {
 
   return (
     <div className='ml-64 bg-'>
-      <div className='mx-60'>
-    <div className=" rounded-lg mb-4">
+      <div className='mx-[18%]'>
+    <div className=" rounded-lg pb-4">
       
       <button
         className="w-full p-4  rounded-2xl bg-white text-left focus:outline-none"
