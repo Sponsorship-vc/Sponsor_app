@@ -2,7 +2,8 @@ import {
     getDocs,
     collection,
     getFirestore,
-    onSnapshot
+    onSnapshot,
+    orderBy,query,
   } from "firebase/firestore";
   import { app ,auth } from '../firebase/config';
 
@@ -10,19 +11,20 @@ import {
 
 const db = getFirestore(app);
 const ideaCollectionRef = collection(db, "Ideas");
+const orderedDataRef = query(ideaCollectionRef,orderBy("date", "desc"));
 const usersCollectionRef = collection(db, "users");
 
 
-const getideaList = () => {
+const getideaList = async () => {
   try {
     return new Promise((resolve, reject) => {
       const unsubscribe = onSnapshot(ideaCollectionRef, (snapshot) => {
-        const filteredData = snapshot.docs
+        const filteredData =  snapshot.docs
           .map((doc) => ({
             ...doc.data(),
             id: doc.id,
           }))
-          .filter((doc) => doc.userId === auth.currentUser.uid);
+          .filter((doc) => doc.userId === auth.currentUser?.uid);
         resolve(filteredData);
       }, (error) => {
         console.error(error);
@@ -42,10 +44,10 @@ const getideaList = () => {
   const getuserList = async () => {
     try {
       const data = await getDocs(usersCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
+      const filteredData = await data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-      })).filter((doc) => doc.userId === auth.currentUser.uid);
+      })).filter((doc) => doc.userId === auth.currentUser?.uid);
       return(filteredData);
       // console.log(userList)
     } catch (err) {
@@ -56,7 +58,7 @@ const getideaList = () => {
   const getideasList = () => {
     try {
       return new Promise((resolve, reject) => {
-        const unsubscribe = onSnapshot(ideaCollectionRef, (snapshot) => {
+        const unsubscribe = onSnapshot(orderedDataRef, (snapshot) => {
           const filteredData = snapshot.docs
             .map((doc) => ({
               ...doc.data(),

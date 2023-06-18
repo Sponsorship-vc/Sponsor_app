@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Sidebar from '../Roleselector/Sidebar';
 import googleImg from '../../Assets/Signup/Google Login.png';
 import { auth, db } from '../../firebase/config';
@@ -46,6 +46,15 @@ function Innlogin() {
   // {
   //   navigate("/dashboard/innovator")
   // }
+  useEffect(() => {; // Replace with your authentication check function
+
+    if (auth.currentUser) {
+     // window.location.href = 'http://localhost:3000/dashboard/innovator/profile';
+     navigate("/dashboard/innovator/profile")
+     window.location.reload()
+    }
+  }, [auth.currentUser]);
+  console.log(auth.currentUser)
 
     
   return (
