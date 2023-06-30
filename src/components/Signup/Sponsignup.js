@@ -65,6 +65,7 @@ function Sponsignup() {
         });
         getuserList();
         navigate('/sponsor/verify')
+        window.location.reload()
       } catch (err) {
         console.error(err);
       }
@@ -91,6 +92,7 @@ function Sponsignup() {
           uploadFile();
           setError(null);
           setName(user.displayName);
+
           // console.log(user.displayName)
         })
         .catch(function(error) {
@@ -109,7 +111,7 @@ function Sponsignup() {
           <p className='font-abc text-4xl text-center font-semibold py-10'> Register your account as a Sponsor </p>
           <div className='flex flex-col gap-2'>
             <input  placeholder='Your name' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'  onChange={(e) => setName(e.target.value)}/>
-            <input  placeholder='Your company mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'onChange={(e) => setEmail(e.target.value)}/>
+            <input  placeholder='Your company mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2x' type='email'    onChange={(e) => setEmail(e.target.value)}/>
             <input  placeholder='Create Password' type='password' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'onChange={(e) => setPassword(e.target.value)}/>
             <label className="w-full mb-6 px-4 py-2 border focus:outline-none rounded-2xl">
               <div id="iconDiv" className="flex flex-col gap-2 py-4">

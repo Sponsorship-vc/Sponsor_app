@@ -75,7 +75,7 @@ function MyIdeabar() {
                       </Link>
 
                     </td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'> {post.draft ? "submit":"draft"}</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800'> {post.draft ? "submitted":"draft"}</p></td>
                     <td>
                       <Popover placement="left">
                         <PopoverHandler>

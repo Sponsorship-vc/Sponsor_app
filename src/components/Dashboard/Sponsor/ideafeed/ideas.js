@@ -122,7 +122,7 @@ function Ideas() {
                 containerClassName={'pagination flex justify-end align-center  gap-7  mr-2'}
                 activeClassName={'active bg-blue-800 rounded-full text-white '}
                 pageClassName={'inline-block '}
-                pageLinkClassName={'px-3  rounded-full '}
+                pageLinkClassName={'!p-3  rounded-full '}
                 previousLabel={<MdArrowLeft size={30}/>}
                 nextLabel={<MdArrowRight size={30}/>}
                 

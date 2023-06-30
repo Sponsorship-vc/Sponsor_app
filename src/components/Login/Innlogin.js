@@ -57,7 +57,7 @@ function Innlogin() {
         <div className='flex flex-col'>
             <p className='font-abc text-4xl text-center font-semibold py-10'> Login to your Innovator account </p>
             <div className='flex flex-col gap-2 items-center justify-center'>
-                <input  placeholder='Enter your mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'  onChange={(e) => setEmail(e.target.value)}/>
+                <input  placeholder='Enter your mail' type='email' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'  onChange={(e) => setEmail(e.target.value)}/>
                 <input  placeholder='Enter your Password' type='password' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl'  onChange={(e) => setPassword(e.target.value)}/>
                 <p className='text-xs text-gray-500 r'>By signing up, you confirm that you’ve read <br/>and accepted our <a className='text-blue-500 cursor-pointer'  href="https://www.example.com/user-notice">User Notice</a> and <a className='text-blue-500 cursor-pointer' href="https://www.example.com/privacy-policy">Privacy Policy</a>.</p>
                 <button className=' w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleLoginClick}>Login</button>

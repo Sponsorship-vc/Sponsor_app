@@ -14,6 +14,7 @@ const usersCollectionRef = collection(db, "users");
 
 
 const getideaList = () => {
+  if(auth.currentUser){
   try {
     return new Promise((resolve, reject) => {
       const unsubscribe = onSnapshot(ideaCollectionRef, (snapshot) => {
@@ -36,22 +37,27 @@ const getideaList = () => {
     console.error(err);
     return Promise.reject(err);
   }
+  }
 };
 
 
-  const getuserList = async () => {
+const getUserList = async () => {
+  if (auth.currentUser) {
     try {
       const data = await getDocs(usersCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      })).filter((doc) => doc.userId === auth.currentUser.uid);
-      return(filteredData);
-      // console.log(userList)
+      const filteredData = data.docs
+        .map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+        .filter((doc) => doc.userId === auth.currentUser.uid);
+      return filteredData;
     } catch (err) {
       console.error(err);
     }
-  };
+  }
+};
+
 
   const getideasList = () => {
     try {
@@ -81,5 +87,5 @@ const getideaList = () => {
 
   
   export const ideaData = getideaList();
-  export const userData = getuserList();
+  export const userData = getUserList();
   export const ideasData = getideasList();

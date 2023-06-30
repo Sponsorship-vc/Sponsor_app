@@ -77,7 +77,7 @@ function Header() {
         <div className="relative">
           <div
             className="h-12 w-12 rounded-full flex bg-white cursor-pointer"
-            onClick={()=>toggleDropdown}
+            onClick={toggleDropdown}
           >
             <FiUser className="m-auto" />
           </div>

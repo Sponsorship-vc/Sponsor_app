@@ -67,7 +67,7 @@ function Innsignup() {
         userId: auth.currentUser.uid,
       });
       getuserList();
-      navigate("/dashboard/innovator/profile")
+      navigate("/login/role/innovator")
     } catch (err) {
       console.error(err);
     }
@@ -95,8 +95,8 @@ function Innsignup() {
           <div className='flex flex-col'>
           <p className='font-abc text-4xl text-center font-semibold py-10'> Register your account as a Innovator </p>
           <div className='flex flex-col gap-2'>
-            <input  placeholder='Your name' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' onChange={(e) => setName(e.target.value)} />
-            <input  placeholder='Your company mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' onChange={(e) => setEmail(e.target.value)} />
+            <input  placeholder='Your name' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' type='text' onChange={(e) => setName(e.target.value)} />
+            <input  placeholder='Your company mail' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' type='email' onChange={(e) => setEmail(e.target.value)} />
             <input  placeholder='Create Password' type='password' className='w-full mb-6 px-4 py-2 border  focus:outline-none rounded-2xl' onChange={(e) => setPassword(e.target.value)} />
             <p className='text-gray-400 text-center w-3/4 flex mx-auto'>By signing up, you confirm that you’ve read and accepted our User Notice and Privacy Policy.</p>
             <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleRegister}>Register</button>
