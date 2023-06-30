@@ -29,7 +29,7 @@ function Sponlogin() {
       let isRoleFound = false;
       userList.forEach((user) => {
         if (!isRoleFound && user.role === "sponsor" && user.verify===true) {
-          navigate("/dashboard/sponsor")
+          navigate("/dashboard/sponsor/profile")
           isRoleFound = true;
           
         }

@@ -26,7 +26,7 @@ function Sponsignup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
   
     function handleFileSelect(event) {
@@ -63,26 +63,13 @@ function Sponsignup() {
           userId: auth.currentUser.uid,
           verify:false,
         });
-        getuserList();
         navigate('/sponsor/verify')
-        window.location.reload()
       } catch (err) {
         console.error(err);
       }
     };
 
-    const getuserList = async () => {
-      try {
-        const data = await getDocs(usersCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setuserList(filteredData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  
 
     const handleRegister=()=>{
       createUserWithEmailAndPassword(auth,email, password)
