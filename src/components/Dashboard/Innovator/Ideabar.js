@@ -5,6 +5,7 @@ import {  storage , db , auth } from "../../../firebase/config";
 import {
   collection,
   addDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import '../../../index.css';
 import {userData} from '../../../data/Userdata'
@@ -20,9 +21,9 @@ const Ideabar = () => {
     const [fileUploaded, setFileUploaded] = useState(false);
     const [fileUpload, setFileUpload] = useState(null);
     const ideaCollectionRef = collection(db, "Ideas");
-    const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
+    // const today = serverTimestamp();
+    // const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    // const formattedDate = today.toLocaleDateString('en-US', options);
     const navigate = useNavigate()
     const [a, seta] = useState("");
     const [b, setb] = useState("");
@@ -186,7 +187,7 @@ const Ideabar = () => {
         teamDetails:tags,
         filepath:`Idea/${id}/${a}/${fileName}`,
         userId:auth.currentUser.uid,
-        date:formattedDate,
+        date: serverTimestamp(),
         draft:draft,
         name: userList[0].name,
         photoURL: userList[0].photoURL || '',
