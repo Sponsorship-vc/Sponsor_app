@@ -14,7 +14,6 @@ const usersCollectionRef = collection(db, "users");
 
 
 const getideaList = () => {
-  if(auth.currentUser){
   try {
     return new Promise((resolve, reject) => {
       const unsubscribe = onSnapshot(ideaCollectionRef, (snapshot) => {
@@ -37,12 +36,10 @@ const getideaList = () => {
     console.error(err);
     return Promise.reject(err);
   }
-  }
 };
 
 
 const getUserList = async () => {
-  if (auth.currentUser) {
     try {
       const data = await getDocs(usersCollectionRef);
       const filteredData = data.docs
@@ -56,7 +53,6 @@ const getUserList = async () => {
       console.error(err);
     }
   }
-};
 
 
   const getideasList = () => {
