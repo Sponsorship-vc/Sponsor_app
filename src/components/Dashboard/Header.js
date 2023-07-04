@@ -1,10 +1,11 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState,useEffect, useContext} from 'react';
 import { FaBell } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { userData } from '../../data/Userdata';
 import { auth } from '../../firebase/config';
 import { signOut } from 'firebase/auth';
+import { AuthContext } from '../../context/AuthContext';
 
 function Header() {
   const location = useLocation();
@@ -13,8 +14,10 @@ function Header() {
   const capitalizedMessage = message.charAt(0).toUpperCase() + message.slice(1);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
+  const navigate = useNavigate()
   const [userList, setuserList] = useState([]);
+  const authContext = useContext(AuthContext);
+  const { currentUser } = authContext;
 
   useEffect(()=>{
     userData.then(
@@ -33,14 +36,15 @@ function Header() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const handleSignOut = () => {
+  const handleSignOutFunc = () => {
     signOut(auth).then(() => {
-      console.log('signout succesfull')
-      window.location.reload()
+      console.log('signout')
     }).catch((error) => {
       // An error happened.
     });
+    
   };
+
 
   const handleDeleteAccount = () => {
     setShowConfirmation(true);
@@ -87,7 +91,7 @@ function Header() {
               <div className="py-2">
                 <button
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                  onClick={handleSignOut}
+                  onClick={handleSignOutFunc}
                 >
                   Sign Out
                 </button>
