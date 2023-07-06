@@ -30,8 +30,10 @@ function Sponlogin() {
     if (user) {
       if (user.verify === true) {
         navigate('/dashboard/sponsor/profile');
+        window.location.reload()
       } else {
         navigate('/sponsor/verify');
+        window.location.reload()
       }
     }
     } catch (err) {
