@@ -21,19 +21,8 @@ import EditProfile from './pages/Dashboard/Innovator/EditProfile';
 import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed';
 import { userData } from './data/Userdata';
 import { AuthContext } from './context/AuthContext';
-
-function PrivateRoute({ children }) {
-  const Auth = useContext(AuthContext);
-  console.log('currentuser',Auth)
-
-  if (Auth.currentUser) {
-    return children;
-  }
-
-  return <Navigate to="/login/role" />;
-}
 import Notfound from './pages/Notfound/Notfound'
-import { AuthContext } from './context/AuthContext';
+
 
 function PrivateRoute({ children }) {
   const Auth = useContext(AuthContext);
@@ -99,22 +88,9 @@ function App() {
                 element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
               />
             </Route>
-          ) : (
-            <Route path="/dashboard/sponsor/profile" element={<Verification />} />
-          )} 
-
-         <Route path="/dashboard/sponsor" element={<Sidebarsp />}>
-              <Route path="/dashboard/sponsor/profile" element={<SponProfile />} />
-              <Route path="/dashboard/sponsor/profile/edit" element={<EditSProfile />} />
-              <Route path="/dashboard/sponsor/ideafeed" element={<Ideafeed />} />
-              <Route path="/dashboard/sponsor/chat" element={<ChatWindow />} />
-              <Route path="/dashboard/sponsor/help" element={<Help />} />
-              <Route
-                path="/dashboard/sponsor/ideafeed/viewidea/:id"
-                element={<ViewIdea />}
-              />
-            </Route>
-          
+          ) : (userList && userList.role ==='sponsor' &&
+            <Route path="/dashboard/sponsor/profile" element={<Verification />} /> 
+          )}
         </Routes>
       </BrowserRouter>
     </div>

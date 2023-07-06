@@ -19,14 +19,14 @@ function Roleselector() {
           </div>
           <div className='flex w-full justify-center gap-20 px-10 flex-row mx-auto '>
             <Link to='innovator'>
-            <div className=''>
+            <div >
                     <Card
                      img={grp2}
                      title="Innovator" 
                      button="Continue as Innovator" />
             </div></Link>
             <Link to='sponsor'>
-            <div className=''>
+            <div>
                     <Card
                      img={grp1} 
                      title="Sponsor"
