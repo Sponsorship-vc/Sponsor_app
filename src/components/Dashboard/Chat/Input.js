@@ -10,7 +10,7 @@ import { userData } from "../../../data/Userdata";
 
 const Input = () => {
   const [text, setText] = useState("");
-  const [img, setImg] = useState(null);
+  // const [img, setImg] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -28,31 +28,32 @@ const Input = () => {
     },[])
 
   const handleSend = async () => {
-    if (img) {
-      const storageRef = ref(storage, uuid());
-      const uploadTask = uploadBytesResumable(storageRef, img);
+    // if (img) {
+    //   const storageRef = ref(storage, uuid());
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        "state_changed",
-        null,
-        (error) => {
-          // Handle error
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await addDoc(collection(db, "chats", data.chatId, "messages"), {
-              id: uuid(),
-              text,
-              senderId: currentUser.uid,
-              recieverId: data.user.userId,
-              date: serverTimestamp(),
-              img: downloadURL,
-            });
-          });
-        }
-      );
-    } else {
+    //   uploadTask.on(
+    //     "state_changed",
+    //     null,
+    //     (error) => {
+    //       // Handle error
+    //       console.log(error);
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await addDoc(collection(db, "chats", data.chatId, "messages"), {
+    //           id: uuid(),
+    //           text,
+    //           senderId: currentUser.uid,
+    //           recieverId: data.user.userId,
+    //           date: serverTimestamp(),
+    //           img: downloadURL,
+    //         });
+    //       });
+    //     }
+    //   );
+    // } 
+    if (text) { 
       await addDoc(collection(db, "chats", data.chatId, "messages"), {
         id: uuid(),
         text,
@@ -96,7 +97,7 @@ const Input = () => {
       event.preventDefault();
       handleSend();
       setText("");
-      setImg(null);
+      // setImg(null);
     }
   };
 
@@ -112,15 +113,15 @@ const Input = () => {
           className="w-full border-none outline-none text-md"
         />
         <div className="flex flex-row items-center gap-5">
-          <input
+          {/* <input
             type="file"
             style={{ display: "none" }}
             id="file"
             onChange={(e) => setImg(e.target.files[0])}
-          />
-          <label htmlFor="file">
+          /> */}
+          {/* <label htmlFor="file">
             <ImAttachment fill="#A098AE" size={20} />
-          </label>
+          </label> */}
           <button
             onClick={handleSend}
             className="bg-[#4D44B5] text-white text-sm rounded-full w-[5rem] h-[2.5rem]"

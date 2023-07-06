@@ -20,6 +20,7 @@ import EditSProfile from './pages/Dashboard/Sponsor/SponProfile';
 import EditProfile from './pages/Dashboard/Innovator/EditProfile';
 import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed';
 import { userData } from './data/Userdata';
+import Notfound from './pages/Notfound/Notfound'
 
 function App() {
   const [userList, setuserList] = useState('');
@@ -46,6 +47,8 @@ function App() {
           <Route path="/login/role" element={<Roleselector />} />
           <Route path="/signup/role" element={<Roleselector />} />
           <Route path="/sponsor/verify" element={<Verification />} />
+          <Route exact path="*" element={<Notfound/>} />
+          
 
           <Route path="/dashboard/innovator" element={<Sidebarin />}>
             <Route path="/dashboard/innovator/profile" element={<InnProfile />} />
@@ -59,7 +62,7 @@ function App() {
             <Route path="/dashboard/innovator/myIdeas/:id" element={<ViewIdea />} />
           </Route>
 
-          {userList && userList.verify === true ? (
+          {/* {userList && userList.verify === false ? (
             <Route path="/dashboard/sponsor" element={<Sidebarsp />}>
               <Route path="/dashboard/sponsor/profile" element={<SponProfile />} />
               <Route path="/dashboard/sponsor/profile/edit" element={<EditSProfile />} />
@@ -73,7 +76,20 @@ function App() {
             </Route>
           ) : (
             <Route path="/dashboard/sponsor/profile" element={<Verification />} />
-          )}
+          )} */}
+
+         <Route path="/dashboard/sponsor" element={<Sidebarsp />}>
+              <Route path="/dashboard/sponsor/profile" element={<SponProfile />} />
+              <Route path="/dashboard/sponsor/profile/edit" element={<EditSProfile />} />
+              <Route path="/dashboard/sponsor/ideafeed" element={<Ideafeed />} />
+              <Route path="/dashboard/sponsor/chat" element={<ChatWindow />} />
+              <Route path="/dashboard/sponsor/help" element={<Help />} />
+              <Route
+                path="/dashboard/sponsor/ideafeed/viewidea/:id"
+                element={<ViewIdea />}
+              />
+            </Route>
+          
         </Routes>
       </BrowserRouter>
     </div>

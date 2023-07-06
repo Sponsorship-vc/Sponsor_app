@@ -104,7 +104,7 @@ const Search = () => {
           className="bg-transparent rounded-full outline-none !w-[95%] border border-gray-400 h-[2rem] text-sm pl-4"
         />
       </div>
-      {err && <span className="text-black">User not found!</span>}
+      {/* {err && <span className="text-black">User not found!</span>} */}
       {user && Object.keys(user).length !== 0 && (
         <div
           className="p-8 flex items-center gap-3 cursor-pointer text-black flex-row bg-gray-100 w-full h-1"
