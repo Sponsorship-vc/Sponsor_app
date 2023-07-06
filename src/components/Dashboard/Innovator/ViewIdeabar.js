@@ -7,14 +7,16 @@ import  Edit  from '../../../Assets/Dashboard/Icons/Vector.png'
 import { Link } from 'react-router-dom';
 import {BsChatLeftDots} from 'react-icons/bs'
 import {ChatContext} from '../../../context/ChatContext'
+import { userData } from '../../../data/Userdata';
 
-function ViewIdeabar({isSponsor}) {
+function ViewIdeabar() {
     const location = useLocation();
     const path = location.pathname
     const message = path.split('/').pop();
     const [post, setpost] = useState([]);
     const navigate = useNavigate()
     const { dispatch } = useContext(ChatContext);
+    const [userList,setuserList] = useState('')
 
 
     useEffect(() => {
@@ -36,6 +38,18 @@ function ViewIdeabar({isSponsor}) {
 
       }
 
+      useEffect(()=>{
+        userData.then(
+          (value) => {
+            setuserList(value[0]);
+          },
+          (reason) => {
+            console.error(reason);
+          }
+        );
+      },[])
+      
+
   return (
     <div className='ml-64 py-8'>
         {post.map((post) => (
@@ -44,7 +58,7 @@ function ViewIdeabar({isSponsor}) {
                     <div className='flex flex-row justify-between'> 
                         <p className='font-bold text-[#303972] text-3xl py-2'>{post.title}</p>
                         <div className='flex flex-row gap-8 justify-center items-center mr-5'>
-                            {isSponsor ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
+                            {userList.role ==="innovator" ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
                                 <img src={Edit} className="h-5"
                                 title="Edit"
                                 />
@@ -53,7 +67,7 @@ function ViewIdeabar({isSponsor}) {
                                 <button  onClick={() => handleChat(post)}>Chat</button>
                                 <BsChatLeftDots/>
                             </div>)}
-                            <img src={Dots} className="h-5"/>
+                            {/* <img src={Dots} className="h-5"/> */}
                         </div>
                     </div>
                     <div className='flex flex-row gap-1 justify-start items-start '>

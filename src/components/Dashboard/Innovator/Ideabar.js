@@ -42,6 +42,7 @@ const Ideabar = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [userList,setuserList] = useState([])
+    const [isPatented, setIsPatented] = useState(true);
 
     useEffect(()=>{
       userData.then(
@@ -104,6 +105,12 @@ const Ideabar = () => {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
     setTags(updatedTags);
+  };
+
+  const handleRadioChange = (event) => {
+    const patend = event.target.value === "true"
+    setIsPatented(patend)
+    // console.log(isPatented)
   };
 
   const handleChange = (event) => {
@@ -192,7 +199,8 @@ const Ideabar = () => {
         name: userList[0].name,
         photoURL: userList[0].photoURL || '',
         ideaType:ideaType,
-        devStage:devStage
+        devStage:devStage,
+        patended : isPatented,
       });
     uploadFile();
     navigate(`/dashboard/innovator/myideas`)
@@ -356,6 +364,39 @@ const Ideabar = () => {
                   </button>
                 </div>
               ))}
+              </div>
+              <div className='gap-2 flex flex-col'>
+                <p className="text[#303972] font-bold">
+                  Is your idea patented or protected by any intellectual property rights?
+                </p>
+                <div className='flex flex-row gap-5'>
+                <div >
+                <label htmlFor="yes">
+                    <input
+                      type="radio"
+                      id="yes"
+                      name="patented"
+                      value= "true"
+                      checked={isPatented === true}
+                      onChange={handleRadioChange}
+                    />
+                    Yes
+                  </label>
+                </div>
+                <div>
+                <label htmlFor="no">
+                    <input
+                      type="radio"
+                      id="no"
+                      name="patented"
+                      value="false"
+                      checked={isPatented === false}
+                      onChange={handleRadioChange}
+                    />
+                    No
+                  </label>
+                </div>
+                </div>
               </div>
             </div>
           </div>
