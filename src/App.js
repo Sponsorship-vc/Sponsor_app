@@ -77,20 +77,21 @@ function App() {
           </Route>
 
           {userList && userList.verify === true ? (
-            <Route path="/dashboard/sponsor" element={<Sidebarsp />}>
-              <Route path="/dashboard/sponsor/profile" element={<SponProfile />} />
-              <Route path="/dashboard/sponsor/profile/edit" element={<EditSProfile />} />
-              <Route path="/dashboard/sponsor/ideafeed" element={<Ideafeed />} />
-              <Route path="/dashboard/sponsor/chat" element={<ChatWindow />} />
-              <Route path="/dashboard/sponsor/help" element={<Help />} />
-              <Route
-                path="/dashboard/sponsor/ideafeed/viewidea/:id"
-                element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
-              />
-            </Route>
-          ) : (userList && userList.role ==='sponsor' &&
-            <Route path="/dashboard/sponsor/profile" element={<Verification />} /> 
-          )}
+          <Route path="/dashboard/sponsor" element={<PrivateRoute> <Sidebarsp /> </PrivateRoute>}>
+            <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>} />
+            <Route path="/dashboard/sponsor/profile/edit" element={<PrivateRoute> <EditSProfile /> </PrivateRoute>} />
+            <Route path="/dashboard/sponsor/ideafeed" element={<PrivateRoute> <Ideafeed /> </PrivateRoute>} />
+            <Route path="/dashboard/sponsor/chat" element={<PrivateRoute> <ChatWindow /> </PrivateRoute>} />
+            <Route path="/dashboard/sponsor/help" element={<PrivateRoute> <Help /> </PrivateRoute>} />
+            <Route
+              path="/dashboard/sponsor/ideafeed/viewidea/:id"
+              element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
+            />
+          </Route>
+        ) : (
+          userList && userList.role === 'sponsor' &&
+          <Route path="/dashboard/sponsor/profile" element={<Verification />} />
+        )}
         </Routes>
       </BrowserRouter>
     </div>
