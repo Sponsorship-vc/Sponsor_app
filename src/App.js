@@ -21,12 +21,19 @@ import EditProfile from './pages/Dashboard/Innovator/EditProfile';
 import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed';
 import { userData } from './data/Userdata';
 import { AuthContext } from './context/AuthContext';
-import Notfound from './pages/Notfound/Notfound'
+import Notfound from './pages/Notfound/Notfound';
 
+function LoadingSpinner() {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-gray-900"></div>
+    </div>
+  );
+}
 
 function PrivateRoute({ children }) {
   const Auth = useContext(AuthContext);
-  console.log('currentuser',Auth)
+  console.log('currentuser', Auth);
 
   if (Auth.currentUser) {
     return children;
@@ -36,24 +43,27 @@ function PrivateRoute({ children }) {
 }
 
 function App() {
-
-  const [userList, setuserList] = useState('');
+  const [userList, setuserList] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    userData.then(
-      (value) => {
+    userData
+      .then((value) => {
         setuserList(value[0]);
-        console.log(userList);
-      },
-      (reason) => {
+        setLoading(false);
+        console.log(value[0]);
+      })
+      .catch((reason) => {
         console.error(reason);
-      }
-    );
+      });
   }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login/role/:id" element={<Login />} />
@@ -61,7 +71,7 @@ function App() {
           <Route path="/login/role" element={<Roleselector />} />
           <Route path="/signup/role" element={<Roleselector />} />
           <Route path="/sponsor/verify" element={<Verification />} />
-          <Route exact path="*" element={<Notfound/>} />
+          {loading ? <Route exact path="*" element={<LoadingSpinner/>} /> : <Route exact path="*" element={<Notfound/>} />}
           
 
           <Route path="/dashboard/innovator" element={<PrivateRoute> <Sidebarin /> </PrivateRoute>}>
@@ -93,7 +103,6 @@ function App() {
           <Route path="/dashboard/sponsor/profile" element={<Verification />} />
         )}
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

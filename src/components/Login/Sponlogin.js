@@ -26,19 +26,14 @@ function Sponlogin() {
       setUserList(filteredData);
 
       // Update login state based on user role
-      let isRoleFound = false;
-      userList.forEach((user) => {
-        if (!isRoleFound && user.role === "sponsor" && user.verify===true) {
-          navigate("/dashboard/sponsor/profile")
-          isRoleFound = true;
-          
-        }
-        if (!isRoleFound && user.role === "sponsor" && user.verify=== false ) {
-            navigate("/sponsor/verify")
-            isRoleFound = true;
-            
-          }
-      });
+      const user = userList.find((user) => user.role === 'sponsor');
+    if (user) {
+      if (user.verify === true) {
+        navigate('/dashboard/sponsor/profile');
+      } else {
+        navigate('/sponsor/verify');
+      }
+    }
     } catch (err) {
       console.error(err);
       setError('Failed to login. Please try again.');

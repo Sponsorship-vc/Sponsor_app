@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from "./context/AuthContext";
 import { ChatContextProvider } from "./context/ChatContext";
 import { ThemeProvider } from "@material-tailwind/react";
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <ChatContextProvider>
       <React.StrictMode>
       <ThemeProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
       </React.StrictMode>
     </ChatContextProvider>
