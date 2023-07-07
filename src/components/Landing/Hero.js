@@ -1,6 +1,7 @@
 import React from 'react'
 import Heroimg from '../../Assets/Landing/heroimg.png'
 import Brands from '../../Assets/Landing/Brands.png'
+import {Link} from 'react-router-dom'
 function Hero() {
   return (
     <div>
@@ -14,9 +15,11 @@ function Hero() {
                         <h2 className="text-lg font-semibold text-gray-800">Innovation categories</h2>
                         <p className='text-gray-600 text-sm'>What kind of innovative ideas do you want to sponsor ?</p>
                     </div>
+                    <Link to='/login/role'>
                     <button className="bg-blue-950 text-white font-bold py-2 px-8 rounded text-sm">
                         Explore now
                     </button>
+                    </Link>
                 </div>
                 <p className='font-semibold mt-4'>Popular Search:  Electric Vehicles , Green Energy, Education </p>
                 </div>

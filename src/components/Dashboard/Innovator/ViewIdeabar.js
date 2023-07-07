@@ -170,7 +170,7 @@ function ViewIdeabar() {
                     <p className='font-bold text-[#303972] text-md pt-2'>Problem Statement</p>
                     {post.Problem ? (
                         <p className='font-normal text-sm text-gray-600 w-3/4'>{post.Problem}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>Some text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                     <p className='font-bold text-[#303972] text-md pt-2'>Related documents</p>
                     <p className='font-normal text-sm text-gray-600'>{post.filepath}</p>
                 </div>
@@ -179,25 +179,25 @@ function ViewIdeabar() {
                         <p className='font-bold text-[#303972] text-lg pt-4'>Solution</p>
                         {post.Solution ? (
                             <p className='font-normal text-sm text-gray-700'>{post.Solution}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                         <p className='font-bold text-[#303972] text-lg pt-4'>Funding Requirements</p>
                         {post.fundingRequirement ? (
                             <p className='font-normal text-sm text-gray-700'>{post.fundingRequirement}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                     </div>
                     <div className='flex flex-col gap-1 flex-1'>
                         <p className='font-bold text-[#303972] text-lg pt-4'>Target Market & Business Model</p>
                         {post.model ? (
                             <p className='font-normal text-sm text-gray-700'>{post.model}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                         <p className='font-bold text-[#303972] text-lg pt-4'>Intellectual Property</p>
                         {post.property ? (
                             <p className='font-normal text-sm text-gray-700'>{post.property}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                         <p className='font-bold text-[#303972] text-lg pt-4'>Team Details</p>
                         {post.teamDetails ? (
                         <p className='font-normal text-sm text-gray-700'>{post.teamDetails}</p>
-                        ) :<p className='font-normal text-sm text-gray-700'>SOme text here</p>}
+                        ) :<p className='font-normal text-sm text-gray-700'>No data</p>}
                     </div>
                 </div>
             </div>
