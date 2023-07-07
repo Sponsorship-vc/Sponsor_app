@@ -32,6 +32,7 @@ function Innlogin() {
       filteredData.forEach((user) => {
         if (!isRoleFound && user.role === "innovator") {
           navigate("/dashboard/innovator/profile")
+          window.location.reload()
           console.log("User role:", user.role);
           isRoleFound = true;
           
