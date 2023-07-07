@@ -81,7 +81,7 @@ function MyIdeabar() {
                     <th><p className='text-sm font-bold text-blue-800'>Title</p></th>
                     <th><p className='text-sm font-bold text-blue-800'>Id</p></th>
                     <th><p className='text-sm font-bold text-blue-800'>Date</p></th>
-                    <th><p className='text-sm font-bold text-blue-800'>Categtory</p></th>
+                    <th><p className='text-sm font-bold text-blue-800'>Patended</p></th>
                     <th><div></div></th>
                     <th><p className='text-sm font-bold text-blue-800'>Sponsorship action</p></th>
                     <th><p className='text-sm font-bold text-blue-800'>Action</p></th>    
@@ -144,7 +144,7 @@ function MyIdeabar() {
                         })()}
                       </p>
                     </td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.category}</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800 capitalize'>{post.patended ? 'yes' : 'no' }</p></td>
                     <td>
                     <Link to={`/dashboard/innovator/myideas/${post.id}`}>
                       <button 
