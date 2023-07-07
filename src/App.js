@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import {  Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../src/pages/Landing/Landing';
 import Roleselector from './pages/Roleselector/Roleselector';
 import Login from './pages/Login/Login';
@@ -107,21 +107,25 @@ function App() {
           </Route>
 
           {userList && userList.verify === true ? (
-          <Route path="/dashboard/sponsor" element={<PrivateRoute> <Sidebarsp /> </PrivateRoute>}>
-            <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>} />
-            <Route path="/dashboard/sponsor/profile/edit" element={<PrivateRoute> <EditSProfile /> </PrivateRoute>} />
-            <Route path="/dashboard/sponsor/ideafeed" element={<PrivateRoute> <Ideafeed /> </PrivateRoute>} />
-            <Route path="/dashboard/sponsor/chat" element={<PrivateRoute> <ChatWindow /> </PrivateRoute>} />
-            <Route path="/dashboard/sponsor/help" element={<PrivateRoute> <Help /> </PrivateRoute>} />
-            <Route
-              path="/dashboard/sponsor/ideafeed/viewidea/:id"
-              element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
-            />
-          </Route>
-        ) : (
-          userList && userList.role === 'sponsor' &&
-          <Route path="/dashboard/sponsor/profile" element={<Verification />} />
-        )}
+            <Route path="/dashboard/sponsor" element={<PrivateRoute> <Sidebarsp /> </PrivateRoute>}>
+              <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>} />
+              <Route path="/dashboard/sponsor/profile/edit" element={<PrivateRoute> <EditSProfile /> </PrivateRoute>} />
+              <Route path="/dashboard/sponsor/ideafeed" element={<PrivateRoute> <Ideafeed /> </PrivateRoute>} />
+              <Route path="/dashboard/sponsor/chat" element={<PrivateRoute> <ChatWindow /> </PrivateRoute>} />
+              <Route path="/dashboard/sponsor/help" element={<PrivateRoute> <Help /> </PrivateRoute>} />
+              <Route
+                path="/dashboard/sponsor/ideafeed/viewidea/:id"
+                element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
+              />
+            </Route>
+          ) : (
+            userList && userList.role === 'sponsor' ? (
+              <Route path="/dashboard/sponsor/profile" element={<Verification />} />
+            ) : (
+              <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>} />
+            )
+          )}
+
         </Routes>
     </div>
   );
