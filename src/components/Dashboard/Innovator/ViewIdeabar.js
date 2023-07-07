@@ -17,6 +17,7 @@ function ViewIdeabar() {
     const navigate = useNavigate()
     const { dispatch } = useContext(ChatContext);
     const [userList,setuserList] = useState('')
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -48,10 +49,69 @@ function ViewIdeabar() {
           }
         );
       },[])
+
+      useEffect(() => {
+        // Simulate loading delay
+        const timer = setTimeout(() => {
+          setLoading(false);
+        }, 2000);
+    
+        // Clean up timer on component unmount
+        return () => clearTimeout(timer);
+      }, []);
       
 
   return (
     <div className='ml-64 py-8'>
+    {loading ? (
+         <div className='mx-8 rounded-xl bg-white p-4'>
+         <div className='flex flex-col gap-2'>
+           <div className='flex flex-row justify-between'>
+             <div className='w-40 h-8 bg-gray-300'></div>
+             <div className='flex flex-row gap-8 justify-center items-center mr-5'>
+               <div className='w-10 h-10 bg-gray-300'></div>
+               <div className='w-10 h-10 bg-gray-300'></div>
+             </div>
+           </div>
+           <div className='flex flex-row gap-1 justify-start items-start'>
+             <div className='w-16 h-6 bg-gray-300'></div>
+             <div className='w-16 h-6 bg-gray-300'></div>
+             <div className='w-16 h-6 bg-gray-300'></div>
+           </div>
+           <div className='font-bold text-[#303972] text-md pt-2'>
+             Problem Statement
+           </div>
+           <div className='w-3/4 h-4 bg-gray-300'></div>
+           <div className='font-bold text-[#303972] text-md pt-2'>
+             Related documents
+           </div>
+           <div className='w-40 h-4 bg-gray-300'></div>
+         </div>
+         <div className='flex flex-col md:flex-row py-2 gap-4'>
+           <div className='flex flex-col gap-1 flex-1'>
+             <div className='font-bold text-[#303972] text-lg pt-4'>Solution</div>
+             <div className='w-full h-4 bg-gray-300'></div>
+             <div className='font-bold text-[#303972] text-lg pt-4'>
+               Funding Requirements
+             </div>
+             <div className='w-full h-4 bg-gray-300'></div>
+           </div>
+           <div className='flex flex-col gap-1 flex-1'>
+             <div className='font-bold text-[#303972] text-lg pt-4'>
+               Target Market & Business Model
+             </div>
+             <div className='w-full h-4 bg-gray-300'></div>
+             <div className='font-bold text-[#303972] text-lg pt-4'>
+               Intellectual Property
+             </div>
+             <div className='w-full h-4 bg-gray-300'></div>
+             <div className='font-bold text-[#303972] text-lg pt-4'>Team Details</div>
+             <div className='w-full h-4 bg-gray-300'></div>
+           </div>
+         </div>
+       </div>
+      ) : (
+        <div>
         {post.map((post) => (
             <div className='mx-8  rounded-xl bg-white p-4'>
                 <div className='flex flex-col gap-2 '>
@@ -112,6 +172,8 @@ function ViewIdeabar() {
                 </div>
             </div>
         ))}
+        </div>
+    )}
     </div>
   )
 }
