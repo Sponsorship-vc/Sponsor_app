@@ -129,7 +129,7 @@ function Ideas() {
       </p>
     </div>
     <div className='flex flex-col gap-y-3 mt-3 ml-10 cursor-pointer'>
-      {Array.isArray(idea.category) ? (
+      {Array.isArray(idea.category) && !loading ? (
         idea.category.map((category, index) => (
           <p
             key={index}
