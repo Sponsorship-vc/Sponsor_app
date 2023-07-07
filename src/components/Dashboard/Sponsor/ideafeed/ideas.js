@@ -7,12 +7,20 @@ import '../../../../index.css';
 import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { MdArrowLeft, MdArrowRight} from 'react-icons/md';
+
+function SkeletonLoader() {
+  return (
+    <div className="animate-pulse bg-gray-200 h-5 w-3/4 mr-4 mb-2 rounded-md"></div>
+  );
+}
+
 function Ideas() {
   const { selectedOptions } = useContext(OptionsContext);
 
   const [likedIndexes, setLikedIndexes] = useState([]);
   const [ideaList, setIdeaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState([]);
 
   const navigate = useNavigate();
 
@@ -70,6 +78,31 @@ function Ideas() {
     navigate(`/dashboard/sponsor/ideafeed/viewidea/${idea.id}`);
   };
 
+  useEffect(() => {
+    let isTimerExpired = false;
+    let isDataLoaded = false;
+
+    const checkLoadingState = () => {
+      if (isTimerExpired && isDataLoaded) {
+        setLoading(false);
+      }
+    };
+
+    if (ideaList) {
+      isDataLoaded = true;
+      checkLoadingState();
+    }
+
+    const timer = setTimeout(() => {
+      isTimerExpired = true;
+      checkLoadingState();
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [ideaList]);
+
   return (
     <div className='h-full w-full bg-white ml-auto mr-5 rounded-xl'>
       <div className='flex flex-row mt-10 mb-7'>
@@ -83,31 +116,42 @@ function Ideas() {
         filteredData
           .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
           .map((idea, index) => (
-            <React.Fragment key={index}>
-              <hr />
-              <div className='flex flex-row mb-3'>
-                <div className='bg-[#C1BBEB] rounded-lg h-full w-1/5 cursor-pointer' onClick={() => handleViewIdea(idea)}></div>
-                <div className='flex flex-col w-1/2 mt-3 cursor-pointer' onClick={() => handleViewIdea(idea)}>
-                  <h1 className='font-bold text-[#303972] '>{idea.title}</h1>
-                  <p className='line-clamp text-[#A098AE] text-sm mt-3'>{idea.Solution}</p>
-                </div>
-                <div className='flex flex-col gap-y-3 mt-3 ml-10 cursor-pointer' onClick={() => handleViewIdea(idea)}>
-                  {Array.isArray(idea.category) &&
-                    idea.category.map((category, index) => (
-                      <p key={index} className='bg-[#C1BBEB] rounded-2xl min-w-content min-h-content px-3 py-1 text-xs flex mx-auto text-[#303972]'>
-                        {category}
-                      </p>
-                    ))}
-                </div>
-                <div className='ml-auto mr-10 h-full justify-center items-center flex mt-10 cursor-pointer'>
-                  {likedIndexes.includes(index) ? (
-                    <AiFillHeart size={30} onClick={() => handleLike(index)} fill='red' />
-                  ) : (
-                    <AiOutlineHeart size={30} onClick={() => handleLike(index)} />
-                  )}
-                </div>
-              </div>
-            </React.Fragment>
+<React.Fragment key={index}>
+  <hr />
+  <div className='flex flex-row mb-3'>
+    <div className='bg-[#C1BBEB] rounded-lg h-full w-1/5 cursor-pointer' onClick={() => handleViewIdea(idea)}></div>
+    <div className='flex flex-col w-1/2 mt-3 cursor-pointer' onClick={() => handleViewIdea(idea)}>
+      <h1 className='font-bold text-[#303972]'>
+        {loading ? <SkeletonLoader /> : idea.title}
+      </h1>
+      <p className='line-clamp text-[#A098AE] text-sm mt-3'>
+        {loading ? <SkeletonLoader /> : idea.Solution}
+      </p>
+    </div>
+    <div className='flex flex-col gap-y-3 mt-3 ml-10 cursor-pointer'>
+      {Array.isArray(idea.category) ? (
+        idea.category.map((category, index) => (
+          <p
+            key={index}
+            className='bg-[#C1BBEB] rounded-2xl min-w-content min-h-content px-3 py-1 text-xs flex mx-auto text-[#303972]'
+          >
+            {category}
+          </p>
+        ))
+      ) : (
+        <SkeletonLoader />
+      )}
+    </div>
+    <div className='ml-auto mr-10 h-full justify-center items-center flex mt-10 cursor-pointer'>
+      {likedIndexes.includes(index) ? (
+        <AiFillHeart size={30} onClick={() => handleLike(index)} fill='red' />
+      ) : (
+        <AiOutlineHeart size={30} onClick={() => handleLike(index)} />
+      )}
+    </div>
+  </div>
+</React.Fragment>
+
           ))}
                         <hr />
               <div className='flex justify-end align-center my-8'>

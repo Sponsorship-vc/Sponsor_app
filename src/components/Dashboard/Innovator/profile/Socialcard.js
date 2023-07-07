@@ -7,6 +7,12 @@ import { db  } from "../../../../firebase/config";
 import tick from '../../../../Assets/Dashboard/Icons/tick.png'
 import { doc ,updateDoc } from "firebase/firestore";
 
+function SkeletonLoader() {
+  return (
+    <div className="animate-pulse bg-gray-200 h-5 w-3/4 mr-4 mb-2 rounded-md"></div>
+  );
+}
+
 function Socialcard() {
   // const [List, setList] = useState([]);
   const [g, setg] = useState("");
@@ -15,6 +21,8 @@ function Socialcard() {
   const [i, seti] = useState("");
   const [edit, setEdit] = useState(false);
   const [Id, setId] = useState("");
+  const [loading, setLoading] = useState(true);
+
 
 
 //  const socials = 
@@ -41,6 +49,31 @@ useEffect(() => {
     }
   );
 }, []);
+
+useEffect(() => {
+  let isTimerExpired = false;
+  let isDataLoaded = false;
+
+  const checkLoadingState = () => {
+    if (isTimerExpired && isDataLoaded) {
+      setLoading(false);
+    }
+  };
+
+  if (g || l || i || f) {
+    isDataLoaded = true;
+    checkLoadingState();
+  }
+
+  const timer = setTimeout(() => {
+    isTimerExpired = true;
+    checkLoadingState();
+  }, 500);
+
+  return () => {
+    clearTimeout(timer);
+  };
+}, [f ,g ,l ,f]);
 
 
 const handleEdit = () => {
@@ -78,9 +111,18 @@ const updateDetails = async () => {
         </div>
         <p className='text-gray-400 text-xs !mt-[-1%]'>Your personal socialmedia profiles</p>
       </div>
-      {!edit &&(
-              <div className='grid grid-cols-3 grid-rows-2 gap-4 ml-5  gap-y-6 mt-5'>
-              {l &&(
+      {!edit && (
+  <div className="grid grid-cols-3 grid-rows-2 gap-4 ml-5 gap-y-6 mt-5">
+    {loading ? (
+      <>
+        <SkeletonLoader />
+        <SkeletonLoader />
+        <SkeletonLoader />
+        <SkeletonLoader />
+      </>
+    ) : (
+      <>
+            {l &&(
               <div className='flex flex-row gap-x-3 justify-start items-center'>
                 <AiFillLinkedin/>
                 <a href={l} className='font-semibold'>{l}</a>
@@ -107,8 +149,12 @@ const updateDetails = async () => {
               </div>
               )}
               {!l && !g && !i && !f && (<p>Add account</p>)}
-            </div>
-      )}
+      </>
+    )}
+    {!l && !g && !i && !f && <p>Add account</p>}
+  </div>
+)}
+
       {edit &&(
                       <div className='grid grid-cols-3 grid-rows-2 gap-4 mx-5  gap-y-6 mt-5'>
                       <div className='flex flex-row gap-x-3 justify-start items-center'>
