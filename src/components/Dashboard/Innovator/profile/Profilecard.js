@@ -10,6 +10,12 @@ import { Link } from 'react-router-dom';
 import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
 import { doc ,updateDoc,setDoc } from "firebase/firestore";
 
+function SkeletonLoader() {
+  return (
+    <div className="animate-pulse bg-gray-200 h-5 w-full mr-4 mb-2 rounded-md"></div>
+  );
+}
+
 function Profilecard() {
   
   const [userList, setuserList] = useState([]);
@@ -30,6 +36,8 @@ function Profilecard() {
   const [fileName, setFileNames] = useState('');
   const [fileUpload, setFileUpload] = useState(null);
   const [selectedPicture, setSelectedPicture] = useState("");
+  const [loading, setLoading] = useState(true);
+  
 
 
 
@@ -116,6 +124,30 @@ function Profilecard() {
     }
   };
 
+  useEffect(() => {
+    let isTimerExpired = false;
+    let isDataLoaded = false;
+  
+    const checkLoadingState = () => {
+      if (isTimerExpired && isDataLoaded) {
+        setLoading(false);
+      }
+    };
+  
+    if (name) {
+      isDataLoaded = true;
+      checkLoadingState();
+    }
+  
+    const timer = setTimeout(() => {
+      isTimerExpired = true;
+      checkLoadingState();
+    }, 500);
+  
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [name]);
 
 
   return (
@@ -156,111 +188,121 @@ function Profilecard() {
     </div>
     <h4 className='text-gray-500 ml-5 mt-2'>Innovator</h4>
     <div className='grid grid-cols-3 grid-rows-2 gap-4 ml-5 mt-2 gap-y-10'>
-      <div className='flex flex-col'>
-        <label className='text-[#A098AE]'>Location</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          <GrLocation className='mt-1' fill='#FB7D5B' />
-          {city ? (
-            <p className='- text-dark-blue'>{city}</p>
-          ) : (
-            <p className='- text-dark-blue'>Add City</p>
-          )}
-        </div>
-      </div>
-      <div className='flex flex-col'>
-        <label className='text-[#A098AE]'>Phone number</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          <BsFillTelephoneFill className='mt-1' fill='#FB7D5B' />
-          {phno ? (
-            <p className='font-semibold text-dark-blue'>{phno}</p>
-          ) : (
-            <p className='font-semibold text-dark-blue'>Add phno</p>
-          )}
-        </div>
-      </div>
-      <div className='flex flex-col'>
-        <label className='text-[#A098AE]'>Email id</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          <MdEmail className='mt-1' fill='#FB7D5B ' size={20} />
-          {email ? (
-            <p className='font-semibold text-dark-blue'>{email}</p>
-          ) : (
-            <p className='font-semibold text-dark-blue'>Add email</p>
-          )}
-        </div>
-      </div>
-      <div className='flex flex-col'>
-        <label className='text-[#A098AE]'>Date of birth</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          {dob ? (
-            <p className='font-semibold text-dark-blue'>{dob}</p>
-          ) : (
-            <p className='font-semibold text-dark-blue'>Add Dob</p>
-          )}
-        </div>
-      </div>
-      <div className='flex flex-col'>
-        <label className='text-[#A098AE]'>Address</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          {add1 ? (
-            <p className='font-semibold text-dark-blue'>
-              {add1}
-              {add2}
-              {add3}
-              {add4}
-            </p>
-          ) : (
-            <p className='font-semibold text-dark-blue'>Add address</p>
-          )}
-        </div>
-      </div>
-    </div>
-    <hr className='bg-black w-full mt-5'></hr>
-    <div className='flex flex-col ml-5 gap-y-10 mt-5 '>
-      <div>
-        <label className='text-[#A098AE]'>Bio</label>
-        <div className='flex flex-row gap-4 mt-3'>
-          {bio ? (
-            <p className='font-semibold text-dark-blue'>{bio}</p>
-          ) : (
-            <p className='font-semibold text-dark-blue'>Add bio</p>
-          )}
+          <div className='flex flex-col'>
+            <label className='text-[#A098AE]'>Location</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              <GrLocation className='mt-1' fill='#FB7D5B' />
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='- text-dark-blue'>{city ? city : 'Add City'}</p>
+              )}
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label className='text-[#A098AE]'>Phone number</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              <BsFillTelephoneFill className='mt-1' fill='#FB7D5B' />
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='font-semibold text-dark-blue'>{phno ? phno : 'Add phno'}</p>
+              )}
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label className='text-[#A098AE]'>Email id</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              <MdEmail className='mt-1' fill='#FB7D5B ' size={20} />
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='font-semibold text-dark-blue'>{email ? email : 'Add email'}</p>
+              )}
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label className='text-[#A098AE]'>Date of birth</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='font-semibold text-dark-blue'>{dob ? dob : 'Add Dob'}</p>
+              )}
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <label className='text-[#A098AE]'>Address</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='font-semibold text-dark-blue'>
+                  {add1 ? (
+                    <>
+                      {add1}
+                      {add2}
+                      {add3}
+                      {add4}
+                    </>
+                  ) : (
+                    'Add address'
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <hr className='bg-black w-full mt-5'></hr>
-      </div>
-      <div className='flex flex-row gap-[30rem] mb-5'>
-        <div className='flex flex-col'>
-          <label className='text-[#A098AE]'>Resume</label>
-          <div className='flex flex-row gap-4 mt-3 relative'>
-          <label className="h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center">
-              <div id="iconDiv" className="flex flex-col gap-2">
-                <p className="text-gray-400 flex justify-center">Click here to upload</p>
-              </div>
-              {fileUploaded ? (
-                <div className="flex flex-wrap justify-center gap-2 py-4">
-                  <p className="text-gray-400 flex justify-center">{fileName}</p>
-                </div>
-              ) : null}
-              <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
-            </label>
+        <div className='flex flex-col ml-5 gap-y-10 mt-5 '>
+          <div>
+            <label className='text-[#A098AE]'>Bio</label>
+            <div className='flex flex-row gap-4 mt-3'>
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                <p className='font-semibold text-dark-blue'>{bio ? bio : 'Add bio'}</p>
+              )}
+            </div>
+            <hr className='bg-black w-full mt-5'></hr>
           </div>
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-[#A098AE]'>Interest</label>
-          <div className='flex flex-row gap-2 mt-3'>
-          {interest.length>0 && interest.map((content, index) => (
-            <p key={index} className="font-semibold text-dark-blue">
-              {content}
-              {index !== interest.length - 1 && ' , '}
-            </p>
-          ))}
+          <div className='flex flex-row gap-[30rem] mb-5'>
+            <div className='flex flex-col'>
+              <label className='text-[#A098AE]'>Resume</label>
+              <div className='flex flex-row gap-4 mt-3 relative'>
+                <label className='h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center'>
+                  <div id='iconDiv' className='flex flex-col gap-2'>
+                    <p className='text-gray-400 flex justify-center'>Click here to upload</p>
+                  </div>
+                  {fileUploaded ? (
+                    <div className='flex flex-wrap justify-center gap-2 py-4'>
+                      <p className='text-gray-400 flex justify-center'>{fileName}</p>
+                    </div>
+                  ) : null}
+                  <input type='file' id='doc' name='doc' hidden onChange={handleFileSelect} />
+                </label>
+              </div>
+            </div>
+            <div className='flex flex-col'>
+              <label className='text-[#A098AE]'>Interest</label>
+              <div className='flex flex-row gap-2 mt-3'>
+                {loading ? (
+                  <SkeletonLoader />
+                ) : (
+                  interest.length > 0 &&
+                  interest.map((content, index) => (
+                    <p key={index} className="font-semibold text-dark-blue">
+                      {content}
+                      {index !== interest.length - 1 && ' , '}
+                    </p>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
   );
 }
 

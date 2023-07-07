@@ -51,14 +51,30 @@ function ViewIdeabar() {
       },[])
 
       useEffect(() => {
-        // Simulate loading delay
+        let isTimerExpired = false;
+        let isDataLoaded = false;
+      
+        const checkLoadingState = () => {
+          if (isTimerExpired && isDataLoaded) {
+            setLoading(false);
+          }
+        };
+      
+        if (Array.isArray(post) && post.length > 0) {
+          isDataLoaded = true;
+          checkLoadingState();
+        }
+      
         const timer = setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-    
-        // Clean up timer on component unmount
-        return () => clearTimeout(timer);
-      }, []);
+          isTimerExpired = true;
+          checkLoadingState();
+        }, 500);
+      
+        return () => {
+          clearTimeout(timer);
+        };
+      }, [post]);
+      
       
 
   return (

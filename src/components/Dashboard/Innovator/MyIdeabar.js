@@ -14,6 +14,7 @@ import { PopoverHandler , Popover  ,PopoverContent ,Typography, Input } from '@m
 function MyIdeabar() {
     
     const [ideaList, setideaList] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [value, setValue] = useState("");
     const length = ideaList.length;
 
@@ -40,6 +41,33 @@ function MyIdeabar() {
       }
     };
 
+    useEffect(() => {
+      let isTimerExpired = false;
+      let isDataLoaded = false;
+    
+      const checkLoadingState = () => {
+        if (isTimerExpired && isDataLoaded) {
+          setLoading(false);
+        }
+      };
+    
+      if (Array.isArray(ideaList) && ideaList.length > 0) {
+        isDataLoaded = true;
+        checkLoadingState();
+      }
+    
+      const timer = setTimeout(() => {
+        isTimerExpired = true;
+        checkLoadingState();
+      }, 500);
+    
+      return () => {
+        clearTimeout(timer);
+      };
+    }, [ideaList]);
+    
+    
+
     
 
 
@@ -59,6 +87,46 @@ function MyIdeabar() {
                     <th><p className='text-sm font-bold text-blue-800'>Action</p></th>    
                 </tr>
                 </thead>
+                {loading ? (
+               <tbody>
+               {[1, 2, 3, 4].map((index) => (
+                 <tr className='h-20 border-l-4 hover:border-l-blue-800 border-l-white border-t-2' key={index}>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-32 rounded-md'></div>
+                     </div>
+                   </td>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-16 rounded-md'></div>
+                     </div>
+                   </td>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-24 rounded-md'></div>
+                     </div>
+                   </td>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-20 rounded-md'></div>
+                     </div>
+                   </td>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-12 rounded-md'></div>
+                     </div>
+                   </td>
+                   <td>
+                     <div className='flex justify-center'>
+                       <div className='animate-pulse bg-blue-200 h-6 w-20 rounded-md'></div>
+                     </div>
+                   </td>
+                 </tr>
+               ))}
+             </tbody>
+             
+                  ) : (
+                    <tbody>
                 {ideaList.map((post) => (
                 <tr className='h-20 border-l-4 hover:border-l-blue-800 border-l-white border-t-2'>
                     <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.title}</p></td>
@@ -105,6 +173,8 @@ function MyIdeabar() {
                     </td>
                 </tr>
                 ))}
+                </tbody>
+                )}
 
             </table>
             <div className='flex justify-between flex-row px-4 py-4'>
