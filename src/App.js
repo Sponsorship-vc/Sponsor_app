@@ -42,9 +42,20 @@ function PrivateRoute({ children }) {
   return <Navigate to="/login/role" />;
 }
 
+function isMobileDevice() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function isSmallScreen() {
+  return window.innerWidth <= 768; // Adjust the threshold as needed
+}
+
+
 function App() {
   const [userList, setuserList] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [displayMessage, setDisplayMessage] = useState(false);
+
 
   useEffect(() => {
     userData
@@ -58,8 +69,17 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const shouldDisplayLaptopMessage = isMobileDevice() || isSmallScreen();
+    setDisplayMessage(shouldDisplayLaptopMessage);
+  }, []);
+
   if (loading) {
     return <LoadingSpinner />;
+  }
+
+  if (displayMessage) {
+    return <h1>Please use a laptop or larger screen to access this app.</h1>;
   }
 
   return (
