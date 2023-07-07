@@ -26,7 +26,7 @@ function Sponlogin() {
       setUserList(filteredData);
 
       // Update login state based on user role
-      const user = userList.find((user) => user.role === 'sponsor');
+      const user = filteredData.find((user) => user.role === 'sponsor');
     if (user) {
       if (user.verify === true) {
         navigate('/dashboard/sponsor/profile');

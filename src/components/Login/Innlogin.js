@@ -29,7 +29,7 @@ function Innlogin() {
 
       // Update login state based on user role
       let isRoleFound = false;
-      userList.forEach((user) => {
+      filteredData.forEach((user) => {
         if (!isRoleFound && user.role === "innovator") {
           navigate("/dashboard/innovator/profile")
           console.log("User role:", user.role);
@@ -46,15 +46,15 @@ function Innlogin() {
   // {
   //   navigate("/dashboard/innovator")
   // }
-  useEffect(() => {; // Replace with your authentication check function
+  // useEffect(() => {; // Replace with your authentication check function
 
-    if (auth.currentUser) {
-     // window.location.href = 'http://localhost:3000/dashboard/innovator/profile';
-     navigate("/dashboard/innovator/profile")
-     window.location.reload()
-    }
-  }, [auth.currentUser]);
-  console.log(auth.currentUser)
+  //   if (auth.currentUser) {
+  //    // window.location.href = 'http://localhost:3000/dashboard/innovator/profile';
+  //    navigate("/dashboard/innovator/profile")
+  //    window.location.reload()
+  //   }
+  // }, [auth.currentUser]);
+  // console.log(auth.currentUser)
 
     
   return (
