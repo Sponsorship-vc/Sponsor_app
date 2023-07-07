@@ -3,7 +3,7 @@ import Devstagefilter from './Devstagefilter';
 
 function Filterideas() {
   const [isOpen, setIsOpen] = useState([]);
-  const industryOptions = ['Healthcare','Agriculture', 'Technology', 'Education', 'Tourism', 'Automobile', 'Others'];
+  const industryOptions = ['Healthcare','Agriculture', 'Technology', 'Education', 'Tourism', 'Automobile'];
   const stageOptions = ['Ideation','Development','Prototype','Commercialisable']
   const typeOptions = ['Product','Service','Design','Process']
 
@@ -21,9 +21,9 @@ function Filterideas() {
         <h1 className='font-bold text-[#363B64]'>Filter</h1>
         <hr className='mt-8' />
       </div>
-      <Devstagefilter options={industryOptions} toggleDropdown={() => toggleDropdown(0)} name='Industry' isOpen={isOpen[0]} />
-      <Devstagefilter options={stageOptions} toggleDropdown={() => toggleDropdown(1)} name='Stage of development' isOpen={isOpen[1]} />
-      <Devstagefilter options={typeOptions} toggleDropdown={() => toggleDropdown(2)} name='Idea type' isOpen={isOpen[2]}/>
+      <Devstagefilter options={industryOptions} toggleDropdown={() => toggleDropdown(0)} name='Industry' isOpen={isOpen[0]} other={true}/>
+      <Devstagefilter options={stageOptions} toggleDropdown={() => toggleDropdown(1)} name='Stage of development' isOpen={isOpen[1]} other={false}/>
+      <Devstagefilter options={typeOptions} toggleDropdown={() => toggleDropdown(2)} name='Idea type' isOpen={isOpen[2]} other={false}/>
     </div>
   );
 }

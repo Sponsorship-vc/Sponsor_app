@@ -127,7 +127,7 @@ const Ideabar = () => {
   const updateSuggestions = (value) => {
     // Implement your logic to fetch suggestions based on the input value
     // For example, you can filter a list of valid words or make an API call to retrieve suggestions
-    const filteredSuggestions = ['apple', 'banana', 'orange'].filter((word) =>
+    const filteredSuggestions =['Healthcare', 'Agriculture', 'Technology', 'Education', 'Tourism', 'Automobile'].filter((word) =>
       word.toLowerCase().startsWith(value.toLowerCase())
     );
     setSuggestions(filteredSuggestions);
