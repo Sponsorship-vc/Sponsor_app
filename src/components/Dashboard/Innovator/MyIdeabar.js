@@ -131,25 +131,36 @@ function MyIdeabar() {
                 <tr className='h-20 border-l-4 hover:border-l-blue-800 border-l-white border-t-2'>
                     <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.title}</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.id}</p></td>
-                    {/* <td><p className='text-sm font-normal flex justify-center text-gray-400'>{post.date}</p><
-                     */}
+                    <td>
+                      <p className='text-sm font-normal flex justify-center text-gray-400'>
+                        {(() => {
+                          const date = post.date.toDate();
+                          const formattedDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          });
+                          return formattedDate;
+                        })()}
+                      </p>
+                    </td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.category}</p></td>
                     <td>
                     <Link to={`/dashboard/innovator/myideas/${post.id}`}>
                       <button 
-                      className='text-md w-[80px] mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-1 '
+                      className='text-sm w-[80px] mx-auto font-normal flex justify-center text-white bg-[#4D44B5] rounded-full py-2 '
                       >
                         View
                       </button>      
                       </Link>
 
                     </td>
-                    <td><p className='text-sm font-bold flex justify-center text-blue-800'> {post.draft ? "submitted":"draft"}</p></td>
+                    <td><p className='text-sm font-bold flex justify-center text-blue-800'> {post.draft ? "Submitted":"Draft"}</p></td>
                     <td>
                       <Popover placement="left">
                         <PopoverHandler>
                           <button
-                          className='text-md  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-1 px-4'
+                          className='text-sm  mx-auto font-normal flex justify-center text-white bg-red-700 rounded-full py-2 px-4'
                           >Delete</button>
                         </PopoverHandler>
                         <PopoverContent className="w-96">

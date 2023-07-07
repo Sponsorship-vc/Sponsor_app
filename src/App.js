@@ -96,7 +96,7 @@ function App() {
           
 
           {userList && userList.role ==="sponsor" ? 
-            (loading ? <Route exact path="*" element={<LoadingSpinner/>} /> : <Route path="/dashboard/innovator/profile" element={<ForbiddenPage/>}/>) : 
+            (loading ? <Route exact path="/dashboard/innovator/profile" element={<LoadingSpinner/>} /> : <Route path="/dashboard/innovator/profile" element={<ForbiddenPage/>}/>) : 
             (<Route path="/dashboard/innovator" element={<PrivateRoute> <Sidebarin /> </PrivateRoute>}>
             <Route path="/dashboard/innovator/profile" element={<PrivateRoute> <InnProfile /> </PrivateRoute>} />
             <Route path="/dashboard/innovator/profile/edit" element={<PrivateRoute> <EditProfile /> </PrivateRoute>} />
@@ -126,7 +126,7 @@ function App() {
               <Route path="/dashboard/sponsor/profile" element={<Verification />} />
             ) : (
               userList && userList.role==="innovator" ?
-              (<Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <ForbiddenPage /> </PrivateRoute>}/>) :
+              (loading ? <Route exact path="*" element={<LoadingSpinner/>} /> : <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <ForbiddenPage /> </PrivateRoute>}/>) :
               ( <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>}/> ) 
             )
           )}
