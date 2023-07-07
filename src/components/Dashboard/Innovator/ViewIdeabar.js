@@ -153,7 +153,7 @@ function ViewIdeabar() {
                                 title="Edit"
                                 />
                             </Link>) : (
-                            <div className='flex justify-center items-center cursor-pointer bg-[#C1BBEB] text-dark-blue py-2 px-4 h-3/4 text-sm rounded-xl gap-2 '>
+                            <div className='flex justify-center items-center cursor-pointer bg-[#C1BBEB] text-dark-blue py-2 px-4 h-2rem text-sm rounded-xl gap-2 '>
                                 <button  onClick={() => handleChat(post)}>Chat</button>
                                 <BsChatLeftDots/>
                             </div>)}
