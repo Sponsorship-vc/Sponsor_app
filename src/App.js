@@ -22,6 +22,7 @@ import Ideafeed from './pages/Dashboard/Sponsor/Ideafeed';
 import { userData } from './data/Userdata';
 import { AuthContext } from './context/AuthContext';
 import Notfound from './pages/Notfound/Notfound';
+import ForbiddenPage from './pages/Notfound/Forbidden';
 
 function LoadingSpinner() {
   return (
@@ -94,7 +95,9 @@ function App() {
           {loading ? <Route exact path="*" element={<LoadingSpinner/>} /> : <Route exact path="*" element={<Notfound/>} />}
           
 
-          <Route path="/dashboard/innovator" element={<PrivateRoute> <Sidebarin /> </PrivateRoute>}>
+          {userList && userList.role ==="sponsor" ? 
+            (loading ? <Route exact path="*" element={<LoadingSpinner/>} /> : <Route path="/dashboard/innovator/profile" element={<ForbiddenPage/>}/>) : 
+            (<Route path="/dashboard/innovator" element={<PrivateRoute> <Sidebarin /> </PrivateRoute>}>
             <Route path="/dashboard/innovator/profile" element={<PrivateRoute> <InnProfile /> </PrivateRoute>} />
             <Route path="/dashboard/innovator/profile/edit" element={<PrivateRoute> <EditProfile /> </PrivateRoute>} />
             <Route path="/dashboard/innovator/ideasubmission" element={<PrivateRoute> <Ideasubmission /> </PrivateRoute>} />
@@ -104,7 +107,7 @@ function App() {
             <Route path="/dashboard/innovator/sponsor" element={<PrivateRoute> <Sponsor /> </PrivateRoute>} />
             <Route path="/dashboard/innovator/chat" element={<PrivateRoute> <ChatWindow /> </PrivateRoute>} />
             <Route path="/dashboard/innovator/myIdeas/:id" element={<PrivateRoute> <ViewIdea /> </PrivateRoute>} />
-          </Route>
+          </Route>)}
 
           {userList && userList.verify === true ? (
             <Route path="/dashboard/sponsor" element={<PrivateRoute> <Sidebarsp /> </PrivateRoute>}>
@@ -122,7 +125,9 @@ function App() {
             userList && userList.role === 'sponsor' ? (
               <Route path="/dashboard/sponsor/profile" element={<Verification />} />
             ) : (
-              <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>} />
+              userList && userList.role==="innovator" ?
+              (<Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <ForbiddenPage /> </PrivateRoute>}/>) :
+              ( <Route path="/dashboard/sponsor/profile" element={<PrivateRoute> <SponProfile /> </PrivateRoute>}/> ) 
             )
           )}
 

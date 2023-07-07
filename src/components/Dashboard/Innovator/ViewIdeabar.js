@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import {BsChatLeftDots} from 'react-icons/bs'
 import {ChatContext} from '../../../context/ChatContext'
 import { userData } from '../../../data/Userdata';
+import {MdVerified} from 'react-icons/md'
 
 function ViewIdeabar() {
     const location = useLocation();
@@ -136,7 +137,16 @@ function ViewIdeabar() {
             <div className='mx-8  rounded-xl bg-white p-4'>
                 <div className='flex flex-col gap-2 '>
                     <div className='flex flex-row justify-between'> 
+                      <div className='flex flex-col gap-1 items-start justify-start'>
                         <p className='font-bold text-[#303972] text-3xl py-2'>{post.title}</p>
+                        <div>
+                        {post.patended && post.patended ? 
+                        (<div className='flex flex-row items-center justify-center gap-3 bg-slate-100 rounded-xl p-2'>
+                          <p className='text-sm'>Patended</p>
+                          <MdVerified/>
+                        </div>) : (null)}
+                        </div>
+                      </div>
                         <div className='flex flex-row gap-8 justify-center items-center mr-5'>
                             {userList.role ==="innovator" ?( <Link to={`/dashboard/innovator/ideasubmission/${post.id}`}>
                                 <img src={Edit} className="h-5"

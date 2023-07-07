@@ -131,7 +131,8 @@ function MyIdeabar() {
                 <tr className='h-20 border-l-4 hover:border-l-blue-800 border-l-white border-t-2'>
                     <td><p className='text-sm font-bold flex justify-center align-center text-blue-800'>{post.title}</p></td>
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.id}</p></td>
-                    {/* <td><p className='text-sm font-normal flex justify-center text-gray-400'>{post.date}</p></td> */}
+                    {/* <td><p className='text-sm font-normal flex justify-center text-gray-400'>{post.date}</p><
+                     */}
                     <td><p className='text-sm font-bold flex justify-center text-blue-800'>{post.category}</p></td>
                     <td>
                     <Link to={`/dashboard/innovator/myideas/${post.id}`}>
