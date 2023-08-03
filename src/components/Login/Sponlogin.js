@@ -3,7 +3,7 @@ import Sidebar from '../Roleselector/Sidebar'
 import { auth, db } from '../../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDocs, collection} from 'firebase/firestore';
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 function Sponlogin() {
 
   const [email, setEmail] = useState('');
@@ -56,7 +56,9 @@ function Sponlogin() {
                     <p className='text-xs text-gray-500 r'>By signing up, you confirm that you’ve read <br/>and accepted our <a className='text-blue-500 cursor-pointer'  href="https://www.example.com/user-notice">User Notice</a> and <a className='text-blue-500 cursor-pointer' href="https://www.example.com/privacy-policy">Privacy Policy</a>.</p>
                     <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleLoginClick} >Login</button>
                     <p className='text-[#ff0000]'>{error}</p>
-                    <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto'>Don’t  have an SponSir account? Register</p>
+                    <Link to='/signup/role/sponsor'>
+                      <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto'>Don’t  have an SponSir account? Register</p>
+                    </Link>
                 </div>
             </div>
         </div>

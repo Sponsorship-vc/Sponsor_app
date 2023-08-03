@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {  Route, Routes, Navigate } from 'react-router-dom';
+import {  Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Landing from '../src/pages/Landing/Landing';
 import Roleselector from './pages/Roleselector/Roleselector';
 import Login from './pages/Login/Login';
@@ -23,6 +23,7 @@ import { userData } from './data/Userdata';
 import { AuthContext } from './context/AuthContext';
 import Notfound from './pages/Notfound/Notfound';
 import ForbiddenPage from './pages/Notfound/Forbidden';
+import MobileMessage from './components/Mobileview/MobileMessage';
 
 function LoadingSpinner() {
   return (
@@ -56,6 +57,7 @@ function App() {
   const [userList, setuserList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [displayMessage, setDisplayMessage] = useState(false);
+  const location = useLocation()
 
 
   useEffect(() => {
@@ -71,16 +73,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const shouldDisplayLaptopMessage = isMobileDevice() || isSmallScreen();
+    const shouldDisplayLaptopMessage = isMobileDevice() && window.location.pathname !== '/';
     setDisplayMessage(shouldDisplayLaptopMessage);
-  }, []);
+  }, [location]);
 
   if (loading) {
     return <LoadingSpinner />;
   }
 
   if (displayMessage) {
-    return <h1>Please use a laptop or larger screen to access this app.</h1>;
+    return <MobileMessage/>
   }
 
   return (
