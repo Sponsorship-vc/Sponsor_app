@@ -236,6 +236,20 @@ function Profilecard() {
                 )}
               </div>
             </div>
+
+            <div className='col-start-3 '>
+                <label className='text-[#A098AE]'>GST Certificate</label>
+                <div className='flex flex-row gap-4 mt-3 relative'>
+                  <input
+                    type='file'
+                    class='opacity-0 absolute inset-0 z-0 h-15 w-[15rem]'
+                  />
+                  <div class='h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center'>
+                    <span class='text-gray-400'>Click here to Upload</span>
+                  </div>
+                </div>
+              </div>
+              
             <div className='col-start-3 col-span-2'>
               <label className='text-[#A098AE]'>Office Address</label>
               <div className='flex flex-row gap-4 mt-3'>

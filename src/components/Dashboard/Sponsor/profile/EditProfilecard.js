@@ -12,8 +12,11 @@ import { IoPersonCircleOutline } from 'react-icons/io5';
 
 
 
-function EditProfilecard() {
 
+function EditProfilecard() {
+    const [fileUploaded, setFileUploaded] = useState(false);
+    const [fileName, setFileNames] = useState('');
+    const [fileUpload, setFileUpload] = useState(null);
     const [userList, setuserList] = useState([]);
     const [name, setName] = useState("");
     const [iname, setIname] = useState("");
@@ -58,6 +61,20 @@ function EditProfilecard() {
           }
         );
       }, []);
+
+      function handleFileSelect(event) {
+        const files = event.target.files;
+        if (files.length > 0) {
+          const fileNames = [];
+          fileNames.push(files[0].name);
+          setFileUploaded(true);
+          setFileNames(fileNames);
+          const iconDiv = document.getElementById('iconDiv');
+          iconDiv.classList.add('hidden');
+          setFileUpload(event.target.files[0])
+          console.log(files)
+        }
+      }
 
       const handlePictureUpload = async (event) => {
         const imageFile = event.target.files[0];
@@ -107,8 +124,24 @@ function EditProfilecard() {
             website:web,
             pin:pin,
             bio:bio,
+            filepath:`GST/${name}/${fileName}`,
         });
+        uploadFile();
       };
+
+ 
+
+    const uploadFile = async () => {
+      if (!fileUpload) return;
+      const filesFolderRef = ref(storage, `GST/${name}/${fileUpload.name}`);
+      try {
+        await uploadBytes(filesFolderRef, fileUpload);
+        console.log("file success");
+        
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
 
   return (
@@ -218,7 +251,29 @@ function EditProfilecard() {
                 </div>
               </div>
 
-          <div className='col-start-3 col-span-2'>
+              <div className='col-start-3 '>
+              
+                <label className='text-[#A098AE]'>GST Certificate
+                <div id="iconDiv" className='flex flex-row gap-4 mt-3 relative'>
+                <div class='h-12 w-[15rem] rounded-lg border border-dotted border-gray-400 bg-transparent flex items-center justify-center'> 
+                 
+                   {fileUploaded ? (
+                <div className="flex flex-wrap justify-center gap-2 py-4">
+                  <p className="text-gray-400 flex justify-center">{fileName}</p>
+                </div>
+              ) : null}
+               <input type="file" id="doc" name="doc" hidden onChange={handleFileSelect}/>
+               <span class='text-gray-400'>Click here to Upload</span>
+               </div>
+               </div>
+              </label>
+             
+                  
+                   
+                  </div>
+               
+
+          <div className='col-start-4 '>
             <label className='text-[#A098AE]'>Office Address</label>
             <div className='flex flex-row gap-4 mt-3'>
             <GrLocation className='flex my-auto' fill='FB7D5B' />
