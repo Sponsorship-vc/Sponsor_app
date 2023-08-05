@@ -237,7 +237,7 @@ function Profilecard() {
               </div>
             </div>
 
-            <div className='col-start-3 '>
+            <div className='col-start-3 col-end-4'>
                 <label className='text-[#A098AE]'>GST Certificate</label>
                 <div className='flex flex-row gap-4 mt-3 relative'>
                   <input
@@ -250,7 +250,7 @@ function Profilecard() {
                 </div>
               </div>
               
-            <div className='col-start-3 col-span-2'>
+            <div className='col-start-1 col-span-2'>
               <label className='text-[#A098AE]'>Office Address</label>
               <div className='flex flex-row gap-4 mt-3'>
                 <GrLocation className='flex my-auto' fill='#FB7D5B' />

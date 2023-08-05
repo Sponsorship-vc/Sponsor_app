@@ -8,6 +8,7 @@ import { db , storage } from "../../../../firebase/config";
 import { ref, uploadBytes ,getDownloadURL} from "firebase/storage";
 import { doc ,updateDoc ,setDoc } from "firebase/firestore";
 import { IoPersonCircleOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -33,6 +34,7 @@ function EditProfilecard() {
     const [Id, setId] = useState("");
     const [web, setWeb] = useState("");
     const [selectedPicture, setSelectedPicture] = useState("");
+    const navigate = useNavigate()
 
 
       useEffect(() => {
@@ -127,6 +129,8 @@ function EditProfilecard() {
             filepath:`GST/${name}/${fileName}`,
         });
         uploadFile();
+        navigate(`/dashboard/sponsor/profile`)
+        window.location.reload()
       };
 
  
@@ -251,7 +255,7 @@ function EditProfilecard() {
                 </div>
               </div>
 
-              <div className='col-start-3 '>
+              <div className='col-start-3 col-end-4'>
               
                 <label className='text-[#A098AE]'>GST Certificate
                 <div id="iconDiv" className='flex flex-row gap-4 mt-3 relative'>
@@ -267,13 +271,9 @@ function EditProfilecard() {
                </div>
                </div>
               </label>
-             
-                  
-                   
-                  </div>
+              </div>
                
-
-          <div className='col-start-4 '>
+          <div className='col-start-1 col-end-2'>
             <label className='text-[#A098AE]'>Office Address</label>
             <div className='flex flex-row gap-4 mt-3'>
             <GrLocation className='flex my-auto' fill='FB7D5B' />
