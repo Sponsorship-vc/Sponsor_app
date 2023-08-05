@@ -152,13 +152,13 @@ function Profilecard() {
 
   return (
     <div className='flex max-w-full ml-[17rem] rounded-xl flex-col bg-white mr-5'>
-  <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem]'>
+  <div className='bg-[rgb(48,57,114)] h-[6rem] w-full rounded-t-xl justify-start flex flex-row gap-x-[35rem] max-w-content'>
     <div className='h-[8rem] w-[8rem] rounded-full bg-white m-5 items-center justify-center flex z-0'>
       <label htmlFor='profile-picture-input'>
         { selectedPicture ? (
           <img
             src={selectedPicture}
-            className='m-auto h-[7.2rem] w-[7.2rem] rounded-full bg-white cursor-pointer'
+            className='m-auto !h-[7.2rem] !w-[7.2rem] rounded-full bg-white cursor-pointer'
             alt='Profile Picture'
             onClick={handleClick}
           />
@@ -174,7 +174,7 @@ function Profilecard() {
         className='hidden'
       />
     </div>
-    <div className='mb-0 flex relative'>
+    <div className='mb-0 flex relative '>
       <div className='w-[10rem] h-[5rem] rounded-b-full bg-[#FCC43E] transform rotate-180 !top-4 left-10 absolute z-25'></div>
       <div className='w-[8rem] h-[4rem] rounded-b-full bg-[#FB7D5B] transform rotate-180 !top-8 absolute z-0'></div>
     </div>

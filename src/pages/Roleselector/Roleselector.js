@@ -3,11 +3,18 @@ import Card from '../../components/Roleselector/Card'
 import grp1 from '../../Assets/Roleselector/Group1.png'
 import grp2 from '../../Assets/Roleselector/Group2.png'
 import Sidebar from '../../components/Roleselector/Sidebar'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 function Roleselector() {
+
+  const navigate = useNavigate()
+  const handleLogoClick =()=>{
+    navigate('/')
+}
+
+
   return (
     <div className='flex w-screen flex-row'>
-      <div className='z-[-1]'>
+      <div>
         <Sidebar/>
       </div>
       {/* need to make responsive */}
