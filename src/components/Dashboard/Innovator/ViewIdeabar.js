@@ -9,22 +9,34 @@ import {BsChatLeftDots} from 'react-icons/bs'
 import {ChatContext} from '../../../context/ChatContext'
 import { userData } from '../../../data/Userdata';
 import {MdVerified} from 'react-icons/md'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import {
+  collection,
+  updateDoc,
+  doc
+} from "firebase/firestore";
+import { db } from '../../../firebase/config';
+
 
 function ViewIdeabar() {
     const location = useLocation();
     const path = location.pathname
     const message = path.split('/').pop();
+    // message = message.toLowerCase()
     const [post, setpost] = useState([]);
     const navigate = useNavigate()
     const { dispatch } = useContext(ChatContext);
     const [userList,setuserList] = useState('')
     const [loading, setLoading] = useState(true);
+    const [like, setLike] = useState(false);
+    const [likelist, setLikelist] = useState([]);
+    const ideaCollectionRef = collection(db, "Ideas");
 
 
     useEffect(() => {
         ideasData.then(
          (value) => {
-            const filteredValues =  value.filter((value) => value.id === message)
+            const filteredValues =  value.filter((value) => value.id === message)          
             setpost(filteredValues);
           },
           (reason) => {
@@ -44,16 +56,21 @@ function ViewIdeabar() {
         userData.then(
           (value) => {
             setuserList(value[0]);
+            setLikelist(value[0].likelist) 
+            if (value[0].likelist && value[0].likelist.includes(message)) {
+              setLike(true);
+            } 
           },
           (reason) => {
             console.error(reason);
           }
         );
-      },[])
+      },[userData[0],message])
 
       useEffect(() => {
         let isTimerExpired = false;
         let isDataLoaded = false;
+        console.log(like,"like")
       
         const checkLoadingState = () => {
           if (isTimerExpired && isDataLoaded) {
@@ -70,13 +87,30 @@ function ViewIdeabar() {
           isTimerExpired = true;
           checkLoadingState();
         }, 500);
+
       
         return () => {
           clearTimeout(timer);
         };
       }, [post]);
+
+      const handleLike = () => {
+        setLike(!like);
+        onLike();
+      }
       
-      
+      const onLike = async () => {
+        const userDoc = doc(db, "users", userList.id);
+        let updatedLikelist;
+        if (likelist && likelist.includes(message)) {
+          updatedLikelist = likelist.filter(item => item !== message);
+        } else {
+          updatedLikelist = [...likelist, message];
+        }
+        await updateDoc(userDoc, { 
+          likelist:updatedLikelist
+        });
+      };
 
   return (
     <div className='ml-64 py-8'>
@@ -153,9 +187,32 @@ function ViewIdeabar() {
                                 title="Edit"
                                 />
                             </Link>) : (
+                              <div className='flex flex-row gap-6 align-center justify-center'>
+                                
+                                <div className='flex justify-center items-end cursor-pointer'>
+                  {like ? (
+                    <AiFillHeart
+                      size={30}
+                      onClick={(e) => {
+                        handleLike();
+                      }}
+                      fill='red'
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      size={30}
+                      onClick={(e) => {
+                        handleLike();
+                      }}
+                    />
+                  )}
+                </div>
+
+
                             <div className='flex justify-center items-center cursor-pointer bg-[#C1BBEB] text-dark-blue py-2 px-4 h-2rem text-sm rounded-xl gap-2 '>
                                 <button  onClick={() => handleChat(post)}>Chat</button>
                                 <BsChatLeftDots/>
+                            </div>
                             </div>)}
                             {/* <img src={Dots} className="h-5"/> */}
                         </div>
