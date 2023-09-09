@@ -62,6 +62,7 @@ function Sponsignup() {
           filepath:`Authentication/${name}/${fileName}`,
           userId: auth.currentUser.uid,
           verify:false,
+          likedIdeas: [],
         });
         navigate('/sponsor/verify')
       } catch (err) {

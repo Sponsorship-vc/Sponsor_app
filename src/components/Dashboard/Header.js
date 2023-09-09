@@ -1,5 +1,5 @@
 import React, { useState,useEffect, useContext} from 'react';
-import { FaBell } from 'react-icons/fa';
+// import { FaBell } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { useLocation,useNavigate } from 'react-router-dom';
 import { userData } from '../../data/Userdata';
@@ -67,9 +67,9 @@ function Header() {
         <p className="font-bold text-2xl text-dark-blue">{capitalizedMessage}</p>
       </div>
       <div className="flex flex-row gap-x-8">
-        <div className="h-12 w-12 rounded-full flex bg-white">
+        {/* <div className="h-12 w-12 rounded-full flex bg-white">
           <FaBell className="m-auto" />
-        </div>
+        </div> */}
 
         {userList &&
           userList.map((user) => (
