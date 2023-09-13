@@ -24,7 +24,7 @@ import { AuthContext } from './context/AuthContext';
 import Notfound from './pages/Notfound/Notfound';
 import ForbiddenPage from './pages/Notfound/Forbidden';
 import MobileMessage from './components/Mobileview/MobileMessage';
-
+import Likedideas from './pages/Dashboard/Sponsor/Liked'
 function LoadingSpinner() {
   return (
     <div className="flex justify-center items-center h-screen">
@@ -118,6 +118,8 @@ function App() {
               <Route path="/dashboard/sponsor/ideafeed" element={<PrivateRoute> <Ideafeed /> </PrivateRoute>} />
               <Route path="/dashboard/sponsor/chat" element={<PrivateRoute> <ChatWindow /> </PrivateRoute>} />
               <Route path="/dashboard/sponsor/help" element={<PrivateRoute> <Help /> </PrivateRoute>} />
+            <Route path="/dashboard/sponsor/likedideas" element={<PrivateRoute> <Likedideas/> </PrivateRoute>} />
+
               <Route
                 path="/dashboard/sponsor/ideafeed/viewidea/:id"
                 element={<PrivateRoute> <ViewIdea /> </PrivateRoute>}
