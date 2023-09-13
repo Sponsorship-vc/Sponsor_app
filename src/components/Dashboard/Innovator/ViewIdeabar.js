@@ -100,12 +100,16 @@ function ViewIdeabar() {
       }
       
       const onLike = async () => {
+        localStorage.setItem('reload', true)
         const userDoc = doc(db, "users", userList.id);
         let updatedLikelist;
         if (likelist && likelist.includes(message)) {
           updatedLikelist = likelist.filter(item => item !== message);
-        } else {
+        } else if(likelist) {
+          console.log(likelist)
           updatedLikelist = [...likelist, message];
+        }else{
+          updatedLikelist = [message]
         }
         await updateDoc(userDoc, { 
           likelist:updatedLikelist
