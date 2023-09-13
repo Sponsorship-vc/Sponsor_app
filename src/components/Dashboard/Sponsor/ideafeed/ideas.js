@@ -72,61 +72,7 @@ function Ideas() {
     });
 
     setFilteredData(filteredData);
-  }, [selectedOptions, ideaList]);
-
-  // const handleLike = (index, idea) => {
-  //   try {
-  //     const ideaId = idea.id;
-  //     const newLikedIdeas = userList && userList[0] && userList[0].likedIdeas ? [...userList[0].likedIdeas] : [];
-  //     const newLikedIndexes = [...likedIndexes];
-  //     console.log(index)
-  
-  //     console.log("Idea ID:", ideaId);
-  //     console.log("newLikedIdeas:", newLikedIdeas);
-
-  //     console.log("newLikedIndexes:", newLikedIndexes);
-  
-  //     // Check if `index` is a valid numeric value
-  //     if (typeof index === 'number' && isFinite(index)) {
-  //       const indexToRemoveFromIndexes = newLikedIndexes.indexOf(index);
-  //       console.log("Index to Remove from Indexes:", indexToRemoveFromIndexes);
-  //       if (indexToRemoveFromIndexes !== -1) {
-  //         newLikedIndexes.splice(indexToRemoveFromIndexes, 1);
-  //       }
-  //     } else {
-  //       console.error("Invalid index:", index);
-  //     }
-  
-  //     if (newLikedIdeas.includes(ideaId)) {
-  //       const indexToRemove = newLikedIdeas.indexOf(ideaId);
-  //       console.log("Index to Remove:", indexToRemove);
-  //       if (indexToRemove !== -1) {
-  //         newLikedIdeas.splice(indexToRemove, 1);
-  //       }
-  //     } else {
-  //       newLikedIdeas.push(ideaId);
-  //       newLikedIndexes.push(index);
-  //       setLikedIndexes(newLikedIndexes)
-  //     }
-  
-  //     // console.log("Updated newLikedIdeas:", newLikedIdeas);
-  //     // console.log("Updated newLikedIndexes:", newLikedIndexes);
-  
-  //     const userDocRef = doc(db, "users", userList[0].id);
-  //     updateDoc(userDocRef, { likedIdeas: newLikedIdeas })
-  //       .then(() => {
-  //         console.log("User document updated successfully");
-  //         setLikedIndexes(newLikedIndexes);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error updating user document: ", error);
-  //       });
-  //   } catch (error) {
-  //     console.error("Error in handleLike: ", error);
-  //   }
-  // };
-  
-  
+  }, [selectedOptions, ideaList]);  
   
 
   const handleViewIdea = (idea) => {

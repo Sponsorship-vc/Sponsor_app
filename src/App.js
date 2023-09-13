@@ -65,7 +65,7 @@ function App() {
       .then((value) => {
         setuserList(value[0]);
         setLoading(false);
-        console.log(value[0]);
+        // console.log(value[0]);
       })
       .catch((reason) => {
         console.error(reason);

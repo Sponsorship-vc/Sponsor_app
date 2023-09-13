@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { ideasData } from '../../../../data/Userdata';
+import { ideasData, getideasList } from '../../../../data/Userdata';
 import { OptionsContext, } from '../../../../context/optionContext';
 // import '../../../../index.css';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +24,7 @@ function LikedIdeas() {
   const [likedIndexes, setLikedIndexes] = useState([]);
   const [ideaList, setIdeaList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  let filteredIdea
   const [loading, setLoading] = useState([]);
 
   const navigate = useNavigate();
@@ -35,11 +36,28 @@ function LikedIdeas() {
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
+  useEffect(() => {
+    // Check a condition, for example, a URL parameter or some state value
+    const shouldReload = true; // You can replace this with your condition
+
+    if (localStorage.getItem('reload') == "true") {
+    localStorage.setItem("reload", false)
+      window.location.reload();
+    }
+  }, []);
+//   useEffect(()=>{
+
+//   window.location.reload();
+//   },[1])
+
+//   useEffect(() => {
+//     getideasList()
+//   }, [])
 
   useEffect(()=>{
     userData.then(
       (value) => {
-        setuserList(value);
+        setuserList(value[0]);
       },
       (reason) => {
         console.error(reason);
@@ -50,29 +68,13 @@ function LikedIdeas() {
   useEffect(() => {
     ideasData
       .then((value) => {
-        setIdeaList(value);
+        setIdeaList(value);        
       })
       .catch((reason) => {
         console.error(reason);
       });
   }, []);
 
-  useEffect(() => {
-    const filteredData = Object.values(ideaList).filter((idea) => {
-      const ideaCategories = Array.isArray(idea.category) ? idea.category.map((category) => category.toLowerCase()) : [];
-      const lowerCaseSelectedIndustry = selectedOptions.Industry ? selectedOptions.Industry.map((option) => option.toLowerCase()) : [];
-      const lowerCaseSelectedIdeaType = selectedOptions['Idea type'] ? selectedOptions['Idea type'].map((option) => option.toLowerCase()) : [];
-      const lowerCaseSelecteddevStage = selectedOptions['Stage of development'] ? selectedOptions['Stage of development'].map((option) => option.toLowerCase()) : [];
-
-      return (
-        (lowerCaseSelectedIndustry.length === 0 || lowerCaseSelectedIndustry.every((option) => ideaCategories.includes(option))) &&
-        (lowerCaseSelectedIdeaType.length === 0 || (idea.ideaType && lowerCaseSelectedIdeaType.some((option) => idea.ideaType.toLowerCase().includes(option)))) &&
-        (lowerCaseSelecteddevStage.length === 0 || (idea.devStage && lowerCaseSelecteddevStage.some((option) => idea.devStage.toLowerCase().includes(option))))
-      );
-    });
-
-    setFilteredData(filteredData);
-  }, [selectedOptions, ideaList]);
 
   const handleViewIdea = (idea) => {
     navigate(`/dashboard/sponsor/ideafeed/viewidea/${idea.id}`);
@@ -103,8 +105,22 @@ function LikedIdeas() {
     };
   }, [ideaList]);
 
+  useEffect(()=>{
+    console.log(userList)
+    if(userList.likelist){
+    //     filteredIdea = userList?.filter((user) =>
+    //   user.likelist.some((id) => ideaList.includes(id))
+    //   );
+    filteredIdea = ideaList.filter(idea => userList.likelist.includes(idea.id))
+    setFilteredData(filteredIdea)
+    console.log(filteredIdea)
+    }
+},[userList.likelist])
+//   console.log(userList[0])
+//   console.log(filteredData)
+
   return (
-    <div className='h-full w-full bg-white ml-auto mr-5 rounded-xl'>
+    <div className='h-full w-full ml-64 bg-white px-4 mr-5 rounded-xl'>
       <div className='flex flex-row mt-10 mb-7'>
         <h2 className='text-[#303972] font-bold flex-initial ml-5'>Idea brief</h2>
         <div className='text-[#303972] font-bold flex flex-row gap-10 ml-auto mr-6'>
@@ -112,7 +128,7 @@ function LikedIdeas() {
           <h2>Action</h2>
         </div>
       </div>
-      <div className='grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
         {filteredData &&
           filteredData
             .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)

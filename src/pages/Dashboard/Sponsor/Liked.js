@@ -5,7 +5,7 @@ import { OptionsProvider } from '../../../context/optionContext'
 
 function Liked() {
   return (
-    <div className='bg-[#F3F4FF] ml-64 h-screen overflow-scroll '>
+    <div className='bg-[#F3F4FF] h-screen overflow-scroll '>
     <Header/>
     <div className='flex flex-row gap-3 items-start'>
     <OptionsProvider>

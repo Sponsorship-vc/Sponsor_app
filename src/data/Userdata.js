@@ -56,7 +56,8 @@ const getUserList = async () => {
   }
 
 
-  const getideasList = () => {
+  export const getideasList = () => {
+
     try {
       return new Promise((resolve, reject) => {
         const unsubscribe = onSnapshot(orderedDataRef, (snapshot) => {
