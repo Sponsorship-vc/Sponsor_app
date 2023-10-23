@@ -1,5 +1,6 @@
 {
   "name": "sponsor_app",
+  "homepage": "https://indianrupeeservices.in/sponsir",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
