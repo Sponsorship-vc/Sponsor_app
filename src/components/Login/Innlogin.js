@@ -72,7 +72,7 @@ function Innlogin() {
                 <p className='text-xs text-gray-500 r'>By signing up, you confirm that you’ve read <br/>and accepted our <a className='text-blue-500 cursor-pointer'  href="https://www.example.com/user-notice">User Notice</a> and <a className='text-blue-500 cursor-pointer' href="https://www.example.com/privacy-policy">Privacy Policy</a>.</p>
                 <button className=' w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleLoginClick}>Login</button>
                 <Link to='/signup/role/innovator'>
-                <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto' >Don’t  have an SponSir account? Register</p>
+                <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto' >Don’t  have an startup-interface account? Register</p>
                 </Link>
                 <p className='text-md text-gray-500'>Or</p>
                 <img src={googleImg} alt='sign in with google' className='cursor-pointer'/>

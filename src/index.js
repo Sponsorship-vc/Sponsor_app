@@ -14,7 +14,7 @@ root.render(
     <ChatContextProvider>
       <React.StrictMode>
       <ThemeProvider>
-      <BrowserRouter basename={"/sponsir"}>
+      <BrowserRouter basename={"/startup-interface"}>
         <App />
       </BrowserRouter>
     </ThemeProvider>

@@ -34,7 +34,7 @@ function Connect() {
               <button className='bg-dark-blue text-white w-full py-3 rounded-lg' onClick={handleMailSend}>Mail Us</button>
             </form>
             <div className='flex flex-col md:flex-row justify-center md:justify-between items-center font-bold text-dark-blue mt-10 md:gap-[10rem]'>
-                <h3>©SponSir</h3>
+                <h3>startup-interface</h3>
                 <div className='flex flex-col md:flex-row justify-center items-center gap-5 md:gap-10 mt-4 md:mt-0'>
                     <h3>Discover</h3>
                     <h3>Innovations</h3>

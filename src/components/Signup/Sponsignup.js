@@ -116,7 +116,7 @@ function Sponsignup() {
             </label>
             <p className='text-gray-400 text-center w-3/4 flex mx-auto'>By signing up, you confirm that you’ve read and accepted our User Notice and Privacy Policy.</p>
             <button className='w-[600px] mx-auto my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg'onClick={handleRegister}>Register</button>
-            <a href='/login/role/sponsor'className='text-blue-500  text-md text-center flex mx-auto mb-5'>Already have an SponSir account? Log in</a>
+            <a href='/login/role/sponsor'className='text-blue-500  text-md text-center flex mx-auto mb-5'>Already have an startup-interface account? Log in</a>
           </div>
          </div>
         </div>

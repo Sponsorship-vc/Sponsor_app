@@ -57,7 +57,7 @@ function Sponlogin() {
                     <button className='w-full my-5 py-2 bg-[#1D263A] hover:bg-[#2C3A4D] text-white font-bold rounded-lg' onClick={handleLoginClick} >Login</button>
                     <p className='text-[#ff0000]'>{error}</p>
                     <Link to='/signup/role/sponsor'>
-                      <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto'>Don’t  have an SponSir account? Register</p>
+                      <p className='text-blue-500 cursor-pointer text-sm text-center flex mx-auto'>Don’t  have an startup-interface account? Register</p>
                     </Link>
                 </div>
             </div>
